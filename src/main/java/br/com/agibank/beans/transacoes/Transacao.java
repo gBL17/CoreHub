@@ -1,4 +1,4 @@
-package br.com.agibank.model.transacoes;
+package br.com.agibank.beans.transacoes;
 
 public class Transacao {
     private int id;
