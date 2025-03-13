@@ -3,6 +3,7 @@ package br.com.agibank.beans.transacoes;
 public class Transacao {
     private int id;
     private int tipo;
+    private int idConta;
     private int contaOrigem;
     private int contaDestino;
     private double valor;
@@ -11,21 +12,24 @@ public class Transacao {
     public Transacao() {
     }
 
-    public Transacao(int tipo, int contaOrigem, double valor) {
+    public Transacao(int tipo, int idConta,int contaOrigem, double valor) {
         this.tipo = tipo;
+        this.idConta = idConta;
         this.contaOrigem = contaOrigem;
         this.valor = valor;
     }
 
-    public Transacao(int tipo, int contaOrigem, int contaDestino, double valor) {
+    public Transacao(int tipo, int idConta, int contaOrigem, int contaDestino, double valor) {
         this.tipo = tipo;
+        this.idConta = idConta;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
         this.valor = valor;
     }
 
-    public Transacao(int tipo, int contaOrigem, int contaDestino, double valor, String descricao) {
+    public Transacao(int tipo, int idConta, int contaOrigem, int contaDestino, double valor, String descricao) {
         this.tipo = tipo;
+        this.idConta = idConta;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
         this.valor = valor;
@@ -46,6 +50,15 @@ public class Transacao {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+
+    public int getIdConta() {
+        return idConta;
+    }
+
+    public void setIdConta(int idConta) {
+        this.idConta = idConta;
     }
 
     public int getContaOrigem() {
@@ -78,5 +91,18 @@ public class Transacao {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @Override
+    public String toString() {
+        return "Transacao{" +
+                "id=" + id +
+                ", tipo=" + tipo +
+                ", idConta=" + idConta +
+                ", contaOrigem=" + contaOrigem +
+                ", contaDestino=" + contaDestino +
+                ", valor=" + valor +
+                ", descricao='" + descricao + '\'' +
+                '}';
     }
 }

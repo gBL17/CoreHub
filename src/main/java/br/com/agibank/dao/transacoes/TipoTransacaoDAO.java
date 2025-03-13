@@ -16,6 +16,10 @@ public class TipoTransacaoDAO {
         con = Conexao.getConexao();
     }
 
+    public void fecharConexao() throws SQLException {
+        con.close();
+    }
+
     public int cadastrarTipoTransacao() throws SQLException {
         final String sql = "";
         stmt = con.prepareStatement(sql);
