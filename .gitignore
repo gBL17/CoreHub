@@ -43,3 +43,6 @@ bin/
 .DS_Store
 
 Conexao.java
+/.idea/dataSources.local.xml
+/.idea/dataSources.xml
+/.idea/inspectionProfiles/Project_Default.xml
