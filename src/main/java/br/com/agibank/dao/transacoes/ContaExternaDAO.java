@@ -1,6 +1,6 @@
 package br.com.agibank.dao.transacoes;
 
-import br.com.agibank.beans.transacoes.ContaExterna;
+import br.com.agibank.beans.conta.ContaExterna;
 import br.com.agibank.dao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,10 +16,11 @@ public class ContaExternaDAO {
         con = Conexao.getConexao();
     }
 
-    public int criarContaExterna(String jsonContaExterna) throws SQLException {
-        final String sql = "INSERT INTO Conta_Externa (dados_conta_externa) VALUES (?)";
+    public int criarContaExterna(int agencia, int numeroContaExterna) throws SQLException {
+        final String sql = "INSERT INTO Conta_Externa (agencia, numero_conta_externa) VALUES (?,?)";
         stmt = con.prepareStatement(sql);
-        stmt.setString(1, jsonContaExterna);
+        stmt.setInt(1, agencia);
+        stmt.setInt(2, numeroContaExterna);
         return stmt.executeUpdate();
     }
 
@@ -29,31 +30,21 @@ public class ContaExternaDAO {
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);
         rs = stmt.executeQuery();
+
         while (rs.next()) {
-            contaExterna.setId(rs.getInt("id"));
-            contaExterna.setJsonContaExterna(rs.getString("jsonContaExterna"));
+            contaExterna.setIdContaExterna(rs.getInt("id_conta_externa"));
+            contaExterna.setAgencia(rs.getInt("agencia"));
+            contaExterna.setNumeroContaExterna(rs.getInt("numero_conta_externa"));
         }
         return contaExterna;
     }
 
-    public ContaExterna consultarContaExterna(String jsonContaExterna) throws SQLException {
-        ContaExterna contaExterna =  new ContaExterna();
-        final String sql = "SELECT * FROM Conta_Externa WHERE jsonContaExterna = ?";
+    public int atualizarContaExterna(int id, int agencia, int numeroConta) throws SQLException {
+        final String sql = "UPDATE Conta_Externa SET agencia = ?, numero_conta_externa = ? WHERE id = ?";
         stmt = con.prepareStatement(sql);
-        stmt.setString(1, jsonContaExterna);
-        rs = stmt.executeQuery();
-        if (rs.next()) {
-            contaExterna.setId(rs.getInt("id"));
-            contaExterna.setJsonContaExterna(rs.getString("jsonContaExterna"));
-        }
-        return contaExterna;
-    }
-
-    public int atualizarContaExterna(int id, String jsonContaExterna) throws SQLException {
-        final String sql = "UPDATE Conta_Externa SET jsonContaExterna = ? WHERE id = ?";
-        stmt = con.prepareStatement(sql);
-        stmt.setString(1, jsonContaExterna);
-        stmt.setInt(2, id);
+        stmt.setInt(1, id);
+        stmt.setInt(2, agencia);
+        stmt.setInt(3, numeroConta);
         return stmt.executeUpdate();
     }
 

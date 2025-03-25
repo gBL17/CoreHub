@@ -103,4 +103,17 @@ public class Transacao {
     public void setTransferenciaExterna(boolean transferenciaExterna) {
         this.transferenciaExterna = transferenciaExterna;
     }
+
+    @Override
+    public String toString() {
+        return "Transacao{" +
+                "id=" + id +
+                ", idContaOrigem=" + idContaOrigem +
+                ", idContaDestino=" + idContaDestino +
+                ", valor=" + valor +
+                ", descricao='" + descricao + '\'' +
+                ", idTipoTransacao=" + idTipoTransacao +
+                ", transferenciaExterna=" + transferenciaExterna +
+                '}';
+    }
 }

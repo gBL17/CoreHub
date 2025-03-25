@@ -1,10 +1,7 @@
 package br.com.agibank.view;
 
-import br.com.agibank.controller.ClearTerminal;
-
-import javax.management.MBeanRegistration;
+import br.com.agibank.view.transacoes.MenuTransacao;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class MenuCliente {
@@ -30,16 +27,16 @@ public class MenuCliente {
                     System.out.println("SALDO NA CONTA:");
                     break;
                 case 2:
-                    MenuTransacao.exibirMenuTransacao(id_usuario);
+//                    MenuTransacao.exibirMenuTransacao(id_usuario);
                     break;
                 case 3:
-                    MenuSuporte.exibirMenuSuporte(id_usuario);
+//                    MenuSuporte.exibirMenuSuporte(id_usuario);
                     break;
                 case 4:
                     System.out.println("BENEFICIOS DA SUA CLASSE:");
                     break;
                 case 5:
-                    MenuDadosUsuario.exibirMenuDadosUsuario(id_usuario);
+//                    MenuDadosUsuario.exibirMenuDadosUsuario(id_usuario);
                     break;
                 case 6:
                     System.out.println("EXTRATO:");

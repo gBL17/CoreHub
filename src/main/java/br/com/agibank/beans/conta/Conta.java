@@ -2,7 +2,7 @@ package br.com.agibank.beans.conta;
 
 import java.util.Date;
 
-public class ContaInterna {
+public class Conta {
 
     private int idContaInterna;
     private int idUsuario;
@@ -14,7 +14,7 @@ public class ContaInterna {
     private Date dataAbertura;
     private String status;
 
-    public ContaInterna(int idContaInterna, int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, Date dataAbertura, String status) {
+    public Conta(int idContaInterna, int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, Date dataAbertura, String status) {
         this.idContaInterna = idContaInterna;
         this.idUsuario = idUsuario;
         this.idTipo = idTipo;
@@ -26,7 +26,7 @@ public class ContaInterna {
         this.status = status;
     }
 
-    public ContaInterna(){}
+    public Conta(){}
 
     public int getIdContaInterna() {
         return idContaInterna;

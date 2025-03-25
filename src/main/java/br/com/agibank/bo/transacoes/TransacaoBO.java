@@ -18,6 +18,10 @@ public class TransacaoBO {
         if(transacao.getValor() <= 0){
             throw new IllegalArgumentException("Valor da transação inválido.");
         }
+        if(transacao.getIdContaOrigem() == transacao.getIdContaDestino()){
+            throw new IllegalArgumentException("Conta de Origem é igual a Conta de Destino.");
+        }
+
         return transacaoDAO.criarTransacao(transacao);
     }
 

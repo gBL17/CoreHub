@@ -1,4 +1,4 @@
-package br.com.agibank.bo.transacoes.taxa;
+package br.com.agibank.bo.taxa;
 
 public class TaxaBO {
 

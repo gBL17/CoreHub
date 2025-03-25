@@ -5,6 +5,7 @@ public class Agencia {
     private int numero;
     private String complemento;
     private String cidade;
+    private int numeroAgencia;
 
     public String getComplemento() {
         return complemento;
@@ -38,11 +39,12 @@ public class Agencia {
         this.cidade = cidade;
     }
 
-    public Agencia(String rua, int numero, String complemento,String cidade){
+    public Agencia(String rua, int numero, String complemento,String cidade, int numeroAgencia) {
         this.rua = rua;
         this.numero = numero;
         this.complemento = complemento;
         this.cidade = cidade;
+        this.numeroAgencia = numeroAgencia;
     }
 
     public Agencia(){

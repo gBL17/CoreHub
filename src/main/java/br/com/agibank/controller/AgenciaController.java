@@ -1,7 +1,7 @@
 package br.com.agibank.controller;
 
 import br.com.agibank.beans.Agencia;
-import br.com.agibank.daos.AgenciaDAO;
+import br.com.agibank.dao.AgenciaDAO;
 
 import java.sql.SQLException;
 
@@ -11,10 +11,10 @@ public class AgenciaController {
     public AgenciaController() throws SQLException {
     }
 
-    public void adicionarAgencia(String rua, int numero, String complemento, String cidade){
-        Agencia agencia = new Agencia(rua,numero,complemento,cidade);
+    public void adicionarAgencia(String rua, int numero, String complemento, String cidade, int numeroAgencia){
+        Agencia agencia = new Agencia(rua,numero,complemento,cidade, numeroAgencia);
         try{
-            AgenciaDAO.inserirAgencia(rua,numero,complemento,cidade);
+            AgenciaDAO.inserirAgencia(rua,numero,complemento,cidade, numeroAgencia);
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }

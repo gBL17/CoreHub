@@ -21,18 +21,16 @@ public class ContaExternaDAO {
         con.close();
     }
 
-    public int cadastrarContaExterna(String json) throws SQLException {
-
-        final String sql = "INSERT INTO Conta_Externa(dados_conta_externa) VALUES(?)";
+    public int cadastrarContaExterna(int agencia, int numeroContaExterna) throws SQLException {
+        final String sql = "INSERT INTO Conta_Externa(agencia, numero_conta_externa) VALUES(?,?)";
 
         stmt = con.prepareStatement(sql);
-        stmt.setString(1, json);
-
+        stmt.setInt(1, agencia);
+        stmt.setInt(2, numeroContaExterna);
         return stmt.executeUpdate();
     }
 
-    public String buscarContaExterna(int id) throws SQLException {
-
+    public ContaExterna buscarContaExterna(int id) throws SQLException {
         final String sql = "SELECT * FROM Conta_Externa WHERE id_conta_externa = ?";
 
         ContaExterna contaExterna = new ContaExterna();
@@ -42,23 +40,34 @@ public class ContaExternaDAO {
         rs = stmt.executeQuery();
 
         if(rs.next()){
+            contaExterna.setIdContaExterna(rs.getInt("id_conta_externa"));
+            contaExterna.setAgencia(rs.getInt("agencia"));
+            contaExterna.setAgencia(rs.getInt("numero_conta_externa"));
+        }
 
-            contaExterna.setIdContaExterna(rs.getInt("get_conta_externa"));
-            contaExterna.setDadosContaExterna(rs.getString("dados_conta_externa"));
-
-            return contaExterna.toString();
-
-        }else return "Deu errado irmao";
-
+        return contaExterna;
     }
 
-    public int atualizarContaExterna(String json, int idContaExterna) throws SQLException {
-
-        final String sql = "UPDATE Conta_Salario SET dados_conta_externa = ? WHERE id_conta_externa = ?";
+    public int buscarIdContaExterna(int agencia, int numeroContaExterna) throws SQLException {
+        final String sql = "SELECT id_conta_externa FROM Conta_Externa WHERE agencia = ? AND numero_conta_externa = ?";
 
         stmt = con.prepareStatement(sql);
-        stmt.setString(1, json);
+        stmt.setInt(1, agencia);
+        stmt.setInt(2, numeroContaExterna);
+        rs = stmt.executeQuery();
+        if(rs.next()){
+            return rs.getInt("id_conta_externa");
+        }
+        return 0;
+    }
 
+    public int atualizarContaExterna(int idContaExterna, int agencia, int numeroContaExterna) throws SQLException {
+        final String sql = "UPDATE Conta_Salario SET agencia = ?, numero_conta_externa = ? WHERE id_conta_externa = ?";
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, agencia);
+        stmt.setInt(2, numeroContaExterna);
+        stmt.setInt(3, idContaExterna);
         return stmt.executeUpdate();
     }
 

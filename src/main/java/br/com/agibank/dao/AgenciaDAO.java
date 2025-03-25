@@ -1,8 +1,6 @@
-package br.com.agibank.daos;
+package br.com.agibank.dao;
 
 import br.com.agibank.beans.Agencia;
-import br.com.agibank.beans.Conexao;
-import br.com.agibank.beans.Suporte;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,15 +15,15 @@ public class AgenciaDAO {
 
 
     public AgenciaDAO() throws SQLException {
-        con = Conexao.getConnection();
+        con = Conexao.getConexao();
     }
 
     public void fecharConexao() throws SQLException {
         con.close();
     }
 
-    public void inserirAgencia(String rua, int numero, String complemento, String cidade) throws SQLException{
-        String sql = "INSERT INTO Agencia (rua,numero,complemento) VALUES (?,?,?,?)";
+    public void inserirAgencia(String rua, int numero, String complemento, String cidade, int numeroAgencia) throws SQLException{
+        String sql = "INSERT INTO Agencia (rua,numero,complemento) VALUES (?,?,?,?,?)";
 
         PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -33,6 +31,7 @@ public class AgenciaDAO {
         stmt.setInt(2, numero);
         stmt.setString(3, complemento);
         stmt.setString(4, cidade);
+        stmt.setInt(5, numeroAgencia);
         stmt.executeUpdate();
         System.out.println("Agencia inserida com sucesso");
 
@@ -96,5 +95,18 @@ public class AgenciaDAO {
         }
 
         return null;
+    }
+
+    public int buscarIdAgenciaPorNumero(int numero) throws SQLException{
+        String sql = "SELECT * FROM Agencia WHERE numero_agencia = ?";
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+
+        stmt.setInt(1, numero);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("id_agencia");
+        }
+        return 0;
     }
 }

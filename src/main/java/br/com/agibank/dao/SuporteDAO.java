@@ -1,6 +1,5 @@
-package br.com.agibank.daos;
+package br.com.agibank.dao;
 
-import br.com.agibank.beans.Conexao;
 import br.com.agibank.beans.Suporte;
 
 import java.sql.*;
@@ -14,7 +13,7 @@ public class SuporteDAO {
 
 
     public SuporteDAO() throws SQLException {
-        con = Conexao.getConnection();
+        con = Conexao.getConexao();
     }
 
 

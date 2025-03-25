@@ -1,14 +1,10 @@
 package br.com.agibank.controller;
-import br.com.agibank.daos.SuporteDAO;
-import br.com.agibank.daos.UsuarioDAO;
+import br.com.agibank.dao.UsuarioDAO;
 import br.com.agibank.beans.Usuario;
 import br.com.agibank.view.CoresTerminal;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
-
-import static java.time.temporal.TemporalQueries.localDate;
 
 public class UsuarioController {
 

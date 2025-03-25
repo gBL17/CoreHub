@@ -2,7 +2,6 @@ package br.com.agibank.view;
 
 import br.com.agibank.beans.Usuario;
 import br.com.agibank.controller.UsuarioController;
-import br.com.agibank.daos.UsuarioDAO;
 
 import java.sql.SQLException;
 import java.util.Scanner;
