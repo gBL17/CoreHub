@@ -8,6 +8,10 @@ public class Main {
     public static void main(String[] args) throws SQLException{
         Scanner sc = new Scanner(System.in);
 //        MenuInicial.exibirMenuInicial(sc);
-        MenuTransacao.exibirMenuTransacao(1, 1);
+        try{
+            MenuTransacao.exibirMenuTransacao(1, 1);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

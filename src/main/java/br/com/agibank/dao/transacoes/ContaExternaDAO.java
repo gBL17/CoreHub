@@ -16,15 +16,16 @@ public class ContaExternaDAO {
         con = Conexao.getConexao();
     }
 
-    public int criarContaExterna(int agencia, int numeroContaExterna) throws SQLException {
-        final String sql = "INSERT INTO Conta_Externa (agencia, numero_conta_externa) VALUES (?,?)";
+    public int criarContaExterna(int agencia, int numeroContaExterna, int codigoBancoExterno) throws SQLException {
+        final String sql = "INSERT INTO Conta_Externa (agencia, numero_conta_externa, codigo_banco) VALUES (?,?,?)";
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, agencia);
         stmt.setInt(2, numeroContaExterna);
+        stmt.setInt(3, codigoBancoExterno);
         return stmt.executeUpdate();
     }
 
-    public ContaExterna consultarContaExterna(int id) throws SQLException {
+    public ContaExterna buscarContaExterna(int id) throws SQLException {
         ContaExterna contaExterna =  new ContaExterna();
         final String sql = "SELECT * FROM Conta_Externa WHERE id = ?";
         stmt = con.prepareStatement(sql);
@@ -35,16 +36,32 @@ public class ContaExternaDAO {
             contaExterna.setIdContaExterna(rs.getInt("id_conta_externa"));
             contaExterna.setAgencia(rs.getInt("agencia"));
             contaExterna.setNumeroContaExterna(rs.getInt("numero_conta_externa"));
+            contaExterna.setCodigoBancoExterno(rs.getInt("codigo_banco"));
         }
         return contaExterna;
     }
 
-    public int atualizarContaExterna(int id, int agencia, int numeroConta) throws SQLException {
-        final String sql = "UPDATE Conta_Externa SET agencia = ?, numero_conta_externa = ? WHERE id = ?";
+    public int buscarIdContaExterna(int agencia, int numeroContaExterna, int codigoBanco) throws SQLException {
+        final String sql = "SELECT id_conta_externa FROM Conta_Externa WHERE agencia = ? AND numero_conta_externa = ? AND codigo_banco = ?";
+
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, id);
-        stmt.setInt(2, agencia);
-        stmt.setInt(3, numeroConta);
+        stmt.setInt(1, agencia);
+        stmt.setInt(2, numeroContaExterna);
+        stmt.setInt(3, codigoBanco);
+        rs = stmt.executeQuery();
+        while (rs.next()) {
+            return rs.getInt("id_conta_externa");
+        }
+        return 0;
+    }
+
+    public int atualizarContaExterna(int id, int agencia, int numeroConta, int codigoBancoExterno) throws SQLException {
+        final String sql = "UPDATE Conta_Externa SET agencia = ?, numero_conta_externa = ?, codigo_banco = ? WHERE id = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, agencia);
+        stmt.setInt(2, numeroConta);
+        stmt.setInt(3, codigoBancoExterno);
+        stmt.setInt(4, id);
         return stmt.executeUpdate();
     }
 

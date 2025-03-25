@@ -11,19 +11,20 @@ public class ContaExternaBO {
         contaExternaDAO = new ContaExternaDAO();
     }
 
-    public int criarContaExterna(ContaExterna conta) throws SQLException {
-        if (contaExternaDAO.consultarContaExterna(conta.getIdContaExterna()) != null) {
-            throw new SQLException("Conta externa já cadastrada, id= " + conta.getIdContaExterna());
-        }
-        return contaExternaDAO.criarContaExterna(conta.getAgencia(), conta.getNumeroContaExterna());
+    public int criarContaExterna(int agencia, int numeroConta, int codigoBanco) throws SQLException {
+        return contaExternaDAO.criarContaExterna(agencia, numeroConta, codigoBanco);
     }
 
     public ContaExterna buscarContaExterna(int id) throws SQLException {
-        return contaExternaDAO.consultarContaExterna(id);
+        return contaExternaDAO.buscarContaExterna(id);
+    }
+
+    public int buscarIdContaExterna(int agencia, int numeroConta, int codigoBanco) throws SQLException {
+        return contaExternaDAO.buscarIdContaExterna(agencia,numeroConta, codigoBanco);
     }
 
     public int atualizarContaExterna(ContaExterna conta) throws SQLException {
-        return contaExternaDAO.atualizarContaExterna(conta.getIdContaExterna(), conta.getAgencia(), conta.getNumeroContaExterna());
+        return contaExternaDAO.atualizarContaExterna(conta.getIdContaExterna(), conta.getAgencia(), conta.getNumeroContaExterna(), conta.getCodigoBancoExterno());
     }
 
     public int excluirContaExterna(int id) throws SQLException {

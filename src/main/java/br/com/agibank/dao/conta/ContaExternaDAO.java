@@ -48,12 +48,13 @@ public class ContaExternaDAO {
         return contaExterna;
     }
 
-    public int buscarIdContaExterna(int agencia, int numeroContaExterna) throws SQLException {
-        final String sql = "SELECT id_conta_externa FROM Conta_Externa WHERE agencia = ? AND numero_conta_externa = ?";
+    public int buscarIdContaExterna(int agencia, int numeroContaExterna, int codigoBanco) throws SQLException {
+        final String sql = "SELECT id_conta_externa FROM Conta_Externa WHERE agencia = ? AND numero_conta_externa = ? AND codigo_banco = ?";
 
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, agencia);
         stmt.setInt(2, numeroContaExterna);
+        stmt.setInt(3, codigoBanco);
         rs = stmt.executeQuery();
         if(rs.next()){
             return rs.getInt("id_conta_externa");
