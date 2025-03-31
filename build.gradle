@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = '21'
+targetCompatibility = '21'
+
+application {
+    // Remova 'mainModule' e use apenas 'mainClass'
+    mainClass = 'br.com.emprestai.App'
+}
+
+javafx {
+    version = '21'
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.web' ]
+}
+
+dependencies {
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'org.mindrot:jbcrypt:0.4'
+
+    // Testes
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs = []
+}
+
+tasks.withType(JavaExec) {
+    jvmArgs = [
+            '--module-path', configurations.runtimeClasspath.asPath,
+            '--add-modules', 'javafx.controls,javafx.fxml,javafx.web'
+    ]
+}
+
+test {
+    useJUnitPlatform()
+}
