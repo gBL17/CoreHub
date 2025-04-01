@@ -12,9 +12,9 @@
 
 <Pane prefHeight="915.0"
       prefWidth="412.0"
-      xmlns="http://javafx.com/javafx/21.0.1"
+      xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.agibank.corehub.controller.TransacaoController">
+      fx:controller="com.agibank.corehub.controller.transacao.TipoTransacaoController">
    <children>
       <VBox prefHeight="915.0" prefWidth="412.0">
          <children>
@@ -54,9 +54,9 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="268.0" prefWidth="412.0">
                      <children>
-                        <RadioButton mnemonicParsing="false" text="PIX" />
-                        <RadioButton mnemonicParsing="false" text="DOC" />
-                        <RadioButton mnemonicParsing="false" text="TED" />
+                        <RadioButton mnemonicParsing="false" text="PIX" fx:id="radioPix"/>
+                        <RadioButton mnemonicParsing="false" text="DOC" fx:id="radioDoc"/>
+                        <RadioButton mnemonicParsing="false" text="TED" fx:id="radioTed"/>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

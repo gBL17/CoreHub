@@ -9,16 +9,11 @@
 <?import javafx.scene.text.Font?>
 
 
-<HBox alignment="CENTER"
-      maxHeight="-Infinity"
-      maxWidth="-Infinity"
-      minHeight="-Infinity"
-      minWidth="-Infinity"
-      prefHeight="110.0"
+<HBox prefHeight="110.0"
       prefWidth="412.0"
-      xmlns="http://javafx.com/javafx/21.0.1"
+      xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="br.com.corehub.agibank.corefx.controller.ContaController">
+      fx:controller="com.agibank.corehub.controller.ContaController">
    <children>
       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
          <image>
