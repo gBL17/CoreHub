@@ -1,6 +1,5 @@
 package com.agibank.corehub.controller;
 
-import com.agibank.corehub.beans.Usuario;
 import java.io.IOException;
 
 import com.agibank.corehub.controller.transacao.TipoTransacaoController;

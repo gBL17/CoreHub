@@ -4,7 +4,7 @@ import com.agibank.corehub.beans.transacao.DestinatarioTransacao;
 import com.agibank.corehub.dao.ContaExternaDAO;
 import java.sql.SQLException;
 
-public class TransacaoController {
+public class IdContaDestinoController {
     public int buscarIdContaDestino(DestinatarioTransacao destinatario) throws SQLException {
         int idContaDestino = 0;
         if (destinatario.getCodigoBanco() != 121){
