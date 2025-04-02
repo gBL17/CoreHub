@@ -225,5 +225,27 @@ public class ContaDAO {
         return contas;
     }
 
+
+    public int retornarIdConta(int numeroAgencia, int numeroConta) throws SQLException{
+        final String sql = """
+                SELECT c.id_conta
+                FROM Conta c
+                Inner join Agencia a ON a.id_agencia = c.id_agencia
+                Where a.numero = ?
+                AND c.numero = ?
+                """;
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, numeroAgencia);
+        stmt.setInt(2, numeroConta);
+        rs = stmt.executeQuery();
+
+        if(rs.next()){
+
+            return rs.getInt("id_conta");
+
+        }else{return 0;}
+
+    }
 }
 
