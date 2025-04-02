@@ -29,13 +29,13 @@ public class ContaTransacaoController {
 
     public void setDestinoTransacao() {
         if (codigoBancoTextField == null || agenciaTextField == null || numeroContaTextField == null) {
-            Alerta.exibirAlerta("Erro na Transacao", "Nenhum campo pode ser nulo.");
+            Alerta.exibirAlertaErro("Erro na Transacao", "Nenhum campo pode ser nulo.");
             return;
         }
         transacao.setTransferenciaExterna(!Objects.equals(codigoBancoTextField.getText(), "121"));
-        destinatario.setCodigoBanco(codigoBancoTextField.getText());
-        destinatario.setAgencia(agenciaTextField.getText());
-        destinatario.setNumero(numeroContaTextField.getText());
+        destinatario.setCodigoBanco(Integer.parseInt(codigoBancoTextField.getText()));
+        destinatario.setAgencia(Integer.parseInt(agenciaTextField.getText()));
+        destinatario.setNumero(Integer.parseInt(numeroContaTextField.getText()));
     }
 
     public void navegarTipoTransacao(ActionEvent actionEvent) throws IOException {

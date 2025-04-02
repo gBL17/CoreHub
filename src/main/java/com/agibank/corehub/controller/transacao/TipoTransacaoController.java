@@ -33,9 +33,13 @@ public class TipoTransacaoController {
         radioTed.setToggleGroup(group);
     }
 
+    public void setIdContaOrigem(int idContaOrigem){
+        transacao.setIdContaOrigem(idContaOrigem);
+    }
+
     private void setTipoTransacao() {
         if (!radioPix.isSelected() && !radioDoc.isSelected() && !radioTed.isSelected()) {
-            Alerta.exibirAlerta("Erro na transação", "Selecione um meio de pagamento.");
+            Alerta.exibirAlertaErro("Erro na transação", "Selecione um meio de pagamento.");
             return;
         }
         if (radioPix.isSelected()) {

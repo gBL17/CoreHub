@@ -1,49 +1,40 @@
 package com.agibank.corehub.beans.transacao;
 
 public class DestinatarioTransacao {
-    private String codigoBanco;
-    private String agencia;
-    private String numero;
+    private int codigoBanco;
+    private int agencia;
+    private int numero;
 
     public DestinatarioTransacao() {
     }
 
-    public DestinatarioTransacao(String codigoBanco, String agencia, String numero) {
+    public DestinatarioTransacao(int codigoBanco, int agencia, int numero) {
         this.codigoBanco = codigoBanco;
         this.agencia = agencia;
         this.numero = numero;
     }
 
-    public String getCodigoBanco() {
+    public int getCodigoBanco() {
         return codigoBanco;
     }
 
-    public void setCodigoBanco(String codigoBanco) {
+    public void setCodigoBanco(int codigoBanco) {
         this.codigoBanco = codigoBanco;
     }
 
-    public String getAgencia() {
+    public int getAgencia() {
         return agencia;
     }
 
-    public void setAgencia(String agencia) {
+    public void setAgencia(int agencia) {
         this.agencia = agencia;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
-    }
-
-    @Override
-    public String toString() {
-        return "DestinatarioTransacao{" +
-                "codigoBanco='" + codigoBanco + '\'' +
-                ", agencia='" + agencia + '\'' +
-                ", numero='" + numero + '\'' +
-                '}';
     }
 }
