@@ -15,6 +15,7 @@ public class AgenciaController {
         Agencia agencia = new Agencia(rua,numero,complemento,cidade);
         try{
             AgenciaDAO.inserirAgencia(rua,numero,complemento,cidade);
+            AgenciaDAO.fecharConexao();
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -24,6 +25,7 @@ public class AgenciaController {
     public void deletarAgencia(int id_agencia){
         try{
             AgenciaDAO.deletarAgencia(id_agencia);
+            AgenciaDAO.fecharConexao();
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -32,6 +34,7 @@ public class AgenciaController {
     public void alterarEndereco(int id_agencia, String rua, int numero, String complemento, String cidade){
         try{
             AgenciaDAO.alterarEndereco(id_agencia,rua,numero,complemento,cidade);
+            AgenciaDAO.fecharConexao();
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -40,6 +43,7 @@ public class AgenciaController {
     public void listarAgencias(){
         try{
             AgenciaDAO.listarAgencias();
+            AgenciaDAO.fecharConexao();
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
