@@ -14,9 +14,9 @@
 
 <Pane minHeight="915.0"
       minWidth="412.0"
-      xmlns="http://javafx.com/javafx/21.0.1"
+      xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.agibank.corehub.controller.TransacaoController">
+      fx:controller="com.agibank.corehub.controller.transacao.ValorTransacaoController">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" prefHeight="915.0" prefWidth="412.0">
          <children>

@@ -17,17 +17,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginController implements Initializable {
+public class LoginController {
 
     @FXML
     private TextField campoApelido;
 
     @FXML
     private PasswordField campoSenha;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-    }
 
     @FXML
     private void login(ActionEvent actionEvent) throws IOException, SQLException {
