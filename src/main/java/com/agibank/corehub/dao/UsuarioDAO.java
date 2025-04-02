@@ -1,5 +1,6 @@
 package com.agibank.corehub.dao;
 
+import br.com.agibank.dao.Conexao;
 import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.controller.CifradorSenha;
 import java.sql.Connection;

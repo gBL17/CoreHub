@@ -2,7 +2,7 @@ package com.agibank.corehub.dao.conta;
 
 //import com.agibank.corehub..conta.Classe;
 import com.agibank.corehub.beans.conta.TipoConta;
-import com.agibank.corehub.dao.Conexao;
+import br.com.agibank.dao.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
