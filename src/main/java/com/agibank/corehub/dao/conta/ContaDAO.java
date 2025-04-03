@@ -194,11 +194,9 @@ public class ContaDAO {
         ArrayList<Conta> contas = new ArrayList<>();
 
         String sql = """
-                SELECT c.id_conta, tc.tipo, cl.tipo_classe, a.numero_agencia, c.numero, c.saldo, c.data_abertura, c.status, c.score
+                SELECT tc.tipo
                 FROM Conta c
                 INNER JOIN Tipo_Conta tc ON c.id_tipo = tc.id_tipo_conta
-                INNER JOIN Classe cl ON c.id_classe = cl.id_classe
-                INNER JOIN Agencia a ON c.id_agencia = a.id_agencia
                 WHERE c.id_usuario = ?
                 """;
 
@@ -207,22 +205,36 @@ public class ContaDAO {
         rs = stmt.executeQuery();
 
         while (rs.next()) {
+
             Conta conta = new Conta();
-
-            conta.setIdConta(rs.getInt("id_conta"));
             conta.setTipo(rs.getString("tipo"));
-            conta.setTipoClasse(rs.getString("tipo_classe"));
-            conta.setNumeroAgencia(rs.getInt("numero_agencia"));
-            conta.setNumero(rs.getInt("numero"));
-            conta.setSaldo(rs.getDouble("saldo"));
-            conta.setDataAbertura(rs.getDate("data_abertura"));
-            conta.setStatus(rs.getString("status"));
-            conta.setScore(rs.getInt("score"));
-
             contas.add(conta);
 
         }
         return contas;
+    }
+
+    public int buscarIdContaPorNumeroEAgencia(int numeroAgencia, int numeroConta) throws SQLException{
+
+        String sql = """
+                SELECT c.id_conta
+                FROM Conta c
+                Inner join Agencia a ON a.id_agencia = c.id_agencia
+                Where a.numero = ?
+                AND c.numero = ?
+                """;
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, numeroAgencia);
+        stmt.setInt(2, numeroConta);
+        rs = stmt.executeQuery();
+
+        if(rs.next()){
+            return rs.getInt("id_conta");
+        }else {
+            return 0;
+        }
+
     }
 
 }
