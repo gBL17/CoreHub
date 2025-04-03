@@ -12,7 +12,7 @@
 
 <Pane minHeight="915.0"
       minWidth="412.0"
-      xmlns="http://javafx.com/javafx/21.0.1"
+      xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.agibank.corehub.controller.ContaController">
    <children>
