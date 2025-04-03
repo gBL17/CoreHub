@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import com.agibank.corehub.dao.Conexao;
 
 public class UsuarioDAO {
     private Connection con;
