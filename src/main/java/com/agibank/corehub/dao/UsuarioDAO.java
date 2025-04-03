@@ -103,7 +103,7 @@ public class UsuarioDAO {
         return null;
     }
 
-    public Usuario buscarUsuarioApelido(String apelido) throws SQLException{
+    public Usuario buscarUsuarioApelido(String apelido) throws SQLException {
         String sql = "SELECT * FROM Usuario WHERE apelido = ?";
 
         PreparedStatement stmt = con.prepareStatement(sql);
