@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DocumentoDAO {
-    private Connection con;
-    private PreparedStatement stmt;
+    private static Connection con;
+    private static PreparedStatement stmt;
     private ResultSet rs;
 
     public DocumentoDAO() throws SQLException {
