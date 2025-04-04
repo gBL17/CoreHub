@@ -23,7 +23,7 @@ public class ContaExternaDAO {
 
     public int cadastrarContaExterna(int agencia, int numeroContaExterna, int codigoBanco) throws SQLException {
 
-        final String sql = "INSERT INTO Conta_Externa(agencia, dados_conta_externa, codigo_banco) VALUES(?,?,?)";
+        final String sql = "INSERT INTO Conta_Externa(agencia, numero_conta_externa, codigo_banco) VALUES(?,?,?)";
 
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, agencia);
@@ -53,7 +53,7 @@ public class ContaExternaDAO {
     }
 
     public int buscarIdContaExterna(int agencia, int numeroConta, int codigoBanco) throws SQLException {
-        final String sql = "SELECT * FROM Conta_Externa WHERE agencia = ? AND numero_conta_externa=? AND codigo_banco_externo=?";
+        final String sql = "SELECT * FROM Conta_Externa WHERE agencia = ? AND numero_conta_externa=? AND codigo_banco=?";
 
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, agencia);
