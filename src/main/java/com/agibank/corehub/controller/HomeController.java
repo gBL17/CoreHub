@@ -1,5 +1,6 @@
 package com.agibank.corehub.controller;
 
+import com.agibank.corehub.controller.conta.ContaController;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,7 +31,7 @@ public class HomeController {
         Parent root = loader.load();
 
         ContaController controller = loader.getController();
-        controller.setIdConta(26);
+        controller.setIdConta(3);
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 412, 915);

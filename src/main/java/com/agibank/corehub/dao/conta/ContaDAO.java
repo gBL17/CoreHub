@@ -216,19 +216,20 @@ public class ContaDAO {
         return contas;
     }
 
-    public int buscarIdContaPorNumeroEAgencia(int numeroAgencia, int numeroConta) throws SQLException{
+    public int buscarIdContaPorAgenciaENumero(int numeroAgencia, int numeroConta) throws SQLException{
 
         String sql = """
-                SELECT c.id_conta
+                SELECT id_conta
                 FROM Conta c
-                Inner join Agencia a ON a.id_agencia = c.id_agencia
-                Where a.numero = ?
-                AND c.numero = ?
+                Inner join Agencia a 
+                ON a.id_agencia = c.id_agencia
+                Where c.numero = ?
+                AND a.numero_agencia = ?
                 """;
 
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, numeroAgencia);
-        stmt.setInt(2, numeroConta);
+        stmt.setInt(1, numeroConta);
+        stmt.setInt(2, numeroAgencia);
         rs = stmt.executeQuery();
 
         if(rs.next()){
@@ -236,7 +237,6 @@ public class ContaDAO {
         }else {
             return 0;
         }
-
     }
 
 }

@@ -1,22 +1,31 @@
-package com.agibank.corehub.controller;
+package com.agibank.corehub.controller.conta;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import com.agibank.corehub.beans.conta.Conta;
+import com.agibank.corehub.controller.transacao.TipoTransacaoController;
+import com.agibank.corehub.dao.conta.ContaDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import com.agibank.corehub.dao.conta.ContaDAO;
 
 public class ContaController {
+    private int idConta;
     ContaDAO contaDAO = new ContaDAO();
 
     public ContaController() throws SQLException {
+    }
+
+    public int getIdConta() {
+        return idConta;
+    }
+
+    public void setIdConta(int idConta) {
+        this.idConta = idConta;
     }
 
     public Conta buscarContaPorId(int id_conta){
@@ -48,10 +57,17 @@ public class ContaController {
         }
     }
 
-    public int buscarIdContaPorNumeroEAgencia(int numeroAgencia, int numeroConta) throws SQLException{
+    public void navegarTipoTransacao(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/tipoTransacao.fxml"));
+        Parent root = loader.load();
 
-        return contaDAO.buscarIdContaPorNumeroEAgencia(numeroAgencia, numeroConta);
+        TipoTransacaoController tipoTransacaoController = loader.getController();
+        tipoTransacaoController.setIdContaOrigem(idConta);
 
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 412, 915);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

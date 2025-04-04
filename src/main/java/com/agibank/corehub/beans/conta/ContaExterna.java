@@ -1,29 +1,9 @@
 package com.agibank.corehub.beans.conta;
 
 public class ContaExterna {
-
     private int idContaExterna;
-    private String dadosContaExterna;
-    public ContaExterna(int idContaExterna, String dadosContaExterna) {
-        this.idContaExterna = idContaExterna;
-        this.dadosContaExterna = dadosContaExterna;
-    }
-
-    public ContaExterna(){}
-
     private int agencia;
-    private int numeroContaExternac ContaExterna(int agencia, int numer
-		      -----------------------------------------------|  -----------------------------------------------|          this.agencia = agencia;               
-		        -----------------------------------------------|  -----------------------------------------------|          this.numeroContaExterna = numeroContaE
-			  -----------------------------------------------|  -----------------------------------------------|          this.codigoBanco = codigoBanco;       
-			    -----------------------------------------------|  -----------------------------------------------|      }                                         
-			      -----------------------------------------------|  -----------------------------------------------|                                                
-			        -----------------------------------------------|  -----------------------------------------------|      public ContaExterna(int idContaExterna, in
-					  -----------------------------------------------|  -----------------------------------------------|          this.idContaExterna = idContaExterna; 
-					    -----------------------------------------------|  -----------------------------------------------|          this.agencia = agencia;               
-					      -----------------------------------------------|  -----------------------------------------------|          this.numeroContaExterna = numeroContaE
-					        -----------------------------------------------|  -----------------------------------------------|          this.codigoBanco = codigoBanco;       
-						  -----------------------------------------------|  -----------------------------------------------|      }    ;
+    private int numeroContaExterna;
     private int codigoBanco;
 
     public ContaExterna() {
@@ -41,7 +21,6 @@ public class ContaExterna {
         this.numeroContaExterna = numeroContaExterna;
         this.codigoBanco = codigoBanco;
     }
->>>>>>> dev
 
     public int getIdContaExterna() {
         return idContaExterna;
@@ -51,16 +30,6 @@ public class ContaExterna {
         this.idContaExterna = idContaExterna;
     }
 
-<<<<<<< HEAD
-    public String getDadosContaExterna() {
-        return dadosContaExterna;
-    }
-
-    public void setDadosContaExterna(String dadosContaExterna) {
-        this.dadosContaExterna = dadosContaExterna;
-    }
-}
-=======
     public int getAgencia() {
         return agencia;
     }
@@ -85,4 +54,3 @@ public class ContaExterna {
         this.codigoBanco = codigoBanco;
     }
 }
->>>>>>> dev

@@ -8,7 +8,6 @@ import java.sql.SQLException;
 public class IntegridadeTransacaoController {
     public void verificarIntegridadeTransacao(Transacao transacao) throws SQLException {
         //todo verificações de integridade de transação
-
         cadastrarTransacao(transacao);
     }
 

@@ -2,19 +2,24 @@ package com.agibank.corehub.controller.transacao;
 
 import com.agibank.corehub.beans.transacao.DestinatarioTransacao;
 import com.agibank.corehub.dao.ContaExternaDAO;
+import com.agibank.corehub.dao.conta.ContaDAO;
+
 import java.sql.SQLException;
 
 public class IdContaDestinoController {
     public int buscarIdContaDestino(DestinatarioTransacao destinatario) throws SQLException {
-        int idContaDestino = 0;
+        int idContaDestino;
+
         if (destinatario.getCodigoBanco() != 121){
             idContaDestino = buscarIdContaExterna(destinatario);
+
             if (idContaDestino == 0){
                 cadastrarContaExterna(destinatario);
                 idContaDestino = buscarIdContaDestino(destinatario);
             }
+
         } else {
-            idContaDestino = buscarIdContaDestino(destinatario);
+            idContaDestino = buscarIdContaInterna(destinatario);
         }
         return idContaDestino;
     }
@@ -31,9 +36,9 @@ public class IdContaDestinoController {
         return idContaExterna;
     }
 
-    public int buscarIdContaInterna(DestinatarioTransacao destinatario){
-        //todo buscar id em caso de conta interna;
-        return 0;
+    public int buscarIdContaInterna(DestinatarioTransacao destinatarioTransacao) throws SQLException {
+        ContaDAO contaDAO = new ContaDAO();
+        return contaDAO.buscarIdContaPorAgenciaENumero(destinatarioTransacao.getAgencia(), destinatarioTransacao.getNumero());
     }
 
     public void cadastrarContaExterna(DestinatarioTransacao destinatario) throws SQLException {

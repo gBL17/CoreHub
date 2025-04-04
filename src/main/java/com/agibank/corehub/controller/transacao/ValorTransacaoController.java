@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import com.agibank.corehub.controller.Alerta;
+import com.agibank.corehub.controller.transacao.verificacao.VerificacaoTransacaoController;
 import com.agibank.corehub.dao.TransacaoDAO;
+import com.agibank.corehub.dao.conta.ContaDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,16 +50,19 @@ public class ValorTransacaoController {
     }
 
     public void concluirTransacao(ActionEvent actionEvent) throws SQLException, IOException {
+        IdContaDestinoController idContaDestinoController = new IdContaDestinoController();
+        VerificacaoTransacaoController verificacaoTransacaoController = new VerificacaoTransacaoController();
         transacao.setValor(Double.parseDouble(valor.getText()));
         transacao.setDescricao(descricao.getText());
-
-        System.out.println(transacao);
-        //todo procurar idContaDestino
-        //todo adicionar idContaDestino a transação
-        //todo cadastrar trasação
-        //todo enviar transação para verificação
-
-        Alerta.exibirAlertaErro("Transacao Concluída", "Parabéns");
+        transacao.setIdContaDestino(idContaDestinoController.buscarIdContaDestino(destinatario));
+        verificacaoTransacaoController.verificarTransacao(transacao);
+        Alerta.exibirAlertaSucesso("Transacao Cadastrada com sucesso!", "Aguardando verificação");
         navegarConta(actionEvent);
+    }
+
+    public void cadastrarTransacao(Transacao transacao) throws SQLException {
+        TransacaoDAO transacaoDAO = new TransacaoDAO();
+        transacaoDAO.criarTransacao(transacao);
+        transacaoDAO.fecharConexao();
     }
 }

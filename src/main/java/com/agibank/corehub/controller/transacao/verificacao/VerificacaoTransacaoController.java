@@ -8,7 +8,8 @@ public class VerificacaoTransacaoController {
     public void verificarTransacao(Transacao transacao) throws SQLException {
         IntegridadeTransacaoController integridadeTransacaoController = new IntegridadeTransacaoController();
         SegurancaTransacaoController segurancaTransacaoController = new SegurancaTransacaoController();
+
         integridadeTransacaoController.verificarIntegridadeTransacao(transacao);
-        segurancaTransacaoController.verificarSegurançaTransacao(transacao);
+        segurancaTransacaoController.verificarSegurancaTransacao(transacao);
     }
 }
