@@ -1,5 +1,6 @@
 package com.agibank.corehub.dao;
 
+import br.com.agibank.dao.Conexao;
 import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.controller.CifradorSenha;
 import java.sql.Connection;
@@ -8,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import com.agibank.corehub.dao.Conexao;
 
 public class UsuarioDAO {
     private Connection con;
@@ -102,7 +104,7 @@ public class UsuarioDAO {
         return null;
     }
 
-    public Usuario buscarUsuarioApelido(String apelido) throws SQLException{
+    public Usuario buscarUsuarioApelido(String apelido) throws SQLException {
         String sql = "SELECT * FROM Usuario WHERE apelido = ?";
 
         PreparedStatement stmt = con.prepareStatement(sql);
