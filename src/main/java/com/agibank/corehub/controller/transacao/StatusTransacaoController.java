@@ -3,6 +3,7 @@ package com.agibank.corehub.controller.transacao;
 import com.agibank.corehub.beans.transacao.StatusTransacao;
 import com.agibank.corehub.dao.StatusTransacaoDAO;
 import com.agibank.corehub.dao.TransacaoDAO;
+import com.agibank.corehub.controller.conta.ContaController;
 
 import java.sql.SQLException;
 
