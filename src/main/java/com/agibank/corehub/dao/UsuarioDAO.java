@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import com.agibank.corehub.dao.Conexao;
 
 public class UsuarioDAO {
     private Connection con;
@@ -40,21 +41,21 @@ public class UsuarioDAO {
         return stmt.executeUpdate();
     }
 
-
-    public int atualizarCadastroUsuario(String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento, int id_usuario) throws SQLException {
-        final String sql = "UPDATE Usuario SET nome = ?, apelido = ?, senha = ?, email = ?, telefone = ?, data_nascimento = ?, rua = ?, numero = ?, complemento = ? WHERE id_usuario = ?";
+    public int atualizarCadastroUsuario(String tabela, String dado, int id_usuario) throws SQLException {
+        final String sql = "UPDATE Usuario SET " + tabela + " = ? where id_usuario = ?";
         stmt = con.prepareStatement(sql);
 
-        stmt.setString(1, nome);
-        stmt.setString(2, apelido);
-        stmt.setString(3, senha);
-        stmt.setString(4, email);
-        stmt.setInt(5, telefone);
-        stmt.setDate(6, Date.valueOf(String.valueOf(data_nascimento)));
-        stmt.setString(7, rua);
-        stmt.setInt(8, numero);
-        stmt.setString(9, complemento);
-        stmt.setInt(10, id_usuario);
+        stmt.setString(1, dado);
+        stmt.setInt(2, id_usuario);
+        return stmt.executeUpdate();
+    }
+
+    public int atualizarCadastroUsuario(String tabela, int dadoNumerico, int id_usuario) throws SQLException {
+        final String sql = "UPDATE Usuario SET " + tabela + " = ? where id_usuario = ?";
+        stmt = con.prepareStatement(sql);
+
+        stmt.setInt(1, dadoNumerico);
+        stmt.setInt(2, id_usuario);
         return stmt.executeUpdate();
     }
 
@@ -102,7 +103,7 @@ public class UsuarioDAO {
         return null;
     }
 
-    public Usuario buscarUsuarioApelido(String apelido) throws SQLException{
+    public Usuario buscarUsuarioApelido(String apelido) throws SQLException {
         String sql = "SELECT * FROM Usuario WHERE apelido = ?";
 
         PreparedStatement stmt = con.prepareStatement(sql);
