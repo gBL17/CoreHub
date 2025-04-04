@@ -18,7 +18,7 @@
       prefWidth="412.0"
       xmlns="http://javafx.com/javafx/21.0.1"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="br.com.corehub.agibank.corefx.controller.ContaController">
+      fx:controller="com.agibank.corehub.controller.ContaController">
    <children>
       <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
          <image>

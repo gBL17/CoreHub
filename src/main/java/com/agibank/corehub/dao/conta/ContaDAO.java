@@ -3,7 +3,7 @@ package com.agibank.corehub.dao.conta;
 import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.beans.conta.Conta;
 import com.agibank.corehub.beans.conta.TipoConta;
-import br.com.agibank.dao.Conexao;
+import com.agibank.corehub.dao.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -207,27 +207,18 @@ public class ContaDAO {
         rs = stmt.executeQuery();
 
         while (rs.next()) {
+
             Conta conta = new Conta();
-
-            conta.setIdConta(rs.getInt("id_conta"));
             conta.setTipo(rs.getString("tipo"));
-            conta.setTipoClasse(rs.getString("tipo_classe"));
-            conta.setNumeroAgencia(rs.getInt("numero_agencia"));
-            conta.setNumero(rs.getInt("numero"));
-            conta.setSaldo(rs.getDouble("saldo"));
-            conta.setDataAbertura(rs.getDate("data_abertura"));
-            conta.setStatus(rs.getString("status"));
-            conta.setScore(rs.getInt("score"));
-
             contas.add(conta);
 
         }
         return contas;
     }
 
+    public int buscarIdContaPorNumeroEAgencia(int numeroAgencia, int numeroConta) throws SQLException{
 
-    public int retornarIdConta(int numeroAgencia, int numeroConta) throws SQLException{
-        final String sql = """
+        String sql = """
                 SELECT c.id_conta
                 FROM Conta c
                 Inner join Agencia a ON a.id_agencia = c.id_agencia
@@ -241,11 +232,12 @@ public class ContaDAO {
         rs = stmt.executeQuery();
 
         if(rs.next()){
-
             return rs.getInt("id_conta");
-
-        }else{return 0;}
+        }else {
+            return 0;
+        }
 
     }
+
 }
 
