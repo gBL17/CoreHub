@@ -14,7 +14,7 @@
       prefWidth="412.0"
       xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.agibank.corehub.controller.HomeController">
+      fx:controller="com.agibank.corehub.controller.home.HomeController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="915.0" prefWidth="412.0">
          <children>
@@ -24,7 +24,7 @@
                      <children>
                         <ImageView fitHeight="154.0" fitWidth="150.0" layoutX="25.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/logoAgi.png" />
+                              <Image url="@../../assets/logoAgi.png" />
                            </image>
                         </ImageView>
                         <Label layoutX="31.0" layoutY="126.0" prefHeight="39.0" prefWidth="81.0" text="v4.69.1">
@@ -38,7 +38,7 @@
                      <children>
                         <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="75.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/usuarioPadrao.png" />
+                              <Image url="@../../assets/usuarioPadrao.png" />
                            </image>
                         </ImageView>
                      </children>

@@ -1,4 +1,4 @@
-package com.agibank.corehub.controller;
+package com.agibank.corehub.controller.home;
 
 import com.agibank.corehub.controller.conta.ContaController;
 import java.io.IOException;
