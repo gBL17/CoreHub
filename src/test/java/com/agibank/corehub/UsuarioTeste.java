@@ -1,4 +1,4 @@
-package com.agibank.corehub.teste;
+package com.agibank.corehub;
 
 import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.dao.UsuarioDAO;
