@@ -85,4 +85,47 @@ public class ContaSalarioDAO {
 
     }
 
+    public int pegarCnpjContaSalario(int idConta) throws SQLException{
+
+        br.com.agibank.beans.conta.ContaSalario contaSalario = new br.com.agibank.beans.conta.ContaSalario();
+
+        final String sql = """
+                Select cs.cnpj
+                FROM Conta c
+                Inner join Conta_Salario cs ON cs.id_conta = c.id_conta
+                Where c.id_conta = ?
+                """;
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idConta);
+        rs = stmt.executeQuery();
+
+        if(rs.next()){
+            return rs.getInt("cnpj");
+        }else{return 0;}
+
+
+    }
+
+    public String pegarCnpjDocumento(int idConta) throws SQLException{
+
+        final String sql = """
+                SELECT d.numero
+                FROM Usuario u
+                Inner Join Conta c ON c.id_usuario = u.id_usuario
+                Inner join Documento d ON d.id_usuario = u.id_usuario
+                WHERE c.id_conta = ?
+                AND d.tipo = 'cnpj'
+                """;
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idConta);
+        rs = stmt.executeQuery();
+
+        if(rs.next()){
+            return rs.getString("numero");
+        }else{return "não";}
+    }
+
+
 }
