@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class VerificacaoSegurancaDAO {
@@ -46,16 +47,17 @@ public class VerificacaoSegurancaDAO {
     }
 
     public Date horarioTransacao(int id_transacao) throws SQLException {
-        final String sql = "SELECT * FROM Status_Transacao WHERE id_transacao = ?";
+        final String sql = "SELECT data FROM Status_Transacao WHERE id_transacao = ?";
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, id_transacao);
         rs = stmt.executeQuery();
 
         Date valor = null;
         if (rs.next()) {
-            long timestamp = rs.getLong(1);
+            Date timestamp = rs.getDate(3);
 
-            valor = new Date(timestamp);
+            // Converte o timestamp em um objeto Date
+            valor = new Date(String.valueOf(timestamp));
         }
         return valor;
     }
