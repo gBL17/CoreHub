@@ -20,7 +20,7 @@ public class DocumentoDAO {
         con.close();
     }
 
-    public static int criarDocumento(Documento documento) throws SQLException {
+    public int criarDocumento(Documento documento) throws SQLException {
         final String sql = "INSERT INTO Documento (numero, id_usuario, tipo, arquivo) VALUES ( ?, ?, ?, ?)";
         stmt = con.prepareStatement(sql);
 
@@ -31,7 +31,7 @@ public class DocumentoDAO {
         return stmt.executeUpdate();
     }
 
-    public static void deletarDocumento(int id_documento) throws SQLException {
+    public void deletarDocumento(int id_documento) throws SQLException {
         final String sql = "DELETE FROM Documento WHERE id_documento = ?";
         stmt = con.prepareStatement(sql);
 
@@ -50,7 +50,7 @@ public class DocumentoDAO {
         return stmt.executeUpdate();
     }
 
-    public static void determinarTipoDocumento(String tipo, int id_usuario) throws SQLException {
+    public void determinarTipoDocumento(String tipo, int id_usuario) throws SQLException {
         final  String sql = "UPDATE Documento SET tipo = ? WHERE id_usuario = ?";
         stmt = con.prepareStatement(sql);
 
