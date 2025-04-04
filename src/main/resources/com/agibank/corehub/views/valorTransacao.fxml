@@ -14,9 +14,9 @@
 
 <Pane minHeight="915.0"
       minWidth="412.0"
-      xmlns="http://javafx.com/javafx/21.0.1"
+      xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.agibank.corehub.controller.TransacaoController">
+      fx:controller="com.agibank.corehub.controller.transacao.ValorTransacaoController">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" prefHeight="915.0" prefWidth="412.0">
          <children>
@@ -54,7 +54,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="43.0" prefWidth="323.0">
+                  <TextField prefHeight="43.0" prefWidth="323.0" fx:id="valor">
                      <VBox.margin>
                         <Insets bottom="40.0" />
                      </VBox.margin>
@@ -64,11 +64,11 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextArea prefHeight="200.0" prefWidth="323.0" />
+                  <TextArea prefHeight="200.0" prefWidth="323.0" fx:id="descricao"/>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Button mnemonicParsing="false" text="Voltar" onAction="#navegarContaTransacao"/>
-                        <Button mnemonicParsing="false" text="Confirmar" />
+                        <Button mnemonicParsing="false" text="Confirmar" onAction="#concluirTransacao"/>
                      </children>
                   </HBox>
                </children>

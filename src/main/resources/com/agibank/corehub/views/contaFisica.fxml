@@ -9,14 +9,9 @@
 <?import javafx.scene.text.Font?>
 
 
-<HBox alignment="CENTER"
-      maxHeight="-Infinity"
-      maxWidth="-Infinity"
-      minHeight="-Infinity"
-      minWidth="-Infinity"
-      prefHeight="110.0"
+<HBox prefHeight="110.0"
       prefWidth="412.0"
-      xmlns="http://javafx.com/javafx/21.0.1"
+      xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.agibank.corehub.controller.ContaController">
    <children>
