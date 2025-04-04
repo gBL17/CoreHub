@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane minHeight="915.0" minWidth="412.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.TelaInicialController">
+ <!-- Imagem centralizada -->
+ <ImageView fitHeight="176.0" fitWidth="165.0">
+     <image>
+         <Image url="@../assets/Logo.png" />
+     </image>
+ </ImageView>
+<VBox alignment="CENTER" spacing="20" StackPane.alignment="BOTTOM_CENTER" >
+     <Button onAction="#handleLogin" style="-fx-background-color: #1666C0; -fx-text-fill: white; -fx-font-size: 18; -fx-pref-width: 200; -fx-pref-height: 50; -fx-background-radius: 10;" text="Login" />
+
+     <Button style="-fx-background-color: #D6D02A; -fx-text-fill: black; -fx-font-size: 18; -fx-pref-width: 200; -fx-pref-height: 50; -fx-background-radius: 10;" text="Cadastrar" />
+</VBox>
+</StackPane>
