@@ -7,17 +7,30 @@ import com.agibank.corehub.beans.conta.Conta;
 import com.agibank.corehub.controller.transacao.TipoTransacaoController;
 import com.agibank.corehub.dao.conta.ContaDAO;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class ContaController {
+    @FXML
+    private Label saldoConta;
+
     private int idConta;
     ContaDAO contaDAO = new ContaDAO();
 
     public ContaController() throws SQLException {
+    }
+
+    public Label getSaldoConta() {
+        return saldoConta;
+    }
+
+    public void setSaldoConta(String saldoConta) {
+        this.saldoConta.setText(saldoConta);
     }
 
     public int getIdConta() {

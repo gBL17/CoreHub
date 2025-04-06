@@ -85,7 +85,16 @@ public class ContaDAO {
             return conta;
 
         } else return null;
+    }
 
+    public String buscarSaldoConta(int idConta) throws SQLException {
+        final String sql = "SELECT saldo FROM Conta WHERE id_conta = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idConta);
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            return String.valueOf(rs.getDouble("saldo"));
+        } else return "0";
     }
 
     public int atualizarConta(int numero, Double saldo, String dataAbertura, String status) throws SQLException {

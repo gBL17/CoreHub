@@ -61,7 +61,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label prefHeight="27.0" prefWidth="182.0" text="99999999,99">
+                              <Label prefHeight="27.0" prefWidth="182.0" text="99999999,99" fx:id="saldoConta">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

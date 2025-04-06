@@ -1,7 +1,9 @@
 package com.agibank.corehub.controller;
 
 import com.agibank.corehub.controller.conta.ContaController;
+import com.agibank.corehub.dao.conta.ContaDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,17 +27,26 @@ public class HomeController {
     @FXML
     public Label labelNomeUsuario;
 
-    public void navegarConta(ActionEvent actionEvent) throws IOException {
+    public void navegarConta(ActionEvent actionEvent) throws IOException, SQLException {
         System.out.println(getIdUsuario());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/conta.fxml"));
         Parent root = loader.load();
 
-        ContaController controller = loader.getController();
-        controller.setIdConta(3);
+        ContaController contaController = loader.getController();
+        contaController.setIdConta(3);
+        contaController.setSaldoConta(buscarSaldoConta(3));
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 412, 915);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private String buscarSaldoConta(int idConta) throws SQLException {
+        String saldoConta;
+        ContaDAO contaDAO = new ContaDAO();
+        saldoConta = contaDAO.buscarSaldoConta(idConta);
+        contaDAO.fecharConexao();
+        return saldoConta;
     }
 }
