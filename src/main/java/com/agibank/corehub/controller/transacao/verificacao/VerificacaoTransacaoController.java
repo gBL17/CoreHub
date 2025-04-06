@@ -9,7 +9,7 @@ public class VerificacaoTransacaoController {
         IntegridadeTransacaoController integridadeTransacaoController = new IntegridadeTransacaoController();
         SegurancaTransacaoController segurancaTransacaoController = new SegurancaTransacaoController();
 
-        integridadeTransacaoController.verificarIntegridadeTransacao(transacao);
+        integridadeTransacaoController.verificarIntegridadeTransacaoParaCadastrarEmStatus(transacao);
         segurancaTransacaoController.verificarSegurancaTransacao(transacao);
     }
 }
