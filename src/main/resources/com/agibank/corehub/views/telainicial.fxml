@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane minHeight="915.0" minWidth="412.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.TelaInicialController">
- <!-- Imagem centralizada -->
- <ImageView fitHeight="176.0" fitWidth="165.0">
-     <image>
-         <Image url="@../assets/Logo.png" />
-     </image>
- </ImageView>
-<VBox alignment="CENTER" spacing="20" StackPane.alignment="BOTTOM_CENTER" >
+<Pane prefHeight="915.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.TelaInicialController">
+
+    <ImageView fitHeight="140.0" fitWidth="150.0" layoutX="135.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../assets/Logo.png" />
+        </image>
+    </ImageView>
+    <ImageView fitHeight="690.0" fitWidth="412.0" layoutY="225.0" pickOnBounds="true">
+        <image>
+            <Image url="@../assets/Instagram_square_feed_dentista_azul-removebg-preview.png" />
+        </image>
+      <rotationAxis>
+         <Point3D z="-1.0" />
+      </rotationAxis>
+    </ImageView>
+<VBox layoutX="105.0" layoutY="640.0" spacing="20">
      <Button onAction="#handleLogin" style="-fx-background-color: #1666C0; -fx-text-fill: white; -fx-font-size: 18; -fx-pref-width: 200; -fx-pref-height: 50; -fx-background-radius: 10;" text="Login" />
 
      <Button style="-fx-background-color: #D6D02A; -fx-text-fill: black; -fx-font-size: 18; -fx-pref-width: 200; -fx-pref-height: 50; -fx-background-radius: 10;" text="Cadastrar" />
+      <rotationAxis>
+         <Point3D z="2.0" />
+      </rotationAxis>
 </VBox>
-</StackPane>
+
+</Pane>
