@@ -2,6 +2,7 @@ package com.agibank.corehub.controller.transacao;
 
 import com.agibank.corehub.beans.transacao.DestinatarioTransacao;
 import com.agibank.corehub.beans.transacao.Transacao;
+import com.agibank.corehub.controller.conta.ContaController;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -43,6 +44,9 @@ public class ValorTransacaoController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/conta.fxml"));
         Parent root = loader.load();
 
+        ContaController contaController = loader.getController();
+        contaController.setIdConta(transacao.getIdContaOrigem());
+
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 412, 915);
         stage.setScene(scene);
@@ -58,11 +62,5 @@ public class ValorTransacaoController {
         verificacaoTransacaoController.verificarTransacao(transacao);
         Alerta.exibirAlertaSucesso("Transacao Cadastrada com sucesso!", "Aguardando verificação");
         navegarConta(actionEvent);
-    }
-
-    public void cadastrarTransacao(Transacao transacao) throws SQLException {
-        TransacaoDAO transacaoDAO = new TransacaoDAO();
-        transacaoDAO.criarTransacao(transacao);
-        transacaoDAO.fecharConexao();
     }
 }
