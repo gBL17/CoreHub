@@ -34,7 +34,7 @@ public class ContaPoupancaDAO {
         return stmt.executeUpdate();
     }
 
-    public String buscarContaPoupanca(int id) throws SQLException {
+    public ContaPoupanca buscarContaPoupanca(int id) throws SQLException {
 
         final String sql = "SELECT * FROM Conta_Poupanca WHERE id_conta_poupanca = ?";
 
@@ -51,9 +51,9 @@ public class ContaPoupancaDAO {
             contaPoupanca.setRendimento(rs.getDouble("rendimento"));
             contaPoupanca.setIdConta(rs.getInt("id_conta"));
 
-            return contaPoupanca.toString();
+            return contaPoupanca;
 
-        }else return "Deu errado irmao";
+        }else return null;
 
     }
 

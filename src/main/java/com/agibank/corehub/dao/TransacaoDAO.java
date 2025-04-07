@@ -83,8 +83,8 @@ public class TransacaoDAO {
 
     public double SomarMovimentacaoPorMes (int id_conta) throws SQLException{
         final String sql = "select sum(valor) as soma " +
-                "from Transacao t inner join Status_Transacao st on st.id_transacao = t.id_transacao where month(data) = month(now())" +
-                "and year(data) = year(now()) " +
+                "from Transacao t inner join Status_Transacao st on st.id_transacao = t.id_transacao where month(data) = month(now())-1" +
+                "and year(data) = year(now())-1" +
                 "and st.status = 'APROVADO' " +
                 "and (t.id_conta_destino = ? " +
                 "or t.id_conta_origem = ?) " +
@@ -102,4 +102,26 @@ public class TransacaoDAO {
 
         return 0;
     }
+
+    public double SomarDepositosPorMes(int id_conta) throws SQLException {
+        final String sql = "select sum(valor) as soma" +
+                "from Transacao t inner join Status_Transacao st on st.id_transacao = t.id_transacao where month(data) = month(now())\n" +
+                "and year(data) = year(now())-1" +
+                "and st.status = 'APROVADO'" +
+                "and t.id_conta_destino = ?" +
+                "group by t.id_conta_destino";
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id_conta);
+        stmt.setInt(2,id_conta);
+
+        rs = stmt.executeQuery();
+
+        if(rs.next()){
+            return rs.getDouble("soma");
+        }
+
+        return 0;
+    }
+
 }
