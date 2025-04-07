@@ -11,7 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane>
+<Pane xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.agibank.corehub.controller.transacao.verificacao.VerificaoDeSegurancaController">
    <children>
       <VBox prefHeight="915.0" prefWidth="412.0">
          <children>
@@ -44,12 +46,12 @@
             </HBox>
             <VBox alignment="CENTER" prefHeight="673.0" prefWidth="412.0">
                <children>
-                  <Label prefHeight="56.0" prefWidth="344.0" text="Ops! Verificamos que existe uma suspeita na sua transação." textAlignment="CENTER" wrapText="true">
+                  <Label prefHeight="56.0" prefWidth="217.0" text="Confirmação de Segurança" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="48.0" prefWidth="395.0" text="Para continuar a transação, confirme algumas informações para sua segurança" textAlignment="CENTER" wrapText="true">
+                  <Label prefHeight="48.0" prefWidth="395.0" text="Revisamos alguns pontos importantes para garantir a segurança de sua transação." textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -57,7 +59,7 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <CheckBox mnemonicParsing="false" prefHeight="104.0" prefWidth="372.0" text="Você não recebeu email cobrando algum tipo de taxa, suspensão de serviço essencial" textAlignment="RIGHT" wrapText="true">
+                  <CheckBox fx:id="checkBox1" mnemonicParsing="false" prefHeight="105.0" prefWidth="300.0" text="Não recebi mensagens suspeitas" textAlignment="RIGHT" wrapText="true">
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>
@@ -65,12 +67,12 @@
                         <Font size="17.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox mnemonicParsing="false" prefHeight="104.0" prefWidth="372.0" text="Você confiarma que ninguém solicitou esse valor com promessa de retorno diferente do normal ou dizendo ser urgência" textAlignment="RIGHT" wrapText="true">
+                  <CheckBox fx:id="checkBox2" mnemonicParsing="false" prefHeight="105.0" prefWidth="300.0" text="Transferência para conta correta" textAlignment="RIGHT" wrapText="true">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox mnemonicParsing="false" prefHeight="104.0" prefWidth="372.0" text="A conta digitada como destino confere com a conta de desejada?" textAlignment="RIGHT" wrapText="true">
+                  <CheckBox fx:id="checkBox3" mnemonicParsing="false" prefHeight="105.0" prefWidth="300.0" text="Confirmo que é seguro prosseguir" textAlignment="RIGHT" wrapText="true">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -78,7 +80,7 @@
                   <HBox alignment="CENTER" prefHeight="165.0" prefWidth="412.0">
                      <children>
                         <Button mnemonicParsing="false" text="Voltar" />
-                        <Button mnemonicParsing="false" text="Confirmar" />
+                        <Button fx:id="confirmarButton" mnemonicParsing="false" text="Confirmar" />
                      </children>
                   </HBox>
                </children>

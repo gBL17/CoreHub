@@ -1,63 +1,25 @@
 package com.agibank.corehub.controller.transacao.verificacao;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.geometry.Pos;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.CheckBox;
 
-public class VerificaoDeSegurancaController extends HBox {
+public class VerificaoDeSegurancaController {
 
-    private final Label label = new Label();
-    private final Button button = new Button();
+    @FXML
+    private CheckBox checkBox1, checkBox2, checkBox3;
 
-    private SimpleBooleanProperty switchedOn = new SimpleBooleanProperty(false);
-    public SimpleBooleanProperty switchOnProperty() { return switchedOn; }
+    @FXML
+    private Button confirmarButton;
 
-    private void init() {
-
-        label.setText("OFF");
-
-        getChildren().addAll(label, button);
-        button.setOnAction((e) -> {
-            switchedOn.set(!switchedOn.get());
-        });
-        label.setOnMouseClicked((e) -> {
-            switchedOn.set(!switchedOn.get());
-        });
-        setStyle();
-        bindProperties();
-    }
-
-    private void setStyle() {
-        //Default Width
-        setWidth(80);
-        label.setAlignment(Pos.CENTER);
-        setStyle("-fx-background-color: grey; -fx-text-fill:black; -fx-background-radius: 4;");
-        setAlignment(Pos.CENTER_LEFT);
-    }
-
-    private void bindProperties() {
-        label.prefWidthProperty().bind(widthProperty().divide(2));
-        label.prefHeightProperty().bind(heightProperty());
-        button.prefWidthProperty().bind(widthProperty().divide(2));
-        button.prefHeightProperty().bind(heightProperty());
-    }
-
-    public VerificaoDeSegurancaController() {
-        init();
-        switchedOn.addListener((a,b,c) -> {
-            if (c) {
-                label.setText("ON");
-                setStyle("-fx-background-color: green;");
-                label.toFront();
-            }
-            else {
-                label.setText("OFF");
-                setStyle("-fx-background-color: grey;");
-                button.toFront();
-            }
-        });
+    @FXML
+    public void initialize() {
+        confirmarButton.disableProperty().bind(
+                checkBox1.selectedProperty().not()
+                        .or(checkBox2.selectedProperty().not())
+                        .or(checkBox3.selectedProperty().not())
+        );
     }
 }
+
 

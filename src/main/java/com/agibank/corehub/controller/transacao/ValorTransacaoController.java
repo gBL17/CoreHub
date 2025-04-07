@@ -53,9 +53,11 @@ public class ValorTransacaoController {
     public void concluirTransacao(ActionEvent actionEvent) throws SQLException, IOException {
         IdContaDestinoController idContaDestinoController = new IdContaDestinoController();
         VerificacaoTransacaoController verificacaoTransacaoController = new VerificacaoTransacaoController();
+
         transacao.setValor(Double.parseDouble(valor.getText()));
         transacao.setDescricao(descricao.getText());
         transacao.setIdContaDestino(idContaDestinoController.buscarIdContaDestino(destinatario));
+
         verificacaoTransacaoController.verificarTransacao(transacao);
         Alerta.exibirAlertaSucesso("Transacao Cadastrada com sucesso!", "Aguardando verificação");
         navegarConta(actionEvent);

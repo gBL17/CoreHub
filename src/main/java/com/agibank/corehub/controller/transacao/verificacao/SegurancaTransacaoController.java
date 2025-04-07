@@ -1,6 +1,8 @@
 package com.agibank.corehub.controller.transacao.verificacao;
 
 import com.agibank.corehub.beans.transacao.Transacao;
+import com.agibank.corehub.dao.StatusTransacaoDAO;
+import com.agibank.corehub.dao.TransacaoDAO;
 import com.agibank.corehub.dao.VerificacaoSegurancaDAO;
 
 import java.sql.SQLException;
@@ -17,6 +19,11 @@ public class SegurancaTransacaoController {
         verificarHorario();
         verificarMediaValor(valor, media);
         verificarMaiorValor(valor, maior);
+
+        StatusTransacaoDAO statusTransacaoDAO = new StatusTransacaoDAO();
+        statusTransacaoDAO.atualizarStatusTransacao(retornaIdTransacao(transacao), "APROVADA");
+        statusTransacaoDAO.fecharConexao();
+
 
     }
 
@@ -46,5 +53,13 @@ public class SegurancaTransacaoController {
             return false;
         }
         return true;
+    }
+
+    public int retornaIdTransacao(Transacao transacao) throws SQLException{
+        int idTransacao;
+        TransacaoDAO transacaoDAO = new TransacaoDAO();
+        idTransacao = transacaoDAO.buscarIdTransacao(transacao);
+        transacaoDAO.fecharConexao();
+        return idTransacao;
     }
 }

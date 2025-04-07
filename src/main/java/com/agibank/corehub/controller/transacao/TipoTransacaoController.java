@@ -2,6 +2,7 @@ package com.agibank.corehub.controller.transacao;
 
 import com.agibank.corehub.beans.transacao.Transacao;
 import com.agibank.corehub.controller.Alerta;
+import com.agibank.corehub.controller.ContaLogadaController;
 import com.agibank.corehub.controller.conta.ContaController;
 import com.agibank.corehub.dao.conta.ContaDAO;
 import java.io.IOException;
@@ -34,6 +35,8 @@ public class TipoTransacaoController {
         radioPix.setToggleGroup(group);
         radioDoc.setToggleGroup(group);
         radioTed.setToggleGroup(group);
+
+        transacao.setIdContaOrigem(ContaLogadaController.getInstance().getConta().getIdConta());
     }
 
     public void setIdContaOrigem(int idContaOrigem){

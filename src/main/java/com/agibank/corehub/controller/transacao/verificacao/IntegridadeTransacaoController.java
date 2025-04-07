@@ -21,6 +21,13 @@ public class IntegridadeTransacaoController {
         transacaoDAO.fecharConexao();
     }
 
+    public void cadastrarTransacaoEmAnalise(int idTransacao) throws SQLException {
+        String status = "EM ANALISE";
+        StatusTransacaoDAO statusTransacaoDAO = new StatusTransacaoDAO();
+        statusTransacaoDAO.criarStatusTransacao(idTransacao, status);
+        statusTransacaoDAO.fecharConexao();
+    }
+
     public int retornaIdTransacao(Transacao transacao) throws SQLException{
         int idTransacao;
         TransacaoDAO transacaoDAO = new TransacaoDAO();
@@ -28,11 +35,13 @@ public class IntegridadeTransacaoController {
         transacaoDAO.fecharConexao();
         return idTransacao;
     }
-    public void cadastrarTransacaoEmAnalise(int idTransacao) throws SQLException {
-        String status = "EM ANALISE";
+
+    public int atualizarStatusTransacao(int idTransacao, String status) throws SQLException{
+        int statusTransacao;
         StatusTransacaoDAO statusTransacaoDAO = new StatusTransacaoDAO();
-        statusTransacaoDAO.criarStatusTransacao(idTransacao, status);
+        statusTransacao = statusTransacaoDAO.atualizarStatusTransacao(idTransacao, status);
         statusTransacaoDAO.fecharConexao();
+        return statusTransacao;
     }
 
     public int buscarIdStatusTransacao(int idTransacao) throws SQLException{
