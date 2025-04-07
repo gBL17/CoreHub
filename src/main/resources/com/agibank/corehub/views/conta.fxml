@@ -12,9 +12,9 @@
 
 <Pane minHeight="915.0"
       minWidth="412.0"
-      xmlns="http://javafx.com/javafx/21.0.1"
+      xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.agibank.corehub.controller.ContaController">
+      fx:controller="com.agibank.corehub.controller.conta.ContaController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="915.0" prefWidth="412.0">
          <children>
@@ -61,7 +61,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label prefHeight="27.0" prefWidth="182.0" text="99999999,99">
+                              <Label prefHeight="27.0" prefWidth="182.0" text="99999999,99" fx:id="saldoConta">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
