@@ -239,5 +239,21 @@ public class ContaDAO {
         }
     }
 
+    public double atualizarScoreConta(double score, int id_conta) throws SQLException{
+        final   String sql = "update Conta set score = score + ? where id_conta = ?";
+
+        stmt = con.prepareStatement(sql);
+        stmt.setDouble(1, score);
+        stmt.setInt(2,id_conta);
+
+        rs = stmt.executeQuery();
+
+        if(rs.next()){
+            return rs.getDouble("score + ?");
+        }
+
+        return 0;
+    }
+
 }
 
