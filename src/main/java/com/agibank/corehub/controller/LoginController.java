@@ -23,6 +23,8 @@ public class LoginController {
     @FXML
     private PasswordField campoSenha;
 
+    UsuarioLogadoController usuarioLogado;
+
     @FXML
     private void login(ActionEvent actionEvent) throws IOException, SQLException {
         String usuario = campoApelido.getText();
@@ -41,7 +43,8 @@ public class LoginController {
         }
 
         if(usuarioVerificado != null && cifrador.validarSenhaCrifrada(usuarioVerificado.getSenha(),senha)){
-            navegarHome(actionEvent, usuarioVerificado);
+            usuarioLogado.setUsuario(usuarioVerificado);
+            navegarHome(actionEvent, usuarioLogado.getUsuario());
         } else {
             Alerta.exibirAlertaErro("Erro de Login", "Usuário ou Senha incorreta!");
         }

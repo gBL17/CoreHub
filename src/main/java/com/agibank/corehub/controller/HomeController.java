@@ -1,5 +1,6 @@
 package com.agibank.corehub.controller;
 
+import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.controller.conta.ContaController;
 import com.agibank.corehub.dao.conta.ContaDAO;
 import java.io.IOException;
@@ -14,21 +15,12 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class HomeController {
-    private int idUsuario;
-
-    public void setIdUsuario(int id){
-        this.idUsuario = id;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
+    private static Usuario usuarioLogado = UsuarioLogadoController.getInstance().getUsuario();
 
     @FXML
     public Label labelNomeUsuario;
 
     public void navegarConta(ActionEvent actionEvent) throws IOException, SQLException {
-        System.out.println(getIdUsuario());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/conta.fxml"));
         Parent root = loader.load();
 
