@@ -19,7 +19,7 @@ public class TelaInicialController {
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 412, 915);
+        Scene scene = new Scene(root, 412, 800);
         stage.setScene(scene);
         stage.show();
     }
