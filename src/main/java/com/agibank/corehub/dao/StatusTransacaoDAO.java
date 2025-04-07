@@ -32,7 +32,27 @@ public class StatusTransacaoDAO {
         return stmt.executeUpdate();
     }
 
-    public StatusTransacao buscarStatusTransacao(int id) throws SQLException {
+    public int criarStatusTransacao(int idTransacao, String status) throws SQLException {
+        final String sql = "INSERT INTO Status_Transacao (id_transacao, status, data) VALUES (?,?,?)";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idTransacao);
+        stmt.setString(2, status);
+        stmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+        return stmt.executeUpdate();
+    }
+
+    public int buscarIdStatusTransacao(int idTransacao) throws SQLException {
+        final String sql = "SELECT id_status_transacao FROM Status_Transacao WHERE id_transacao = ? ORDER BY data DESC LIMIT 1";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idTransacao);
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("id_status_transacao");
+        }
+        return -1;
+    }
+
+    public StatusTransacao buscarTodosStatusTransacao(int id) throws SQLException {
         StatusTransacao statusTransacao = new StatusTransacao();
         final String sql = "SELECT * FROM Status_Transacao WHERE id_transacao = ?";
         stmt = con.prepareStatement(sql);

@@ -50,6 +50,22 @@ public class TransacaoDAO {
         return transacao;
     }
 
+    public int buscarIdTransacao(Transacao transacao) throws SQLException {
+        final String sql = "SELECT id_transacao FROM Transacao WHERE id_conta_origem = ? AND id_conta_destino = ? AND valor = ? AND descricao = ? AND id_tipo_transacao = ? AND transferencia_externa = ? ORDER BY id_transacao DESC LIMIT 1";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, transacao.getIdContaOrigem());
+        stmt.setInt(2, transacao.getIdContaDestino());
+        stmt.setDouble(3, transacao.getValor());
+        stmt.setString(4, transacao.getDescricao());
+        stmt.setInt(5, transacao.getIdTipoTransacao());
+        stmt.setBoolean(6, transacao.isTransferenciaExterna());
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("id_transacao");
+        }
+        return -1;
+    }
+
     public int atualizarTransacao(int id, String descricao) throws SQLException {
         final String sql = "UPDATE Transacao SET descricao = ? WHERE id_transacao = ?";
         stmt = con.prepareStatement(sql);
