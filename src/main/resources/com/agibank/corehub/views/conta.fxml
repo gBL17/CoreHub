@@ -1,96 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane minHeight="915.0"
-      minWidth="412.0"
-      xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.agibank.corehub.controller.conta.ContaController">
+<Pane minHeight="800.0" minWidth="412.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.conta.ContaController">
+
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="915.0" prefWidth="412.0">
+      <!-- Imagem da onda no topo, sem alteração de tamanho -->
+      <ImageView fitHeight="412.0" fitWidth="412.0" pickOnBounds="true" preserveRatio="false">
+         <image>
+            <Image url="@../assets/ondaConta180.png" />
+         </image>
+      </ImageView>
+
+      <!-- Imagem do usuário fixa no canto superior direito -->
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="359.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/usuarioPadrao.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="77.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/LogoCX.png" />
+         </image>
+      </ImageView>
+
+      <VBox alignment="CENTER" layoutY="93.0" prefHeight="80.0" prefWidth="412.0" spacing="5">
          <children>
-            <HBox prefHeight="200.0" prefWidth="412.0">
-               <children>
-                  <Pane minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="154.0" fitWidth="150.0" layoutX="25.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/logoAgi.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="33.0" layoutY="126.0" prefHeight="39.0" prefWidth="81.0" text="v4.69.1">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="75.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/usuarioPadrao.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" minHeight="64.0" minWidth="412.0" prefHeight="74.0" prefWidth="412.0">
-               <children>
-                  <VBox alignment="CENTER_LEFT" maxHeight="65.0" prefHeight="46.0" prefWidth="218.0">
-                     <children>
-                        <Label layoutX="31.0" layoutY="31.0" prefHeight="27.0" prefWidth="141.0" text="Saldo:">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label prefHeight="27.0" prefWidth="44.0" text="R$:">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label prefHeight="27.0" prefWidth="182.0" text="99999999,99">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </children>
-                     <HBox.margin>
-                        <Insets left="35.0" />
-                     </HBox.margin>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="133.0" prefWidth="412.0">
-               <children>
-                  <Button mnemonicParsing="false" text="Extrato" />
-                  <Button mnemonicParsing="false" text="Transação" onAction="#navegarTipoTransacao"/>
-               </children>
-            </HBox>
-            <VBox alignment="CENTER" prefHeight="338.0" prefWidth="412.0">
-               <children>
-                  <ImageView fitHeight="335.0" fitWidth="357.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/logoCoreHub.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
+            <!-- Texto menor e discreto -->
+            <Label text="Saldo total" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+
+            <!-- Saldo destacado -->
+            <Label text="R$ 1.234.567,90" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
+
+      <HBox alignment="CENTER" layoutY="275.0" prefWidth="412.0" spacing="30">
+         <children>
+
+            <!-- Transferir -->
+            <VBox alignment="CENTER">
+               <StackPane fx:id="transferirBox" onMouseClicked="#navegarTipoTransacao" prefHeight="70" prefWidth="70" style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                  <ImageView fitHeight="57.0" fitWidth="54.0">
+                     <image>
+                        <Image url="@../assets/setasTransferencia.png" />
+                     </image>
+                  </ImageView>
+               </StackPane>
+               <Label text="Transferir" textFill="#1166B1" />
+            </VBox>
+
+            <!-- Extrato -->
+            <VBox alignment="CENTER">
+               <StackPane fx:id="extratoBox" prefHeight="70" prefWidth="70" style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                  <ImageView fitHeight="40.0" fitWidth="30.0">
+                     <image>
+                        <Image url="@../assets/extratoBanco.png" />
+                     </image>
+                  </ImageView>
+               </StackPane>
+               <Label text="Extrato" textFill="#1166B1" />
+            </VBox>
+
+            <!-- Voltar a Contas -->
+            <VBox alignment="CENTER">
+               <StackPane fx:id="voltarBox" prefHeight="70" prefWidth="50.0" style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                  <ImageView fitHeight="30.0" fitWidth="30.0">
+                     <image>
+                        <Image url="@../assets/voltarContas.png" />
+                     </image>
+                  </ImageView>
+               </StackPane>
+               <Label text="Voltar a contas" textAlignment="CENTER" textFill="#1166B1" />
+            </VBox>
+
+         </children>
+      </HBox>
+
+
    </children>
 </Pane>

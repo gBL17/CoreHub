@@ -5,7 +5,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane prefHeight="915.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.TelaInicialController">
+<Pane prefHeight="900.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.TelaInicialController">
 
     <ImageView fitHeight="140.0" fitWidth="150.0" layoutX="135.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
         <image>
