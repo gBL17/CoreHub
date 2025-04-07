@@ -1,19 +1,17 @@
 package com.agibank.corehub.controller.conta;
 
+import com.agibank.corehub.controller.ScoreController;
+import com.agibank.corehub.dao.conta.ContaDAO;
 import java.io.IOException;
+import com.agibank.corehub.beans.Usuario;
+import com.agibank.corehub.beans.conta.Conta;
+import com.agibank.corehub.controller.ContaLogadaController;
+import com.agibank.corehub.controller.UsuarioLogadoController;
+import com.agibank.corehub.controller.transacao.TipoTransacaoController;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import com.agibank.corehub.beans.Usuario;
-import com.agibank.corehub.beans.conta.Conta;
-import com.agibank.corehub.beans.conta.ContaCorrente;
-import com.agibank.corehub.controller.ContaLogadaController;
-import com.agibank.corehub.controller.ScoreController;
-import com.agibank.corehub.controller.UsuarioLogadoController;
-import com.agibank.corehub.controller.transacao.TipoTransacaoController;
-import com.agibank.corehub.dao.conta.ContaDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,19 +22,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class ContaController{
+public class ContaController implements Initializable {
     private static final Usuario usarioLogado = UsuarioLogadoController.getInstance().getUsuario();
-    private static final Conta contaLogada = ContaLogadaController.getInstance().getConta();
+    private static Conta contaLogada;
 
     @FXML
     private Label saldoConta;
 
-    public Label getSaldoConta() {
-        return saldoConta;
-    }
-
-    public void setSaldoConta(String saldoConta) {
-        this.saldoConta.setText(saldoConta);
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+         contaLogada = ContaLogadaController.getInstance().getConta();
+         saldoConta.setText(String.valueOf(contaLogada.getSaldo()));
     }
 
     //    public Conta buscarContaPorId(int id_conta){
@@ -59,14 +55,14 @@ public class ContaController{
 
 //
 //    }
+
 //    public void atualizarSaldo(int id_conta, double valor){
 //        try{
+//            ContaDAO contaDAO = new ContaDAO();
 //            contaDAO.atualizarSaldo(id_conta,valor);
 //        }catch (SQLException e){
 //            System.out.println(e.getMessage());
-
 //        }
-
 //    }
 
     public void navegarTipoTransacao(ActionEvent actionEvent) throws IOException {
@@ -83,28 +79,28 @@ public class ContaController{
     }
 
 
-//    public void atualizarContas(int id_usuario) throws SQLException{
-//
-//        ScoreController scoreController = new ScoreController();
-//        //ContaPoupancaController contaSalarioController = new ContaSalarioController();
-//        ContaCorrenteController contaCorrenteController = new ContaCorrenteController();
-//        ArrayList<Conta> contas = new ArrayList<>();
-//
-//        try{
-//            contas = contaDAO.listarContasUsuario(id_usuario);
-//        }catch(SQLException e){
-//            System.out.println(e.getMessage());
-//        }
-//
-//       for (Conta conta : contas){
-//           scoreController.atualizarScore(conta.getIdConta());
-//           if(conta.getIdTipo() == 1){
-//               contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta());
-//           }else if (conta.getIdTipo() == 2){
-//               System.out.println();
-//               //TODO colocar atualização da conta poupança
-//           }
-//       }
-//
-//    }
+    public void atualizarContas(int id_usuario) throws SQLException{
+
+        ScoreController scoreController = new ScoreController();
+        ContaPoupancaController contaPoupancaController = new ContaPoupancaController();
+        ContaCorrenteController contaCorrenteController = new ContaCorrenteController();
+        ArrayList<Conta> contas;
+
+        try{
+            ContaDAO contaDAO = new ContaDAO();
+            contas = contaDAO.listarContasUsuario(id_usuario);
+
+            for (Conta conta : contas){
+                scoreController.atualizarScore(conta.getIdConta());
+                if(conta.getIdTipo() == 1){
+                    contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta());
+                }else if (conta.getIdTipo() == 2){
+                    System.out.println();
+                    //TODO colocar atualização da conta poupança
+                }
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }

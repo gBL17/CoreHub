@@ -31,14 +31,10 @@ public class HomeController implements Initializable {
     }
 
     public void navegarConta(ActionEvent actionEvent) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/conta.fxml"));
-        Parent root = loader.load();
-
         ContaLogadaController.getInstance().setConta(buscarConta(3));
 
-        //cuidado isso é necessário para não dar nullpointer na view de Conta e eu não sei o motivo
-        ContaController contaController = loader.getController();
-        contaController.setSaldoConta(String.valueOf(ContaLogadaController.getInstance().getConta().getSaldo()));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/conta.fxml"));
+        Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 412, 915);

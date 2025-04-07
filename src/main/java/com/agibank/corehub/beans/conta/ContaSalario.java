@@ -1,4 +1,4 @@
-package br.com.agibank.beans.conta;
+package com.agibank.corehub.beans.conta;
 
 import java.time.LocalDate;
 import java.util.Date;

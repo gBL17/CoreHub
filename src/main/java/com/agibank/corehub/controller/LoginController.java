@@ -1,7 +1,6 @@
 package com.agibank.corehub.controller;
 
 import com.agibank.corehub.beans.Usuario;
-import com.agibank.corehub.controller.conta.ContaCorrenteController;
 import com.agibank.corehub.dao.UsuarioDAO;
 import com.agibank.corehub.controller.conta.ContaController;
 import java.io.IOException;
@@ -45,7 +44,7 @@ public class LoginController {
         if(usuarioVerificado != null && cifrador.validarSenhaCrifrada(usuarioVerificado.getSenha(),senha)){
             UsuarioLogadoController.getInstance().setUsuario(usuarioVerificado);
             ContaController contaController = new ContaController();
-//            contaController.atualizarContas(usuarioLogado.getUsuario().getId_Usuario());
+            contaController.atualizarContas(UsuarioLogadoController.getInstance().getUsuario().getId_Usuario());
             navegarHome(actionEvent);
         } else {
             Alerta.exibirAlertaErro("Erro de Login", "Usuário ou Senha incorreta!");

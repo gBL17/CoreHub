@@ -41,7 +41,6 @@ public class ValorTransacaoController {
     }
 
     public void navegarConta(ActionEvent actionEvent) throws IOException, SQLException {
-        int idContaOrigem = transacao.getIdContaOrigem();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/conta.fxml"));
         Parent root = loader.load();
 

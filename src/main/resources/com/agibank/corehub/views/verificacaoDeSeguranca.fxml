@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane>
+   <children>
+      <VBox prefHeight="915.0" prefWidth="412.0">
+         <children>
+            <HBox prefHeight="200.0" prefWidth="412.0">
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="154.0" fitWidth="150.0" layoutX="25.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/logoAgi.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="31.0" layoutY="126.0" prefHeight="39.0" prefWidth="81.0" text="v4.69.1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="75.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/usuarioPadrao.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="673.0" prefWidth="412.0">
+               <children>
+                  <Label prefHeight="56.0" prefWidth="344.0" text="Ops! Verificamos que existe uma suspeita na sua transação." textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="48.0" prefWidth="395.0" text="Para continuar a transação, confirme algumas informações para sua segurança" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <CheckBox mnemonicParsing="false" prefHeight="104.0" prefWidth="372.0" text="Você não recebeu email cobrando algum tipo de taxa, suspensão de serviço essencial" textAlignment="RIGHT" wrapText="true">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" prefHeight="104.0" prefWidth="372.0" text="Você confiarma que ninguém solicitou esse valor com promessa de retorno diferente do normal ou dizendo ser urgência" textAlignment="RIGHT" wrapText="true">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" prefHeight="104.0" prefWidth="372.0" text="A conta digitada como destino confere com a conta de desejada?" textAlignment="RIGHT" wrapText="true">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </CheckBox>
+                  <HBox alignment="CENTER" prefHeight="165.0" prefWidth="412.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Voltar" />
+                        <Button mnemonicParsing="false" text="Confirmar" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>
