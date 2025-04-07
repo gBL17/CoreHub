@@ -16,7 +16,7 @@ public class ContaPoupancaController {
     private double calcularRendimento(int id_conta){
         double valor;
         double rendimento;
-        ContaPoupanca conta = new ContaPoupanca();
+
         try{
             valor = transacaoDAO.SomarDepositosPorMes(id_conta);
             rendimento = contaPoupancaDAO.buscarContaPoupanca(id_conta).getRendimento();

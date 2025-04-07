@@ -104,6 +104,7 @@ public class TransacaoDAO {
     }
 
     public double SomarDepositosPorMes(int id_conta) throws SQLException {
+
         final String sql = "select sum(valor) as soma" +
                 "from Transacao t inner join Status_Transacao st on st.id_transacao = t.id_transacao where month(data) = month(now())\n" +
                 "and year(data) = year(now())-1" +
