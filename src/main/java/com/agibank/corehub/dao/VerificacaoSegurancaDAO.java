@@ -21,7 +21,7 @@ public class VerificacaoSegurancaDAO {
     }
 
     public double mediaValores(int id_conta_origem) throws SQLException {
-        final String sql = "SELECT AVG(valor) FROM Transacao WHERE id_conta_origem = ?";
+        final String sql = "SELECT AVG(valor) AS Media_Transacao FROM Transacao WHERE id_conta_origem = ? AND valor >= 100;";
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, id_conta_origem);
         rs = stmt.executeQuery();
