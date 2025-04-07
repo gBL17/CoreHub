@@ -75,10 +75,6 @@ public class TipoTransacaoController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/conta.fxml"));
         Parent root = loader.load();
 
-        ContaController contaController = loader.getController();
-        contaController.setIdConta(idContaOrigem);
-        contaController.setSaldoConta(buscarSaldoConta(idContaOrigem));
-
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 412, 915);
         stage.setScene(scene);

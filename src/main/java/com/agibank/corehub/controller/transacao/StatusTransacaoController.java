@@ -17,33 +17,33 @@ public class StatusTransacaoController {
 
     }
 
-    public int criarStatusTransacao(StatusTransacao statusTransacao,boolean transacaoExterna){
-        try{
-            statusTransacaoDAO.criarStatusTransacao(statusTransacao);
-            if(atualizarSaldo(statusTransacao,transacaoExterna) == 1)  return 1;
-            else return 0;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+//    public int criarStatusTransacao(StatusTransacao statusTransacao,boolean transacaoExterna){
+//        try{
+//            statusTransacaoDAO.criarStatusTransacao(statusTransacao);
+//            if(atualizarSaldo(statusTransacao,transacaoExterna) == 1)  return 1;
+//            else return 0;
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//        return 0;
+//    }
 
-        return 0;
-    }
-
-    public int atualizarSaldo(StatusTransacao statusTransacao, boolean transacaoExterna){
-
-        try{
-            if(statusTransacao.getStatus().equals("APROVADO")){
-                controller.atualizarSaldo(transacaoDAO.buscarTransacaoPorId(statusTransacao.getIdTransacao()).getIdContaOrigem(), -transacaoDAO.buscarTransacaoPorId(statusTransacao.getIdTransacao()).getValor());
-                if(!transacaoExterna){
-                    controller.atualizarSaldo(transacaoDAO.buscarTransacaoPorId(statusTransacao.getIdTransacao()).getIdContaDestino(), transacaoDAO.buscarTransacaoPorId(statusTransacao.getIdTransacao()).getValor());
-                }
-            }
-            return 1;
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-        return 0;
-    }
+//    public int atualizarSaldo(StatusTransacao statusTransacao, boolean transacaoExterna){
+//
+//        try{
+//            if(statusTransacao.getStatus().equals("APROVADO")){
+//                controller.atualizarSaldo(transacaoDAO.buscarTransacaoPorId(statusTransacao.getIdTransacao()).getIdContaOrigem(), -transacaoDAO.buscarTransacaoPorId(statusTransacao.getIdTransacao()).getValor());
+//                if(!transacaoExterna){
+//                    controller.atualizarSaldo(transacaoDAO.buscarTransacaoPorId(statusTransacao.getIdTransacao()).getIdContaDestino(), transacaoDAO.buscarTransacaoPorId(statusTransacao.getIdTransacao()).getValor());
+//                }
+//            }
+//            return 1;
+//        }catch (SQLException e){
+//            System.out.println(e.getMessage());
+//        }
+//        return 0;
+//    }
 
 
 }
