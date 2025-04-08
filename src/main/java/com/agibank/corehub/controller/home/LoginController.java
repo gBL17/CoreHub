@@ -61,10 +61,6 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/home/home.fxml"));
         Parent root = loader.load();
 
-        HomeController homeController = loader.getController();
-        homeController.labelNomeUsuario.setText(usuario.getNome());
-        homeController.setIdUsuario(usuario.getId_Usuario());
-
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 412, 800);
         stage.setScene(scene);
