@@ -4,6 +4,7 @@ import com.agibank.corehub.beans.transacao.Transacao;
 import com.agibank.corehub.controller.Alerta;
 import com.agibank.corehub.controller.ContaLogadaController;
 import com.agibank.corehub.controller.conta.ContaController;
+import com.agibank.corehub.controller.utils.Navegador;
 import com.agibank.corehub.dao.conta.ContaDAO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 public class TipoTransacaoController {
 
     private Transacao transacao = new Transacao();
+    private Navegador navegador = new Navegador();
 
     @FXML
     private StackPane pixButton;
@@ -62,17 +64,15 @@ public class TipoTransacaoController {
         Scene scene = new Scene(root, 412, 915);
         stage.setScene(scene);
         stage.show();
+    public void navegarContaTransacao(ActionEvent actionEvent) throws IOException {
+        setTipoTransacao();
+        if (transacao.getIdTipoTransacao() != 0) {
+            navegador.navegarPara(actionEvent,"contaTransacao.fxml");
+        }
     }
 
-    @FXML
-    public void navegarConta() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/conta.fxml"));
-        Parent root = loader.load();
-
-        Stage stage = (Stage) pixButton.getScene().getWindow();
-        Scene scene = new Scene(root, 412, 915);
-        stage.setScene(scene);
-        stage.show();
+    public void navegarConta(ActionEvent actionEvent) throws IOException, SQLException {
+        navegador.navegarPara(actionEvent, "conta.fxml");
     }
 
     private String buscarSaldoConta(int idContaOrigem) throws SQLException {
