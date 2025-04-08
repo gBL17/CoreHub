@@ -70,4 +70,15 @@ public class ValorTransacaoController {
         contaDAO.fecharConexao();
         return saldoConta;
     }
+
+    @FXML
+    private void voltarTelaInicial(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/contaTransacao.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 412, 800);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

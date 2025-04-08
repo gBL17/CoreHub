@@ -5,7 +5,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane prefHeight="800.0" prefWidth="412.0" style="-fx-background-color: #f8f8f8;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.home.HomeController">
+<Pane prefHeight="800.0" prefWidth="412.0" style="-fx-background-color: #f8f8f8;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.home.HomeController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="412.0">
          <image>
@@ -32,7 +32,9 @@
          </children>
       </HBox>
 
-      <Button layoutX="290.0" layoutY="470.0" mnemonicParsing="false" onAction="#navegarConta" style="-fx-background-color: #004aad;                -fx-text-fill: white;                -fx-font-weight: bold;                -fx-background-radius: 10;                -fx-padding: 8 20;                -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0, 0, 2);" text="AVANÇAR" />
+      <Button layoutX="290.0" layoutY="470.0" mnemonicParsing="false" onAction="#navegarConta" style="-fx-background-color: #004aad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 8 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0, 0, 2);" text="AVANÇAR" />
+
+      <Button layoutX="35.0" layoutY="470.0" mnemonicParsing="false" onAction="#navegarConta" style="-fx-background-color: #d6d62b; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 8 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0, 0, 2);" text="NOVA CONTA" />
 
       <ListView fx:id="listViewContas" layoutX="35.0" layoutY="250.0" prefHeight="200.0" prefWidth="350.0">
          <effect>
