@@ -1,5 +1,6 @@
 package com.agibank.corehub.dao.conta;
 
+import com.agibank.corehub.beans.conta.ContaSalario;
 import com.agibank.corehub.dao.Conexao;
 
 import java.sql.Connection;
@@ -39,7 +40,7 @@ public class ContaSalarioDAO {
 
         final String sql = "SELECT * FROM Conta_Salario WHERE id_conta_salario = ?";
 
-        br.com.agibank.beans.conta.ContaSalario contaSalario = new br.com.agibank.beans.conta.ContaSalario();
+        ContaSalario contaSalario = new ContaSalario();
 
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);
@@ -87,7 +88,7 @@ public class ContaSalarioDAO {
 
     public int pegarCnpjContaSalario(int idConta) throws SQLException{
 
-        br.com.agibank.beans.conta.ContaSalario contaSalario = new br.com.agibank.beans.conta.ContaSalario();
+        ContaSalario contaSalario = new ContaSalario();
 
         final String sql = """
                 Select cs.cnpj

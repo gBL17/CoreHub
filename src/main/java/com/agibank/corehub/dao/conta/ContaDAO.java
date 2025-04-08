@@ -85,7 +85,16 @@ public class ContaDAO {
             return conta;
 
         } else return null;
+    }
 
+    public String buscarSaldoConta(int idConta) throws SQLException {
+        final String sql = "SELECT saldo FROM Conta WHERE id_conta = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idConta);
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            return String.valueOf(rs.getDouble("saldo"));
+        } else return "0";
     }
 
     public int atualizarConta(int numero, Double saldo, String dataAbertura, String status) throws SQLException {
@@ -118,6 +127,8 @@ public class ContaDAO {
 
         return 0;
     }
+
+
 
     public int deletarConta(int id) throws SQLException {
         final String sql = "DELETE FROM Conta(id_conta) VALUES(?)";
@@ -237,6 +248,22 @@ public class ContaDAO {
         }else {
             return 0;
         }
+    }
+
+    public double atualizarScoreConta(double score, int id_conta) throws SQLException{
+        final   String sql = "update Conta set score = score + ? where id_conta = ?";
+
+        stmt = con.prepareStatement(sql);
+        stmt.setDouble(1, score);
+        stmt.setInt(2,id_conta);
+
+        rs = stmt.executeQuery();
+
+        if(rs.next()){
+            return rs.getDouble("score + ?");
+        }
+
+        return 0;
     }
 
 }
