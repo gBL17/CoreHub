@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -70,7 +69,6 @@ public class TipoTransacaoController {
             navegador.navegarPara(actionEvent,"contaTransacao.fxml");
         }
     }
-
     public void navegarConta(ActionEvent actionEvent) throws IOException, SQLException {
         navegador.navegarPara(actionEvent, "conta.fxml");
     }

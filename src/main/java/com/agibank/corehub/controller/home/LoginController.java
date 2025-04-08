@@ -51,6 +51,7 @@ public class LoginController {
             UsuarioLogadoController.getInstance().setUsuario(usuarioVerificado);
             ContaController contaController = new ContaController();
             contaController.atualizarContas(UsuarioLogadoController.getInstance().getUsuario().getId_Usuario());
+            usuarioDao.atualizarUltimaDataAcesso(LocalDate.now(),UsuarioLogadoController.getInstance().getUsuario().getId_Usuario());
             navegador.navegarPara(actionEvent, "home.fxml");
         } else {
             Alerta.exibirAlertaErro("Erro de Login", "Usuário ou Senha incorreta!");
