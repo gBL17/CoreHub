@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 public class ContaController implements Initializable {
     private static final Usuario usarioLogado = UsuarioLogadoController.getInstance().getUsuario();
     private static Conta contaLogada;
+    private Navegador navegador;
 
     @FXML
     private Label saldoConta;
@@ -60,35 +61,25 @@ public class ContaController implements Initializable {
 //
 //    }
 
-    public void atualizarSaldo(int id_conta, double valor){
-        try{
-            ContaDAO contaDAO = new ContaDAO();
-            contaDAO.atualizarSaldo(id_conta,valor);
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }
+//    public void atualizarSaldo(int id_conta, double valor){
+//        try{
+//            ContaDAO contaDAO = new ContaDAO();
+//            contaDAO.atualizarSaldo(id_conta,valor);
+//        }catch (SQLException e){
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
     public void navegarTipoTransacao(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/tipoTransacao.fxml"));
-        Parent root = loader.load();
-
-        TipoTransacaoController tipoTransacaoController = loader.getController();
-        tipoTransacaoController.setIdContaOrigem(contaLogada.getIdConta());
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 412, 800);
-        stage.setScene(scene);
-        stage.show();
+        navegador.navegarPara(actionEvent, "tipoTransacao.fxml");
     }
 
 
     public void atualizarContas(int id_usuario) throws SQLException{
+
         ScoreController scoreController = new ScoreController();
         ContaPoupancaController contaPoupancaController = new ContaPoupancaController();
         ContaCorrenteController contaCorrenteController = new ContaCorrenteController();
-        UsuarioController usuarioController = new UsuarioController();
-        Usuario usuario = usuarioController.buscarDadosUsuario(id_usuario);
         ArrayList<Conta> contas;
 
         try{
@@ -96,19 +87,15 @@ public class ContaController implements Initializable {
             contas = contaDAO.listarContasUsuario(id_usuario);
 
             for (Conta conta : contas){
-                LocalDate dataAbertura = Instant.ofEpochMilli(conta.getDataAbertura().getTime())
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDate();
-                scoreController.atualizarScore(conta.getIdConta(),usuario.geUltimoAcesso(),dataAbertura);
+                scoreController.atualizarScore(conta.getIdConta());
                 if(conta.getIdTipo() == 1){
-                    contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta(),usuario.geUltimoAcesso());
+                    contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta());
                 }else if (conta.getIdTipo() == 2){
                     System.out.println();
-                    double rendimento = contaPoupancaController.calcularRendimento(conta.getIdConta(), usuario.geUltimoAcesso());
-                    atualizarSaldo(conta.getIdConta(),rendimento);
+                    //TODO colocar atualização da conta poupança
                 }
             }
-        }catch(Exception e){
+        }catch(SQLException e){
             System.out.println(e.getMessage());
         }
     }
