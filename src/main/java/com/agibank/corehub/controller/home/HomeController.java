@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import com.agibank.corehub.controller.utils.Navegador;
 
 import com.agibank.corehub.dao.conta.ContaDAO;
 import javafx.collections.FXCollections;
@@ -23,6 +24,7 @@ import javafx.stage.Stage;
 
 public class HomeController implements Initializable {
     private int idUsuario;
+    private Navegador navegar = new Navegador();
 
     public void setIdUsuario(int id){
         this.idUsuario = id;
@@ -73,16 +75,7 @@ public class HomeController implements Initializable {
                 e.printStackTrace();
             }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/conta.fxml"));
-            Parent root = loader.load();
-
-            ContaController controller = loader.getController();
-            controller.setIdConta(idConta);
-
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 412, 800);
-            stage.setScene(scene);
-            stage.show();
+            navegar.navegarPara(actionEvent, "conta.fxml");
         } else {
             System.out.println("Nenhuma conta selecionada.");
         }

@@ -3,6 +3,7 @@ package com.agibank.corehub.controller.home;
 import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.controller.Alerta;
 import com.agibank.corehub.controller.CifradorSenha;
+import com.agibank.corehub.controller.UsuarioLogadoController;
 import com.agibank.corehub.dao.UsuarioDAO;
 import com.agibank.corehub.controller.conta.ContaController;
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class LoginController {
     }
 
 
-    public void navegarHome(ActionEvent actionEvent, Usuario usuario) throws IOException {
+    public void navegarHome(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/home/home.fxml"));
         Parent root = loader.load();
 
