@@ -41,6 +41,15 @@ public class UsuarioDAO {
         return stmt.executeUpdate();
     }
 
+    public int atualizarUltimaDataAcesso(LocalDate data, int id_usuario) throws SQLException {
+        final String sql = "UPDATE Usuario SET ultima_data_acesso = ? where id_usuario = ?";
+        stmt = con.prepareStatement(sql);
+
+        stmt.setDate(1, Date.valueOf(data));
+        stmt.setInt(2, id_usuario);
+        return stmt.executeUpdate();
+    }
+
     public int atualizarCadastroUsuario(String tabela, String dado, int id_usuario) throws SQLException {
         final String sql = "UPDATE Usuario SET " + tabela + " = ? where id_usuario = ?";
         stmt = con.prepareStatement(sql);
@@ -97,6 +106,7 @@ public class UsuarioDAO {
             usuario.setId(rs.getInt("id_usuario"));
             usuario.setNome(rs.getString("nome"));
             usuario.setApelido(rs.getString("apelido"));
+            usuario.setUltimoAcesso(rs.getDate("ultima_data_acesso").toLocalDate());
             return usuario;
         }
 

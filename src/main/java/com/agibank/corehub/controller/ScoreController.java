@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import com.agibank.corehub.dao.TransacaoDAO;
 import com.agibank.corehub.dao.conta.ContaDAO;
 import java.sql.SQLException;
+import java.time.temporal.ChronoUnit;
 
 public class ScoreController{
     private final TransacaoDAO transacaoDAO = new TransacaoDAO();
@@ -29,16 +30,25 @@ public class ScoreController{
         return 0;
     }
 
-    public double atualizarScore(int id_conta){
-        LocalDate hoje = LocalDate.now();
+    public boolean verificarTempoCadastro(LocalDate dataCadastro){
+        LocalDate dataAtual = LocalDate.now();
+        long mesesDesdeCadastro = ChronoUnit.MONTHS.between(dataCadastro, dataAtual);
 
-        if(hoje.getDayOfMonth() == 1){
-            try{
-                double pontuacaoValor = contaDAO.atualizarScoreConta(calcularScorePorValor(id_conta),id_conta);
-                return pontuacaoValor;
-            }catch (SQLException e){
-                System.out.printf(e.getMessage());
-            }
+        if(mesesDesdeCadastro % 6 == 0 && dataAtual.getDayOfMonth() == dataCadastro.getDayOfMonth()) return true;
+        else return false;
+    }
+
+    public double atualizarScore(int id_conta, LocalDate UltimaDataAcesso, LocalDate dataCadastro){
+        LocalDate dataAtual = LocalDate.now();
+        long mesesDesdeCadastro = ChronoUnit.MONTHS.between(dataCadastro, dataAtual);
+        double pontuacaoValor = 0;
+
+        try{
+            if(UltimaDataAcesso.getMonthValue() < dataAtual.getMonthValue()) pontuacaoValor = contaDAO.atualizarScoreConta(calcularScorePorValor(id_conta), id_conta);
+            if(verificarTempoCadastro(dataCadastro)) return pontuacaoValor + 10;
+            return pontuacaoValor;
+        } catch (SQLException e) {
+            System.out.printf(e.getMessage());
         }
 
         return 0;

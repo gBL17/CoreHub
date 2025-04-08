@@ -14,6 +14,7 @@ public class Usuario {
     private int numero;
     private String complemento;
     private boolean funcionario;
+    private LocalDate data_ultimo_acesso;
 
     public Usuario(String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento, boolean funcionario) {
         this.nome = nome;
@@ -143,5 +144,13 @@ public class Usuario {
 
     public void setFuncionario(boolean funcionario) {
         this.funcionario = funcionario;
+    }
+
+    public LocalDate geUltimoAcesso(){
+        return data_ultimo_acesso;
+    }
+
+    public void setUltimoAcesso (LocalDate data) {
+        this.data_ultimo_acesso = data;
     }
 }
