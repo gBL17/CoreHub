@@ -8,6 +8,7 @@ import com.agibank.corehub.dao.UsuarioDAO;
 import com.agibank.corehub.controller.conta.ContaController;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,6 +49,8 @@ public class LoginController {
             UsuarioLogadoController.getInstance().setUsuario(usuarioVerificado);
             ContaController contaController = new ContaController();
             contaController.atualizarContas(UsuarioLogadoController.getInstance().getUsuario().getId_Usuario());
+            usuarioDao.atualizarUltimaDataAcesso(LocalDate.now(),UsuarioLogadoController.getInstance().getUsuario().getId_Usuario());
+
             navegarHome(actionEvent);
         } else {
             Alerta.exibirAlertaErro("Erro de Login", "Usuário ou Senha incorreta!");
@@ -58,6 +61,10 @@ public class LoginController {
     public void navegarHome(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/home/home.fxml"));
         Parent root = loader.load();
+
+        HomeController homeController = loader.getController();
+        homeController.labelNomeUsuario.setText(usuario.getNome());
+        homeController.setIdUsuario(usuario.getId_Usuario());
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 412, 800);

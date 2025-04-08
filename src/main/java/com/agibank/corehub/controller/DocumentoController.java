@@ -41,15 +41,26 @@ public class DocumentoController {
 
     public void inserirTipoDocumento(String numero) {
         try {
-            if (numero.length() == 11) {
-                DocumentoDAO.determinarTipoDocumento("cpf", idUsuario);
-            } else if (numero.length() == 8) {
-                DocumentoDAO.determinarTipoDocumento("rg", idUsuario);
-            } else if (numero.length() == 9) {
-                DocumentoDAO.determinarTipoDocumento("cnh", idUsuario);
-            } else if (numero.length() == 14) {
-                DocumentoDAO.determinarTipoDocumento("cnpj", idUsuario);
+
+            boolean documentoValido = false;
+            while (!documentoValido) {
+                if (numero.length() == 11) {
+                    DocumentoDAO.determinarTipoDocumento("cpf", idUsuario);
+                    documentoValido = true;
+                } else if (numero.length() == 8) {
+                    DocumentoDAO.determinarTipoDocumento("rg", idUsuario);
+                    documentoValido = true;
+                } else if (numero.length() == 9) {
+                    DocumentoDAO.determinarTipoDocumento("cnh", idUsuario);
+                    documentoValido = true;
+                } else if (numero.length() == 14) {
+                    DocumentoDAO.determinarTipoDocumento("cnpj", idUsuario);
+                    documentoValido = true;
+                } else {
+                    System.out.println("Documento não aceito no cadastro, tente novamente.");
+                }
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

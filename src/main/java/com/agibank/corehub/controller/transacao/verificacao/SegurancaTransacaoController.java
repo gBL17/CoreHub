@@ -1,58 +1,62 @@
 package com.agibank.corehub.controller.transacao.verificacao;
 
 import com.agibank.corehub.beans.transacao.Transacao;
+import com.agibank.corehub.controller.Alerta;
 import com.agibank.corehub.dao.StatusTransacaoDAO;
 import com.agibank.corehub.dao.TransacaoDAO;
 import com.agibank.corehub.dao.VerificacaoSegurancaDAO;
 
 import java.sql.SQLException;
-import java.time.LocalTime;
 
 public class SegurancaTransacaoController {
     public void verificarSegurancaTransacao(Transacao transacao) throws SQLException {
-        //todo Adicionar metodos de segurança
-        VerificacaoSegurancaDAO verificacaoSegurancaDAO = new VerificacaoSegurancaDAO();
-        double media = (int) verificacaoSegurancaDAO.mediaValores(transacao.getIdContaOrigem());
-        double maior = (int) verificacaoSegurancaDAO.maiorValor(transacao.getIdContaOrigem());
-        double valor = transacao.getValor();
+        if (verificarSeMaiorValorHistoricoTransacaoDaConta(transacao)){
+            //todo chamar tela de verificação de segurança
+        }
 
-        verificarHorario();
-        verificarMediaValor(valor, media);
-        verificarMaiorValor(valor, maior);
+        if (verificarHorarioInseguro(transacao) && verificarSeMaiorQueMediaValor(transacao)){
+            //todo chamar tela de verificação de segurança
+        }
 
         StatusTransacaoDAO statusTransacaoDAO = new StatusTransacaoDAO();
         statusTransacaoDAO.atualizarStatusTransacao(retornaIdTransacao(transacao), "APROVADA");
-        statusTransacaoDAO.fecharConexao();
-
-
     }
 
-    public boolean verificarHorario() throws  SQLException {
-        LocalTime horarioAtual = LocalTime.now();
-        LocalTime start = LocalTime.of(6, 0);  // 6:00 AM
-        LocalTime end = LocalTime.of(22, 0);   // 10:00 PM
-
-        if (!(horarioAtual.isAfter(start) && horarioAtual.isBefore(end))) {
-            System.out.println("Transação fora do horário permitido.");
-            return  false;
-        }
-        return true;
+    public boolean verificarHorarioInseguro(Transacao transacao) throws SQLException {
+        VerificacaoSegurancaDAO verificacaoSegurancaDAO = new VerificacaoSegurancaDAO();
+        return !verificacaoSegurancaDAO.transacaoCorreuHorarioSeguro(transacao.getId());
     }
 
-    public boolean verificarMaiorValor(double valor ,double maiorValor) throws  SQLException {
-        if(valor > maiorValor) {
-            System.out.println("Transação excede o maior valor permitido.");
-            return false;
+    public boolean verificarSeMaiorValorHistoricoTransacaoDaConta(Transacao transacao){
+        double valorMinimoVerificacaoDeSeguranca = 500.0;
+        try{
+            VerificacaoSegurancaDAO verificacaoSegurancaDAO = new VerificacaoSegurancaDAO();
+            double maiorTransferencia = verificacaoSegurancaDAO.maiorValorTransferenciaAprovada(transacao.getIdContaOrigem());
+            verificacaoSegurancaDAO.fecharConexao();
+
+            if (maiorTransferencia < transacao.getValor() && maiorTransferencia > valorMinimoVerificacaoDeSeguranca){
+                return true;
+            }
+        } catch (SQLException e) {
+            Alerta.exibirAlertaErro("Erro No Banco de dados", e.getMessage());
         }
-        return true;
+        return false;
     }
 
-    public boolean verificarMediaValor(double valor, double mediaValores) throws  SQLException {
-        if(valor > mediaValores * 1.5) {
-            System.out.println("Transação acima do limite baseado na média.");
-            return false;
+    public boolean verificarSeMaiorQueMediaValor(Transacao transacao) {
+        double valorMinimoDeSeguranca = 100.0;
+        try {
+            VerificacaoSegurancaDAO verificacaoSegurancaDAO = new VerificacaoSegurancaDAO();
+            double mediaTransferencia = verificacaoSegurancaDAO.mediaValoresTransacaoMaioresQueMinimo(transacao.getIdContaOrigem(), valorMinimoDeSeguranca);
+            verificacaoSegurancaDAO.fecharConexao();
+            if(mediaTransferencia < transacao.getValor()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            Alerta.exibirAlertaErro("Erro No Banco de dados", e.getMessage());
         }
-        return true;
+
+        return false;
     }
 
     public int retornaIdTransacao(Transacao transacao) throws SQLException{

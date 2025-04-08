@@ -1,6 +1,7 @@
 package com.agibank.corehub.dao;
 
 import com.agibank.corehub.beans.transacao.StatusTransacao;
+import com.agibank.corehub.controller.Alerta;
 import com.agibank.corehub.dao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,11 +34,20 @@ public class StatusTransacaoDAO {
     }
 
     public int criarStatusTransacao(int idTransacao, String status) throws SQLException {
-        final String sql = "INSERT INTO Status_Transacao (id_transacao, status, data) VALUES (?,?,?)";
-        stmt = con.prepareStatement(sql);
-        stmt.setInt(1, idTransacao);
-        stmt.setString(2, status);
-        stmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+        final String sql = """
+                INSERT INTO Status_Transacao (id_transacao, status, data)
+                VALUES (?,?,?)
+                """;
+        try{
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idTransacao);
+            stmt.setString(2, status);
+            stmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+        } catch (SQLException e){
+            Alerta.exibirAlertaErro("Erro de conexão com banco de dados", e.getMessage());
+        } finally {
+            fecharConexao();
+        }
         return stmt.executeUpdate();
     }
 
