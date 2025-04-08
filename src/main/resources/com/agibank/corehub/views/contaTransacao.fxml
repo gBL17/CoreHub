@@ -20,10 +20,6 @@
          </children>
       </HBox>
 
-      <Button layoutX="14.0" layoutY="14.0" onAction="#voltarTelaInicial" prefHeight="35.0" prefWidth="87.0" style="-fx-background-color: #d5d643; -fx-text-fill: #004aad; -fx-font-weight: bold; -fx-background-radius: 20;">
-         <text>VOLTAR</text>
-      </Button>
-
       <VBox alignment="CENTER" fillWidth="false" layoutY="150.0" prefHeight="630.0" prefWidth="412.0" spacing="30.0">
          <children>
             <VBox spacing="8.0">
