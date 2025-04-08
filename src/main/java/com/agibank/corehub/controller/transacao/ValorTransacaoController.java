@@ -2,6 +2,7 @@ package com.agibank.corehub.controller.transacao;
 
 import com.agibank.corehub.beans.transacao.DestinatarioTransacao;
 import com.agibank.corehub.beans.transacao.Transacao;
+import com.agibank.corehub.controller.conta.ContaController;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -39,7 +40,7 @@ public class ValorTransacaoController {
         stage.show();
     }
 
-    public void navegarConta(ActionEvent actionEvent) throws IOException {
+    public void navegarConta(ActionEvent actionEvent) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/conta.fxml"));
         Parent root = loader.load();
 
@@ -52,17 +53,21 @@ public class ValorTransacaoController {
     public void concluirTransacao(ActionEvent actionEvent) throws SQLException, IOException {
         IdContaDestinoController idContaDestinoController = new IdContaDestinoController();
         VerificacaoTransacaoController verificacaoTransacaoController = new VerificacaoTransacaoController();
+
         transacao.setValor(Double.parseDouble(valor.getText()));
         transacao.setDescricao(descricao.getText());
         transacao.setIdContaDestino(idContaDestinoController.buscarIdContaDestino(destinatario));
+
         verificacaoTransacaoController.verificarTransacao(transacao);
         Alerta.exibirAlertaSucesso("Transacao Cadastrada com sucesso!", "Aguardando verificação");
         navegarConta(actionEvent);
     }
 
-    public void cadastrarTransacao(Transacao transacao) throws SQLException {
-        TransacaoDAO transacaoDAO = new TransacaoDAO();
-        transacaoDAO.criarTransacao(transacao);
-        transacaoDAO.fecharConexao();
+    public String buscarSaldoConta(int idContaOrigem) throws SQLException {
+        String saldoConta;
+        ContaDAO contaDAO = new ContaDAO();
+        saldoConta = contaDAO.buscarSaldoConta(idContaOrigem);
+        contaDAO.fecharConexao();
+        return saldoConta;
     }
 }
