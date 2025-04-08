@@ -50,7 +50,7 @@
 
             <!-- Transferir -->
             <VBox alignment="CENTER">
-               <StackPane fx:id="transferirBox" onMouseClicked="#navegarTipoTransacao" prefHeight="70" prefWidth="70" style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+               <StackPane onMouseClicked="#navegarTipoTransacao" prefHeight="70" prefWidth="70" style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
                   <ImageView fitHeight="57.0" fitWidth="54.0">
                      <image>
                         <Image url="@../assets/setasTransferencia.png" />
