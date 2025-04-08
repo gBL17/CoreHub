@@ -5,6 +5,7 @@ import com.agibank.corehub.dao.UsuarioDAO;
 import com.agibank.corehub.controller.conta.ContaController;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,6 +46,7 @@ public class LoginController {
             UsuarioLogadoController.getInstance().setUsuario(usuarioVerificado);
             ContaController contaController = new ContaController();
             contaController.atualizarContas(UsuarioLogadoController.getInstance().getUsuario().getId_Usuario());
+            usuarioDao.atualizarUltimaDataAcesso(LocalDate.now(),UsuarioLogadoController.getInstance().getUsuario().getId_Usuario());
             navegarHome(actionEvent);
         } else {
             Alerta.exibirAlertaErro("Erro de Login", "Usuário ou Senha incorreta!");

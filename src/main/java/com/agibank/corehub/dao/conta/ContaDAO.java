@@ -221,6 +221,7 @@ public class ContaDAO {
 
             Conta conta = new Conta();
             conta.setTipo(rs.getString("tipo"));
+            conta.setDataAbertura(rs.getDate("data_abertura"));
             contas.add(conta);
 
         }
