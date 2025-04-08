@@ -62,7 +62,7 @@ public class LoginController {
         homeController.setIdUsuario(usuario.getId_Usuario());
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 412, 915);
+        Scene scene = new Scene(root, 412, 800);
         stage.setScene(scene);
         stage.show();
     }
@@ -73,7 +73,7 @@ public class LoginController {
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 412, 915); // mantém o mesmo tamanho
+        Scene scene = new Scene(root, 412, 800); // mantém o mesmo tamanho
         stage.setScene(scene);
         stage.show();
     }
