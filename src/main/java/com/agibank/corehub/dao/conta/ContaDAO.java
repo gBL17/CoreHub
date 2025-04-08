@@ -220,6 +220,7 @@ public class ContaDAO {
         while (rs.next()) {
 
             Conta conta = new Conta();
+            conta.setIdConta(rs.getInt("id_conta"));
             conta.setTipo(rs.getString("tipo"));
             conta.setDataAbertura(rs.getDate("data_abertura"));
             contas.add(conta);
@@ -258,13 +259,7 @@ public class ContaDAO {
         stmt.setDouble(1, score);
         stmt.setInt(2,id_conta);
 
-        rs = stmt.executeQuery();
-
-        if(rs.next()){
-            return rs.getDouble("score + ?");
-        }
-
-        return 0;
+        return stmt.executeUpdate();
     }
 
 }

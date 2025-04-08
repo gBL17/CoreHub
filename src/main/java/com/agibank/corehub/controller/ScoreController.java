@@ -23,7 +23,7 @@ public class ScoreController{
 
     public double calcularScorePorValor(int id_conta){
         try{
-            return transacaoDAO.SomarMovimentacaoPorMes(id_conta)*0.1;
+            return transacaoDAO.SomarMovimentacaoPorMes(1)*0.2;
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
@@ -34,19 +34,18 @@ public class ScoreController{
         LocalDate dataAtual = LocalDate.now();
         long mesesDesdeCadastro = ChronoUnit.MONTHS.between(dataCadastro, dataAtual);
 
-        if(mesesDesdeCadastro % 6 == 0 && dataAtual.getDayOfMonth() == dataCadastro.getDayOfMonth()) return true;
-        else return false;
+        return mesesDesdeCadastro % 6 == 0 && dataAtual.getDayOfMonth() == dataCadastro.getDayOfMonth();
     }
 
     public double atualizarScore(int id_conta, LocalDate UltimaDataAcesso, LocalDate dataCadastro){
         LocalDate dataAtual = LocalDate.now();
-        long mesesDesdeCadastro = ChronoUnit.MONTHS.between(dataCadastro, dataAtual);
         double pontuacaoValor = 0;
 
+        if(UltimaDataAcesso.getMonthValue() < dataAtual.getMonthValue()) pontuacaoValor = calcularScorePorValor(id_conta);
+
         try{
-            if(UltimaDataAcesso.getMonthValue() < dataAtual.getMonthValue()) pontuacaoValor = contaDAO.atualizarScoreConta(calcularScorePorValor(id_conta), id_conta);
-            if(verificarTempoCadastro(dataCadastro)) return pontuacaoValor + 10;
-            return pontuacaoValor;
+            if(verificarTempoCadastro(dataCadastro)) return contaDAO.atualizarScoreConta(pontuacaoValor + 10,id_conta);
+            return contaDAO.atualizarScoreConta(pontuacaoValor,id_conta);
         } catch (SQLException e) {
             System.out.printf(e.getMessage());
         }

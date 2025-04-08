@@ -8,7 +8,6 @@ import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.beans.conta.Conta;
 import com.agibank.corehub.controller.ContaLogadaController;
 import com.agibank.corehub.controller.UsuarioLogadoController;
-import com.agibank.corehub.controller.transacao.TipoTransacaoController;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -61,14 +60,14 @@ public class ContaController implements Initializable {
 //
 //    }
 
-//    public void atualizarSaldo(int id_conta, double valor){
-//        try{
-//            ContaDAO contaDAO = new ContaDAO();
-//            contaDAO.atualizarSaldo(id_conta,valor);
-//        }catch (SQLException e){
-//            System.out.println(e.getMessage());
-//        }
-//    }
+    public void atualizarSaldo(int id_conta, double valor){
+        try{
+            ContaDAO contaDAO = new ContaDAO();
+            contaDAO.atualizarSaldo(id_conta,valor);
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
     public void navegarTipoTransacao(ActionEvent actionEvent) throws IOException {
         navegador.navegarPara(actionEvent, "tipoTransacao.fxml");
@@ -80,6 +79,8 @@ public class ContaController implements Initializable {
         ScoreController scoreController = new ScoreController();
         ContaPoupancaController contaPoupancaController = new ContaPoupancaController();
         ContaCorrenteController contaCorrenteController = new ContaCorrenteController();
+        UsuarioController usuarioController = new UsuarioController();
+        Usuario usuario = usuarioController.buscarDadosUsuario(id_usuario);
         ArrayList<Conta> contas;
 
         try{
@@ -87,12 +88,16 @@ public class ContaController implements Initializable {
             contas = contaDAO.listarContasUsuario(id_usuario);
 
             for (Conta conta : contas){
-                scoreController.atualizarScore(conta.getIdConta());
+                LocalDate dataAbertura = Instant.ofEpochMilli(conta.getDataAbertura().getTime())
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+
+                scoreController.atualizarScore(conta.getIdConta(),usuario.geUltimoAcesso(),dataAbertura);
                 if(conta.getIdTipo() == 1){
-                    contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta());
+                    contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta(),usuario.geUltimoAcesso());
                 }else if (conta.getIdTipo() == 2){
-                    System.out.println();
-                    //TODO colocar atualização da conta poupança
+                    double rendimento = contaPoupancaController.calcularRendimento(conta.getIdConta(),usuario.geUltimoAcesso());
+                    atualizarSaldo(conta.getIdConta(),rendimento);
                 }
             }
         }catch(SQLException e){
