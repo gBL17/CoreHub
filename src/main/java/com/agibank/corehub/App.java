@@ -1,6 +1,5 @@
 package com.agibank.corehub;
 
-import java.util.Objects;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
