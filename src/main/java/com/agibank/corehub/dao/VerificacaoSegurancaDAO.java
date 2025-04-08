@@ -1,10 +1,11 @@
 package com.agibank.corehub.dao;
 
+import com.agibank.corehub.controller.Alerta;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class VerificacaoSegurancaDAO {
@@ -20,10 +21,17 @@ public class VerificacaoSegurancaDAO {
         con.close();
     }
 
-    public double mediaValores(int id_conta_origem) throws SQLException {
-        final String sql = "SELECT AVG(valor) AS Media_Transacao FROM Transacao WHERE id_conta_origem = ? AND valor >= 100;";
+    public double mediaValoresTransacaoMaioresQueMinimo(int id_conta_origem, double valorMinimo) throws SQLException {
+        final String statusTransacao = "'APROVADA'";
+        final String sql = """
+                "SELECT AVG(valor)
+                "FROM Transacao t Inner Join Status_Transacao st
+                "on t.id_transacao = st.id_transacao
+                "Where t.id_conta_origem = ? AND valor >= ? AND st.status =
+                """ + statusTransacao;
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, id_conta_origem);
+        stmt.setDouble(2, valorMinimo);
         rs = stmt.executeQuery();
 
         double valor = 0;
@@ -33,12 +41,18 @@ public class VerificacaoSegurancaDAO {
         return valor;
     }
 
-    public double maiorValor(int id_conta_origem) throws SQLException {
-        final String sql = "SELECT MAX(valor) FROM Transacao WHERE id_conta_origem = ?";
+    public double maiorValorTransferenciaAprovada(int id_conta_origem) throws SQLException {
+        final String statusTransacao = "'APROVADA'";
+        final String sql = """
+                "SELECT MAX(valor)
+                "FROM Transacao t Inner Join Status_Transacao st
+                "on t.id_transacao = st.id_transacao
+                "Where t.id_conta_origem = ? AND st.status =
+                """ + statusTransacao;
+
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, id_conta_origem);
         rs = stmt.executeQuery();
-
         double valor = 0;
         if (rs.next()) {
             valor = rs.getDouble(1);
@@ -46,19 +60,30 @@ public class VerificacaoSegurancaDAO {
         return valor;
     }
 
-    public Date horarioTransacao(int id_transacao) throws SQLException {
-        final String sql = "SELECT data FROM Status_Transacao WHERE id_transacao = ?";
-        stmt = con.prepareStatement(sql);
-        stmt.setInt(1, id_transacao);
-        rs = stmt.executeQuery();
+    public boolean transacaoCorreuHorarioSeguro(int id_transacao) throws SQLException {
+        final String sql = """
+                "SELECT CASE
+                "WHEN TIME(data) BETWEEN '06:00:00' AND '18:00:00' THEN TRUE
+                "ELSE FALSE
+                "END AS dentro_intervalo
+                "FROM Transacao t Inner Join Status_Transacao st
+                "on t.id_transacao = st.id_transacao
+                "WHERE t.id_transacao = ?""";
 
-        Date valor = null;
-        if (rs.next()) {
-            Date timestamp = rs.getDate(3);
-
-            // Converte o timestamp em um objeto Date
-            valor = new Date(String.valueOf(timestamp));
+        try{
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id_transacao);
+            rs = stmt.executeQuery();
+            boolean valor = false;
+            if (rs.next()) {
+                valor = rs.getBoolean("dentro_intervalo");
+            }
+            return valor;
+        } catch (SQLException e) {
+            Alerta.exibirAlertaErro("Erro no acesso ao Bacno", e.getMessage());
+        } finally {
+            fecharConexao();
         }
-        return valor;
+        return true;
     }
 }

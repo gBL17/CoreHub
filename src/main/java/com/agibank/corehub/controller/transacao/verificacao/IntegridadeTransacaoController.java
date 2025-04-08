@@ -12,7 +12,6 @@ public class IntegridadeTransacaoController {
         cadastrarTransacao(transacao);
         int idTransacao = retornaIdTransacao(transacao);
         cadastrarTransacaoEmAnalise(idTransacao);
-        buscarIdStatusTransacao(idTransacao);
     }
 
     public void cadastrarTransacao(Transacao transacao) throws SQLException {
@@ -42,13 +41,5 @@ public class IntegridadeTransacaoController {
         statusTransacao = statusTransacaoDAO.atualizarStatusTransacao(idTransacao, status);
         statusTransacaoDAO.fecharConexao();
         return statusTransacao;
-    }
-
-    public int buscarIdStatusTransacao(int idTransacao) throws SQLException{
-        int idStatusTransacao;
-        StatusTransacaoDAO statusTransacaoDAO = new StatusTransacaoDAO();
-        idStatusTransacao = statusTransacaoDAO.buscarIdStatusTransacao(idTransacao);
-        statusTransacaoDAO.fecharConexao();
-        return idStatusTransacao;
     }
 }
