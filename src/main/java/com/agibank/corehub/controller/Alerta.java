@@ -1,5 +1,6 @@
 package com.agibank.corehub.controller;
 
+import com.agibank.corehub.controller.utils.Navegador;
 import javafx.scene.control.Alert;
 
 public class Alerta {

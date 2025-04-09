@@ -14,7 +14,6 @@ public class TelaInicialController {
 
     @FXML
     private void handleLogin(ActionEvent actionEvent) throws IOException {
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/login.fxml"));
         Parent root = loader.load();
 

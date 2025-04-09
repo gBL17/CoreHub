@@ -78,6 +78,17 @@ public class StatusTransacaoDAO {
         return statusTransacao;
     }
 
+    public String buscarUltimoStatusTransacao(int id) throws SQLException {
+        final String sql = "SELECT status FROM Status_Transacao WHERE id_transacao = ? ORDER BY data DESC LIMIT 1";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getString("status");
+        }
+        return null;
+    }
+
     public int atualizarStatusTransacao(int id, String Status) throws SQLException {
         final String sql = "UPDATE Status_Transacao SET status = ?, data = ? WHERE id_transacao = ?";
         stmt = con.prepareStatement(sql);

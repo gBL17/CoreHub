@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ContaDAO {
-
     private Connection con;
     private PreparedStatement stmt;
     private ResultSet rs;
@@ -112,21 +111,12 @@ public class ContaDAO {
 
     }
 
-    public double atualizarSaldo(int id_conta, double valor) throws SQLException {
+    public int atualizarSaldo(int id_conta, double valor) throws SQLException {
         final String sql = "UPDATE Conta set saldo = saldo + ? where id_conta = ?";
-
         stmt = con.prepareStatement(sql);
-
         stmt.setDouble(1, valor);
         stmt.setInt(2, id_conta);
-
-        rs = stmt.executeQuery();
-
-        if (rs.next()) {
-            return rs.getInt("saldo");
-        }
-
-        return 0;
+        return stmt.executeUpdate();
     }
 
 

@@ -31,6 +31,10 @@ public class ContaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //teste
+        if (usarioLogado.getId_Usuario() != contaLogada.getIdUsuario()){
+            return;
+        }
         try{
             saldoConta.setText("R$ " + contaLogada.getSaldo());
         } catch (Exception e) {
@@ -38,7 +42,7 @@ public class ContaController implements Initializable {
         }
     }
 
-    public void atualizarSaldo(int id_conta, double valor){
+    public void atualizarSaldoInterno(int id_conta, double valor){
         try{
             ContaDAO contaDAO = new ContaDAO();
             contaDAO.atualizarSaldo(id_conta,valor);
@@ -74,7 +78,7 @@ public class ContaController implements Initializable {
                     contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta(),usuario.geUltimoAcesso());
                 }else if (conta.getIdTipo() == 2){
                     double rendimento = contaPoupancaController.calcularRendimento(conta.getIdConta(),usuario.geUltimoAcesso());
-                    atualizarSaldo(conta.getIdConta(),rendimento);
+                    atualizarSaldoInterno(conta.getIdConta(),rendimento);
                 }
             }
         }catch(SQLException e){
