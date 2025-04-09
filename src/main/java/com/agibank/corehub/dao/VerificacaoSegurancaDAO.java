@@ -25,10 +25,10 @@ public class VerificacaoSegurancaDAO {
     public double mediaValoresTransacaoMaioresQueMinimo(int id_conta_origem, double valorMinimo) throws SQLException {
         final String statusTransacao = "'APROVADA'";
         final String sql = """
-                "SELECT AVG(valor)
-                "FROM Transacao t Inner Join Status_Transacao st
-                "on t.id_transacao = st.id_transacao
-                "Where t.id_conta_origem = ? AND valor >= ? AND st.status =
+                SELECT AVG(valor)
+                FROM Transacao t Inner Join Status_Transacao st
+                on t.id_transacao = st.id_transacao
+                Where t.id_conta_origem = ? AND valor >= ? AND st.status =
                 """ + statusTransacao;
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, id_conta_origem);
@@ -45,10 +45,10 @@ public class VerificacaoSegurancaDAO {
     public double maiorValorTransferenciaAprovada(int id_conta_origem) throws SQLException {
         final String statusTransacao = "'APROVADA'";
         final String sql = """
-                "SELECT MAX(valor)
-                "FROM Transacao t Inner Join Status_Transacao st
-                "on t.id_transacao = st.id_transacao
-                "Where t.id_conta_origem = ? AND st.status =
+                SELECT MAX(valor)
+                FROM Transacao t Inner Join Status_Transacao st
+                on t.id_transacao = st.id_transacao
+                Where t.id_conta_origem = ? AND st.status = 
                 """ + statusTransacao;
 
         stmt = con.prepareStatement(sql);
@@ -67,7 +67,6 @@ public class VerificacaoSegurancaDAO {
                 FROM Status_Transacao
                 WHERE id_transacao = ?
                 """;
-
         try{
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id_transacao);
@@ -80,6 +79,6 @@ public class VerificacaoSegurancaDAO {
         } finally {
             fecharConexao();
         }
-        return true;
+        return Date.from(Timestamp.valueOf("2022-01-01 00:00:00").toInstant());
     }
 }

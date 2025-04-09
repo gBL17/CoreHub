@@ -1,63 +1,53 @@
 package com.agibank.corehub.controller.transacao.verificacao;
 
-import com.agibank.corehub.beans.conta.Conta;
-import com.agibank.corehub.beans.conta.ContaCorrente;
-import com.agibank.corehub.beans.conta.ContaPoupanca;
-import com.agibank.corehub.beans.conta.ContaSalario;
 import com.agibank.corehub.beans.transacao.Transacao;
+import com.agibank.corehub.controller.Alerta;
 import com.agibank.corehub.dao.StatusTransacaoDAO;
 import com.agibank.corehub.dao.TransacaoDAO;
 
+import com.agibank.corehub.dao.conta.ContaDAO;
 import java.sql.SQLException;
 
 public class IntegridadeTransacaoController {
-    public void verificarIntegridadeTransacaoParaCadastrarEmStatus(Conta conta, Transacao transacao) throws SQLException {
-        //todo verificações de integridade de transação
-        verificarTransacaoContaOrigemDiferenteContaDestino(transacao);
-        verificarSaldoDisponivel(conta, transacao);
-        cadastrarTransacao(transacao);
-        int idTransacao = retornaIdTransacao(transacao);
-        cadastrarTransacaoEmAnalise(idTransacao);
-    }
+    private static TransacaoDAO transacaoDAO;
+    private static StatusTransacaoDAO statusTransacaoDAO;
+    private static ContaDAO contaDAO;
 
-    public void cadastrarTransacao(Transacao transacao) throws SQLException {
-        TransacaoDAO transacaoDAO = new TransacaoDAO();
-        transacaoDAO.criarTransacao(transacao);
-        transacaoDAO.fecharConexao();
-    }
-
-    public void cadastrarTransacaoEmAnalise(int idTransacao) throws SQLException {
-        String status = "EM ANALISE";
-        StatusTransacaoDAO statusTransacaoDAO = new StatusTransacaoDAO();
-        statusTransacaoDAO.criarStatusTransacao(idTransacao, status);
-        statusTransacaoDAO.fecharConexao();
-    }
-
-    public int retornaIdTransacao(Transacao transacao) throws SQLException{
-        int idTransacao;
-        TransacaoDAO transacaoDAO = new TransacaoDAO();
-        idTransacao = transacaoDAO.buscarIdTransacao(transacao);
-        transacaoDAO.fecharConexao();
-        return idTransacao;
+    public boolean verificarIntegridadeTransacaoParaCadastrarEmStatus(Transacao transacao) throws SQLException {
+        try{
+            transacaoDAO = new TransacaoDAO();
+            statusTransacaoDAO = new StatusTransacaoDAO();
+            contaDAO = new ContaDAO();
+            //Cadastra transação
+            transacaoDAO.criarTransacao(transacao);
+            if (!verificarTransacaoContaOrigemDiferenteContaDestino(transacao)){
+                statusTransacaoDAO.criarStatusTransacao(transacaoDAO.buscarIdTransacao(transacao), "CANCELADA");
+                return false;
+            }
+            if (verificarSaldoDisponivel(transacao)){
+                statusTransacaoDAO.criarStatusTransacao(transacaoDAO.buscarIdTransacao(transacao), "CANCELADA");
+                return false;
+            }
+            //Adicionar Status 'EM ANALISE'
+            statusTransacaoDAO.criarStatusTransacao(transacaoDAO.buscarIdTransacao(transacao), "EM ANALISE");
+            return true;
+        } catch (SQLException e) {
+            Alerta.exibirAlertaErro("Erro No Banco de dados", e.getMessage());
+        } finally {
+            transacaoDAO.fecharConexao();
+            statusTransacaoDAO.fecharConexao();
+            contaDAO.fecharConexao();
+        }
+        return false;
     }
 
     public boolean verificarTransacaoContaOrigemDiferenteContaDestino(Transacao transacao){
-        if ((transacao.getIdContaOrigem() != transacao.getIdContaDestino()) || ((transacao.getIdContaOrigem() == transacao.getIdContaDestino()) && (transacao.isTransferenciaExterna() != false))) return true;
-        else return false;
+        if (transacao.getIdContaOrigem() != transacao.getIdContaDestino() && !transacao.getTransacaoExterna()) {
+            return true;
+        } else return transacao.getTransacaoExterna();
     }
 
-    public boolean verificarSaldoDisponivel (Conta conta, Transacao transacao) {
-        if (conta.getSaldo() < transacao.getValor()) return false;
-        return true;
-    }
-
-
-
-    public int atualizarStatusTransacao(int idTransacao, String status) throws SQLException{
-        int statusTransacao;
-        StatusTransacaoDAO statusTransacaoDAO = new StatusTransacaoDAO();
-        statusTransacao = statusTransacaoDAO.atualizarStatusTransacao(idTransacao, status);
-        statusTransacaoDAO.fecharConexao();
-        return statusTransacao;
+    public boolean verificarSaldoDisponivel (Transacao transacao) throws SQLException {
+        return (contaDAO.buscarSaldoConta(transacao.getIdContaOrigem()) > transacao.getValor());
     }
 }

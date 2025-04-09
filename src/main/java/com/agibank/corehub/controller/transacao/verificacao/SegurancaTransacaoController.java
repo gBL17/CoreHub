@@ -2,6 +2,7 @@ package com.agibank.corehub.controller.transacao.verificacao;
 
 import com.agibank.corehub.beans.transacao.Transacao;
 import com.agibank.corehub.controller.Alerta;
+import com.agibank.corehub.controller.utils.Navegador;
 import com.agibank.corehub.dao.StatusTransacaoDAO;
 import com.agibank.corehub.dao.TransacaoDAO;
 import com.agibank.corehub.dao.VerificacaoSegurancaDAO;
@@ -9,17 +10,22 @@ import com.agibank.corehub.dao.VerificacaoSegurancaDAO;
 import java.sql.SQLException;
 
 public class SegurancaTransacaoController {
-    public void verificarSegurancaTransacao(Transacao transacao) throws SQLException {
+    private Navegador navegador = new Navegador();
+
+    public boolean verificarSegurancaTransacao(Transacao transacao) throws SQLException {
         if (verificarSeMaiorValorHistoricoTransacaoDaConta(transacao)){
-            //todo chamar tela de verificação de segurança
+//            navegador.navegarPara();
+            return false;
         }
 
         if (verificarHorarioInseguro(transacao) && verificarSeMaiorQueMediaValor(transacao)){
             //todo chamar tela de verificação de segurança
+            return false;
         }
 
         StatusTransacaoDAO statusTransacaoDAO = new StatusTransacaoDAO();
         statusTransacaoDAO.atualizarStatusTransacao(retornaIdTransacao(transacao), "APROVADA");
+        return true;
     }
 
     public boolean verificarHorarioInseguro(Transacao transacao) throws SQLException {
@@ -55,7 +61,6 @@ public class SegurancaTransacaoController {
         } catch (SQLException e) {
             Alerta.exibirAlertaErro("Erro No Banco de dados", e.getMessage());
         }
-
         return false;
     }
 

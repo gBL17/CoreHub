@@ -28,7 +28,7 @@ public class TransacaoDAO {
         stmt.setDouble(3, transacao.getValor());
         stmt.setString(4, transacao.getDescricao());
         stmt.setInt(5, transacao.getIdTipoTransacao());
-        stmt.setBoolean(6, transacao.isTransferenciaExterna());
+        stmt.setBoolean(6, transacao.getTransacaoExterna());
         return stmt.executeUpdate();
     }
 
@@ -58,7 +58,7 @@ public class TransacaoDAO {
         stmt.setDouble(3, transacao.getValor());
         stmt.setString(4, transacao.getDescricao());
         stmt.setInt(5, transacao.getIdTipoTransacao());
-        stmt.setBoolean(6, transacao.isTransferenciaExterna());
+        stmt.setBoolean(6, transacao.getTransacaoExterna());
         rs = stmt.executeQuery();
         if (rs.next()) {
             return rs.getInt("id_transacao");
