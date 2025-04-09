@@ -2,7 +2,7 @@ package com.agibank.corehub.controller.transacao;
 
 import com.agibank.corehub.beans.transacao.DestinatarioTransacao;
 import com.agibank.corehub.beans.transacao.Transacao;
-import com.agibank.corehub.controller.Alerta;
+import com.agibank.corehub.controller.utils.Alerta;
 import java.io.IOException;
 
 import com.agibank.corehub.controller.utils.DestinatarioTransacaoController;

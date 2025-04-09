@@ -3,11 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="800.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.home.LoginController">
+<AnchorPane prefHeight="800.0"
+            prefWidth="412.0"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.agibank.corehub.controller.home.CadastroController">
 
-    <ImageView fitHeight="350.0" fitWidth="412.0" layoutX="0.0" layoutY="0.0">
+    <ImageView fitHeight="350.0" fitWidth="412.0">
         <image>
             <Image url="@../assets/ondas180.png" />
         </image>
@@ -24,6 +27,7 @@
                 <TextField fx:id="campoSobrenome" promptText="Sobrenome" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
             </HBox>
 
+            <TextField fx:id="campoApelido" promptText="Usuario" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
             <TextField fx:id="campoEmail" promptText="Endereço de E-mail" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
             <TextField fx:id="campoTelefone" promptText="Telefone" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
 
@@ -44,6 +48,5 @@
         </children>
     </VBox>
 
-    <Button fx:id="btnCadastrar" layoutX="112.0" layoutY="700.0" prefHeight="47.0" prefWidth="189.0" style="-fx-background-color: #1666C0; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="CADASTRAR" />
-
+    <Button fx:id="btnCadastrar" onAction="#cadastrarUsuario" layoutX="112.0" layoutY="700.0" prefHeight="47.0" prefWidth="189.0" style="-fx-background-color: #1666C0; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="CADASTRAR" />
 </AnchorPane>

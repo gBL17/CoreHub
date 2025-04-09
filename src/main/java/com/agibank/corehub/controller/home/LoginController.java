@@ -2,9 +2,9 @@ package com.agibank.corehub.controller.home;
 
 import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.controller.utils.Navegador;
-import com.agibank.corehub.controller.Alerta;
-import com.agibank.corehub.controller.CifradorSenha;
-import com.agibank.corehub.controller.UsuarioLogadoController;
+import com.agibank.corehub.controller.utils.Alerta;
+import com.agibank.corehub.controller.utils.CifradorSenha;
+import com.agibank.corehub.controller.login.UsuarioLogadoController;
 import com.agibank.corehub.dao.UsuarioDAO;
 import com.agibank.corehub.controller.conta.ContaController;
 import java.io.IOException;
@@ -13,13 +13,8 @@ import java.time.LocalDate;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 public class LoginController {
     Navegador navegador = new Navegador();

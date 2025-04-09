@@ -1,14 +1,12 @@
 package com.agibank.corehub.controller.conta;
 
-import com.agibank.corehub.controller.ScoreController;
-import com.agibank.corehub.controller.UsuarioController;
+import com.agibank.corehub.controller.login.UsuarioController;
 import com.agibank.corehub.controller.utils.Navegador;
 import com.agibank.corehub.dao.conta.ContaDAO;
 import java.io.IOException;
 import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.beans.conta.Conta;
-import com.agibank.corehub.controller.ContaLogadaController;
-import com.agibank.corehub.controller.UsuarioLogadoController;
+import com.agibank.corehub.controller.login.UsuarioLogadoController;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.Instant;

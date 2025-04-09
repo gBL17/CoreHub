@@ -1,6 +1,6 @@
 package com.agibank.corehub.dao;
 
-import com.agibank.corehub.controller.Alerta;
+import com.agibank.corehub.controller.utils.Alerta;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

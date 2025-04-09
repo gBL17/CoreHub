@@ -1,7 +1,7 @@
 package com.agibank.corehub.controller.transacao.verificacao;
 
 import com.agibank.corehub.beans.transacao.Transacao;
-import com.agibank.corehub.controller.Alerta;
+import com.agibank.corehub.controller.utils.Alerta;
 import com.agibank.corehub.controller.conta.ContaController;
 import com.agibank.corehub.controller.transacao.TransacaoController;
 import com.agibank.corehub.controller.utils.Navegador;

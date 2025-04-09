@@ -1,7 +1,7 @@
 package com.agibank.corehub.controller.transacao.verificacao;
 
 import com.agibank.corehub.beans.transacao.Transacao;
-import com.agibank.corehub.controller.Alerta;
+import com.agibank.corehub.controller.utils.Alerta;
 import com.agibank.corehub.dao.StatusTransacaoDAO;
 import com.agibank.corehub.dao.TransacaoDAO;
 

@@ -1,5 +1,6 @@
 package com.agibank.corehub.controller;
 
+import com.agibank.corehub.controller.utils.CifradorSenha;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

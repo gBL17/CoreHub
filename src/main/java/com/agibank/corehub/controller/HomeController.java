@@ -2,6 +2,8 @@ package com.agibank.corehub.controller;
 
 import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.beans.conta.Conta;
+import com.agibank.corehub.controller.conta.ContaLogadaController;
+import com.agibank.corehub.controller.login.UsuarioLogadoController;
 import com.agibank.corehub.controller.utils.Navegador;
 import com.agibank.corehub.dao.conta.ContaDAO;
 import java.io.IOException;

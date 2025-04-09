@@ -1,8 +1,7 @@
 package com.agibank.corehub.controller.transacao.verificacao;
 
-import com.agibank.corehub.App;
 import com.agibank.corehub.beans.transacao.Transacao;
-import com.agibank.corehub.controller.Alerta;
+import com.agibank.corehub.controller.utils.Alerta;
 import com.agibank.corehub.controller.utils.Navegador;
 import com.agibank.corehub.dao.StatusTransacaoDAO;
 import com.agibank.corehub.dao.TransacaoDAO;
@@ -13,7 +12,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

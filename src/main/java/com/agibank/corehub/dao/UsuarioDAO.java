@@ -1,14 +1,13 @@
 package com.agibank.corehub.dao;
 
 import com.agibank.corehub.beans.Usuario;
-import com.agibank.corehub.controller.CifradorSenha;
+import com.agibank.corehub.controller.utils.CifradorSenha;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import com.agibank.corehub.dao.Conexao;
 
 public class UsuarioDAO {
     private Connection con;
@@ -26,9 +25,7 @@ public class UsuarioDAO {
     public int criarUsuario(Usuario usuario) throws SQLException {
         final String sql = "INSERT INTO Usuario (nome, apelido, senha, email, telefone, data_nascimento, rua, numero, complemento) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         stmt = con.prepareStatement(sql);
-
         CifradorSenha cifradorSenha = new CifradorSenha();
-
         stmt.setString(1, usuario.getNome());
         stmt.setString(2, usuario.getApelido());
         stmt.setString(3, cifradorSenha.cifrarSenha(usuario.getSenha()));
