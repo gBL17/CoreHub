@@ -24,4 +24,15 @@ public class TelaInicialController {
         stage.show();
     }
 
+    @FXML
+    private void handleCadastro(ActionEvent actionEvent) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/cadastro.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 412, 800);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
