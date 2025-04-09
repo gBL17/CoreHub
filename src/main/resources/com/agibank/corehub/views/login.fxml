@@ -8,7 +8,7 @@
 
     <ImageView fitHeight="350.0" fitWidth="412.0" layoutX="0.0" layoutY="0.0">
         <image>
-            <Image url="@../../../corehub/assets/ondas180.png" />
+            <Image url="@../assets/ondas180.png" />
         </image>
     </ImageView>
 
@@ -18,7 +18,7 @@
 
     <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="131.0" layoutY="120.0">
         <image>
-            <Image url="@../../../corehub/assets/usuarioPadrao.png" />
+            <Image url="@../assets/usuarioPadrao.png" />
         </image>
     </ImageView>
 

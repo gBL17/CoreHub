@@ -2,6 +2,7 @@ package com.agibank.corehub.controller.conta;
 
 import com.agibank.corehub.controller.ScoreController;
 import com.agibank.corehub.controller.UsuarioController;
+import com.agibank.corehub.controller.utils.Navegador;
 import com.agibank.corehub.dao.conta.ContaDAO;
 import java.io.IOException;
 import com.agibank.corehub.beans.Usuario;
@@ -17,48 +18,25 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 public class ContaController implements Initializable {
-    private static final Usuario usarioLogado = UsuarioLogadoController.getInstance().getUsuario();
-    private static Conta contaLogada;
-    private Navegador navegador;
+    private Usuario usarioLogado = UsuarioLogadoController.getInstance().getUsuario();
+    private Conta contaLogada = ContaLogadaController.getInstance().getConta();
+    private Navegador navegador = new Navegador();
 
     @FXML
     private Label saldoConta;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-         contaLogada = ContaLogadaController.getInstance().getConta();
-         saldoConta.setText(String.valueOf(contaLogada.getSaldo()));
+        try{
+            saldoConta.setText("R$ " + contaLogada.getSaldo());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
-    //    public Conta buscarContaPorId(int id_conta){
-//        try{
-//            return contaDAO.buscarConta(id_conta);
-//        }catch (SQLException e){
-//            System.out.println(e.getMessage());
-//        }
-
-//        return null;
-//    }
-//    public int tratamento(int idUsuario) throws SQLException {
-//        contaDAO.listarContasUsuario(idUsuario);
-
-//        return 1;
-//    }
-//    public ArrayList<Conta> listarContaUsuario(int idUsuario) throws SQLException {
-//
-//        return contaDAO.listarContasUsuario(idUsuario);
-
-//
-//    }
 
     public void atualizarSaldo(int id_conta, double valor){
         try{
@@ -91,7 +69,6 @@ public class ContaController implements Initializable {
                 LocalDate dataAbertura = Instant.ofEpochMilli(conta.getDataAbertura().getTime())
                         .atZone(ZoneId.systemDefault())
                         .toLocalDate();
-
                 scoreController.atualizarScore(conta.getIdConta(),usuario.geUltimoAcesso(),dataAbertura);
                 if(conta.getIdTipo() == 1){
                     contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta(),usuario.geUltimoAcesso());
@@ -103,5 +80,9 @@ public class ContaController implements Initializable {
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
+    }
+
+    public void navegarHome(ActionEvent actionEvent) throws IOException {
+        navegador.navegarPara(actionEvent, "home.fxml");
     }
 }

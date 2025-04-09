@@ -8,14 +8,12 @@
 <Pane minHeight="800.0" minWidth="412.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.conta.ContaController">
 
    <children>
-      <!-- Imagem da onda no topo, sem alteração de tamanho -->
       <ImageView fitHeight="412.0" fitWidth="412.0" pickOnBounds="true" preserveRatio="false">
          <image>
             <Image url="@../assets/ondaConta180.png" />
          </image>
       </ImageView>
 
-      <!-- Imagem do usuário fixa no canto superior direito -->
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="359.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/usuarioPadrao.png" />
@@ -29,64 +27,80 @@
 
       <VBox alignment="CENTER" layoutY="93.0" prefHeight="80.0" prefWidth="412.0" spacing="5">
          <children>
-            <!-- Texto menor e discreto -->
-            <Label text="Saldo total" textFill="WHITE">
+            <Label text="Saldo" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
 
-            <!-- Saldo destacado -->
-            <Label text="R$ 1.234.567,90" textFill="WHITE">
+            <Label fx:id="saldoConta" text="R$ 1.234.567,90" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
          </children>
       </VBox>
-
       <HBox alignment="CENTER" layoutY="275.0" prefWidth="412.0" spacing="30">
          <children>
-
             <!-- Transferir -->
             <VBox alignment="CENTER">
-               <StackPane onMouseClicked="#navegarTipoTransacao" prefHeight="70" prefWidth="70" style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
-                  <ImageView fitHeight="57.0" fitWidth="54.0">
-                     <image>
-                        <Image url="@../assets/setasTransferencia.png" />
-                     </image>
-                  </ImageView>
+               <StackPane prefHeight="70" prefWidth="70">
+                  <StackPane style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                     <ImageView fitHeight="57.0" fitWidth="54.0">
+                        <image>
+                           <Image url="@../assets/setasTransferencia.png" />
+                        </image>
+                     </ImageView>
+                  </StackPane>
+
+                  <Button onAction="#navegarTipoTransacao"
+                          style="-fx-background-color: transparent; -fx-cursor: hand;"
+                          prefHeight="70" prefWidth="70" />
                </StackPane>
                <Label text="Transferir" textFill="#1166B1" />
             </VBox>
 
             <!-- Extrato -->
             <VBox alignment="CENTER">
-               <StackPane fx:id="extratoBox" prefHeight="70" prefWidth="70" style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
-                  <ImageView fitHeight="40.0" fitWidth="30.0">
-                     <image>
-                        <Image url="@../assets/extratoBanco.png" />
-                     </image>
-                  </ImageView>
+               <StackPane prefHeight="70" prefWidth="70">
+                  <!-- Ícone visível -->
+                  <StackPane fx:id="extratoBox" style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                     <ImageView fitHeight="40.0" fitWidth="30.0">
+                        <image>
+                           <Image url="@../assets/extratoBanco.png" />
+                        </image>
+                     </ImageView>
+                  </StackPane>
+
+                  <!-- Botão invisível por cima -->
+                  <Button style="-fx-background-color: transparent; -fx-cursor: hand;"
+                          prefHeight="70" prefWidth="70" />
                </StackPane>
                <Label text="Extrato" textFill="#1166B1" />
             </VBox>
 
             <!-- Voltar a Contas -->
             <VBox alignment="CENTER">
-               <StackPane fx:id="voltarBox" prefHeight="70" prefWidth="50.0" style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
-                  <ImageView fitHeight="30.0" fitWidth="30.0">
-                     <image>
-                        <Image url="@../assets/voltarContas.png" />
-                     </image>
-                  </ImageView>
+               <StackPane prefHeight="70" prefWidth="50.0">
+                  <!-- Ícone visível -->
+                  <StackPane fx:id="voltarBox" style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                     <ImageView fitHeight="30.0" fitWidth="30.0">
+                        <image>
+                           <Image url="@../assets/voltarContas.png" />
+                        </image>
+                     </ImageView>
+                  </StackPane>
+
+                  <!-- Botão invisível por cima -->
+                  <Button onAction="#navegarHome"
+                          style="-fx-background-color: transparent; -fx-cursor: hand;"
+                          prefHeight="70" prefWidth="50.0" />
                </StackPane>
                <Label text="Voltar a contas" textAlignment="CENTER" textFill="#1166B1" />
             </VBox>
 
+
          </children>
       </HBox>
-
-
    </children>
 </Pane>

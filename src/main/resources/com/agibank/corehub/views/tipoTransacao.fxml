@@ -14,42 +14,64 @@
       <Label layoutX="106.0" layoutY="138.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-size: 16px; -fx-text-fill: white;" text="Selecione a opção desejada" />
 
       <HBox alignment="CENTER" layoutX="76.0" layoutY="229.0" spacing="25.0">
-      <!-- PIX -->
-      <VBox alignment="CENTER">
-         <StackPane fx:id="pixButton" onMouseClicked="#navegarParaTransacaoPix" prefHeight="70" prefWidth="70" style="-fx-background-color: #1166B1; -fx-background-radius: 15; -fx-cursor: hand;">
-            <ImageView fitHeight="53.0" fitWidth="56.0">
-               <image>
-                  <Image url="@../assets/pixIcon.png" />
-               </image>
-            </ImageView>
-         </StackPane>
-         <Label text="Pix" textFill="#1166B1" />
-      </VBox>
 
-      <!-- DOC -->
-      <VBox alignment="CENTER">
-         <StackPane fx:id="docButton" onMouseClicked="#navegarParaTransacaoDoc" prefHeight="70" prefWidth="70" style="-fx-background-color: #1166B1; -fx-background-radius: 15; -fx-cursor: hand;">
-            <ImageView fitHeight="61.0" fitWidth="61.0">
-               <image>
-                  <Image url="@../assets/docIcon.png" />
-               </image>
-            </ImageView>
-         </StackPane>
-         <Label text="DOC" textFill="#1166B1" />
-      </VBox>
+         <!-- PIX -->
+         <VBox alignment="CENTER">
+            <StackPane prefHeight="70" prefWidth="70">
+               <!-- Ícone visível -->
+               <StackPane style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                  <ImageView fitHeight="53.0" fitWidth="56.0">
+                     <image>
+                        <Image url="@../assets/pixIcon.png" />
+                     </image>
+                  </ImageView>
+               </StackPane>
 
-      <!-- TED -->
-      <VBox alignment="CENTER">
-         <StackPane fx:id="tedButton" onMouseClicked="#navegarParaTransacaoTed" prefHeight="70" prefWidth="70" style="-fx-background-color: #1166B1; -fx-background-radius: 15; -fx-cursor: hand;">
-            <ImageView fitHeight="58.0" fitWidth="51.0">
-               <image>
-                  <Image url="@../assets/tedIcon.png" />
-               </image>
-            </ImageView>
-         </StackPane>
-         <Label text="TED" textFill="#1166B1" />
-      </VBox>
-   </HBox>
+               <!-- Botão invisível por cima -->
+               <Button onAction="#navegarParaTransacaoPix"
+                       style="-fx-background-color: transparent; -fx-cursor: hand;"
+                       prefHeight="70" prefWidth="70" />
+            </StackPane>
 
+            <Label text="Pix" textFill="#1166B1" />
+         </VBox>
+         <!-- DOC -->
+         <VBox alignment="CENTER">
+            <StackPane prefHeight="70" prefWidth="70">
+               <!-- Ícone visível -->
+               <StackPane style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                  <ImageView fitHeight="61.0" fitWidth="61.0">
+                     <image>
+                        <Image url="@../assets/docIcon.png" />
+                     </image>
+                  </ImageView>
+               </StackPane>
+               <!-- Botão invisível por cima -->
+               <Button onAction="#navegarParaTransacaoDoc"
+                       style="-fx-background-color: transparent; -fx-cursor: hand;"
+                       prefHeight="70" prefWidth="70" />
+            </StackPane>
+
+            <Label text="DOC" textFill="#1166B1" />
+         </VBox>
+         <!-- TED -->
+         <VBox alignment="CENTER">
+            <StackPane prefHeight="70" prefWidth="70">
+               <!-- Ícone visível -->
+               <StackPane style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                  <ImageView fitHeight="58.0" fitWidth="51.0">
+                     <image>
+                        <Image url="@../assets/tedIcon.png" />
+                     </image>
+                  </ImageView>
+               </StackPane>
+               <!-- Botão invisível por cima -->
+               <Button onAction="#navegarParaTransacaoTed"
+                       style="-fx-background-color: transparent; -fx-cursor: hand;"
+                       prefHeight="70" prefWidth="70" />
+            </StackPane>
+            <Label text="TED" textFill="#1166B1" />
+         </VBox>
+      </HBox>
    </children>
 </Pane>

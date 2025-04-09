@@ -1,24 +1,18 @@
 package com.agibank.corehub.controller.transacao;
 
 import com.agibank.corehub.beans.transacao.DestinatarioTransacao;
-import com.agibank.corehub.beans.transacao.Transacao;
 import com.agibank.corehub.controller.Alerta;
 import java.io.IOException;
-import java.util.Objects;
+
+import com.agibank.corehub.controller.utils.DestinatarioTransacaoController;
+import com.agibank.corehub.controller.utils.Navegador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class ContaTransacaoController {
     private Navegador navegador = new Navegador();
-    public Transacao transacao;
+    private DestinatarioTransacao destinatarioTransacao;
 
     @FXML
     private TextField codigoBancoTextField;
@@ -29,11 +23,12 @@ public class ContaTransacaoController {
     @FXML
     private TextField numeroContaTextField;
 
+
     public DestinatarioTransacao criaDestinoTransacao() throws IOException {
         if (codigoBancoTextField == null || agenciaTextField == null || numeroContaTextField == null) {
             Alerta.exibirAlertaErro("Erro na Transacao", "Nenhum campo pode ser nulo.");
         }
-        return new DestinatarioTransacao(
+        return destinatarioTransacao = new DestinatarioTransacao(
                 Integer.parseInt(codigoBancoTextField.getText()),
                 Integer.parseInt(agenciaTextField.getText()),
                 Integer.parseInt(numeroContaTextField.getText())
@@ -45,30 +40,9 @@ public class ContaTransacaoController {
     }
 
     public void navegarValorTransacao(ActionEvent actionEvent) throws IOException {
-        criaDestinoTransacao();
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/valorTransacao.fxml"));
-        Parent root = loader.load();
-
-        ValorTransacaoController valorTransacaoController = loader.getController();
-        valorTransacaoController.transacao = transacao;
-        valorTransacaoController.destinatario = criaDestinoTransacao();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 412, 800);
-        stage.setScene(scene);
-        stage.show();
+        destinatarioTransacao = criaDestinoTransacao();
+        DestinatarioTransacaoController.getInstance().setDestinatarioTransacao(destinatarioTransacao);
+        System.out.println(DestinatarioTransacaoController.getInstance().getDestinatarioTransacao().toString());
+        navegador.navegarPara(actionEvent, "valorTransacao.fxml");
     }
-
-    @FXML
-    private void voltarTelaInicial(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/tipoTransacao.fxml"));
-        Parent root = loader.load();
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 412, 800);
-        stage.setScene(scene);
-        stage.show();
-    }
-
 }

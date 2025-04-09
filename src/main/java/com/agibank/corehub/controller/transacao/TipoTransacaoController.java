@@ -1,83 +1,43 @@
 package com.agibank.corehub.controller.transacao;
 
 import com.agibank.corehub.beans.transacao.Transacao;
-import com.agibank.corehub.controller.Alerta;
-import com.agibank.corehub.controller.ContaLogadaController;
-import com.agibank.corehub.controller.conta.ContaController;
 import com.agibank.corehub.controller.utils.Navegador;
-import com.agibank.corehub.dao.conta.ContaDAO;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javafx.fxml.Initializable;
 
-public class TipoTransacaoController {
-
-    private Transacao transacao = new Transacao();
+public class TipoTransacaoController implements Initializable {
     private Navegador navegador = new Navegador();
+    private Transacao transacao;
 
-    @FXML
-    private StackPane pixButton;
-
-    @FXML
-    private StackPane docButton;
-
-    @FXML
-    private StackPane tedButton;
-
-    public void setIdContaOrigem(int idContaOrigem) {
-        transacao.setIdContaOrigem(idContaOrigem);
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        TransacaoController.getInstance().setTransacao(new Transacao());
+        transacao = TransacaoController.getInstance().getTransacao();
     }
 
     @FXML
-    private void navegarParaTransacaoPix() throws IOException {
+    private void navegarParaTransacaoPix(ActionEvent actionEvent) throws IOException {
         transacao.setIdTipoTransacao(1); // PIX
-        abrirTelaTransacao();
+        navegarContaTransacao(actionEvent);
     }
 
     @FXML
-    private void navegarParaTransacaoDoc() throws IOException {
+    private void navegarParaTransacaoDoc(ActionEvent actionEvent) throws IOException {
         transacao.setIdTipoTransacao(2); // DOC
-        abrirTelaTransacao();
+        navegarContaTransacao(actionEvent);
     }
 
     @FXML
-    private void navegarParaTransacaoTed() throws IOException {
+    private void navegarParaTransacaoTed(ActionEvent actionEvent) throws IOException {
         transacao.setIdTipoTransacao(3); // TED
-        abrirTelaTransacao();
+        navegarContaTransacao(actionEvent);
     }
 
-    private void abrirTelaTransacao() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/contaTransacao.fxml"));
-        Parent root = loader.load();
-
-        ContaTransacaoController contaTransacaoController = loader.getController();
-        contaTransacaoController.transacao = transacao;
-
-        Stage stage = (Stage) pixButton.getScene().getWindow(); // qualquer StackPane serve
-        Scene scene = new Scene(root, 412, 915);
-        stage.setScene(scene);
-        stage.show();
-    public void navegarContaTransacao(ActionEvent actionEvent) throws IOException {
-        setTipoTransacao();
-        if (transacao.getIdTipoTransacao() != 0) {
-            navegador.navegarPara(actionEvent,"contaTransacao.fxml");
-        }
-    }
-    public void navegarConta(ActionEvent actionEvent) throws IOException, SQLException {
-        navegador.navegarPara(actionEvent, "conta.fxml");
-    }
-
-    private String buscarSaldoConta(int idContaOrigem) throws SQLException {
-        String saldoConta;
-        ContaDAO contaDAO = new ContaDAO();
-        saldoConta = contaDAO.buscarSaldoConta(idContaOrigem);
-        contaDAO.fecharConexao();
-        return saldoConta;
+    private void navegarContaTransacao(ActionEvent actionEvent) throws IOException {
+        navegador.navegarPara(actionEvent, "contaTransacao.fxml");
     }
 }

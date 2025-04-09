@@ -9,19 +9,19 @@
    <children>
       <ImageView fitHeight="800.0" fitWidth="412.0">
          <image>
-            <Image url="@../../../corehub/assets/backgroundHome.png" />
+            <Image url="@../assets/backgroundHome.png" />
          </image>
       </ImageView>
 
       <ImageView fitHeight="77.0" fitWidth="161.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../corehub/assets/LogoCX.png" />
+            <Image url="@../assets/LogoCX.png" />
          </image>
       </ImageView>
 
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="359.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../corehub/assets/usuarioPadrao.png" />
+            <Image url="@../assets/usuarioPadrao.png" />
          </image>
       </ImageView>
 

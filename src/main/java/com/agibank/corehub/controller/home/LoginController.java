@@ -48,35 +48,24 @@ public class LoginController {
         }
 
         if(usuarioVerificado != null && cifrador.validarSenhaCrifrada(usuarioVerificado.getSenha(),senha)){
+            //Cria instancia do usuario logado
             UsuarioLogadoController.getInstance().setUsuario(usuarioVerificado);
+
+            //Carrega as views na próxima lista
             ContaController contaController = new ContaController();
             contaController.atualizarContas(UsuarioLogadoController.getInstance().getUsuario().getId_Usuario());
+
+            //Atualiza data de acesso
             usuarioDao.atualizarUltimaDataAcesso(LocalDate.now(),UsuarioLogadoController.getInstance().getUsuario().getId_Usuario());
+
             navegador.navegarPara(actionEvent, "home.fxml");
         } else {
             Alerta.exibirAlertaErro("Erro de Login", "Usuário ou Senha incorreta!");
         }
     }
 
-
-    public void navegarHome(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/home/home.fxml"));
-        Parent root = loader.load();
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 412, 800);
-        stage.setScene(scene);
-        stage.show();
-    }
-
     @FXML
-    private void voltarTelaInicial(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/telainicial.fxml"));
-        Parent root = loader.load();
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 412, 800); // mantém o mesmo tamanho
-        stage.setScene(scene);
-        stage.show();
+    private void voltarTelaInicial(ActionEvent actionEvent) throws IOException {
+        navegador.navegarPara(actionEvent,"telaInicial.fxml");
     }
 }

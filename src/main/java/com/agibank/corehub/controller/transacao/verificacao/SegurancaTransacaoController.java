@@ -24,7 +24,8 @@ public class SegurancaTransacaoController {
 
     public boolean verificarHorarioInseguro(Transacao transacao) throws SQLException {
         VerificacaoSegurancaDAO verificacaoSegurancaDAO = new VerificacaoSegurancaDAO();
-        return !verificacaoSegurancaDAO.transacaoCorreuHorarioSeguro(transacao.getId());
+//        (verificacaoSegurancaDAO.transacaoCorreuHorarioSeguro(transacao.getId());
+        return false;
     }
 
     public boolean verificarSeMaiorValorHistoricoTransacaoDaConta(Transacao transacao){
@@ -32,7 +33,6 @@ public class SegurancaTransacaoController {
         try{
             VerificacaoSegurancaDAO verificacaoSegurancaDAO = new VerificacaoSegurancaDAO();
             double maiorTransferencia = verificacaoSegurancaDAO.maiorValorTransferenciaAprovada(transacao.getIdContaOrigem());
-            verificacaoSegurancaDAO.fecharConexao();
 
             if (maiorTransferencia < transacao.getValor() && maiorTransferencia > valorMinimoVerificacaoDeSeguranca){
                 return true;

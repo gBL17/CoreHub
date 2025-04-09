@@ -3,6 +3,7 @@ package com.agibank.corehub.dao.conta;
 import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.beans.conta.Conta;
 import com.agibank.corehub.beans.conta.TipoConta;
+import com.agibank.corehub.controller.Alerta;
 import com.agibank.corehub.dao.Conexao;
 
 import java.sql.Connection;
@@ -201,11 +202,11 @@ public class ContaDAO {
 
     }
 
-    public ArrayList<Conta> listarContasUsuario(int idUsuario) throws SQLException {
+    public ArrayList<Conta> listarContasUsuario(int idUsuario) {
         ArrayList<Conta> contas = new ArrayList<>();
 
         String sql = """
-                SELECT c.id_conta, tc.tipo, cl.tipo_classe, a.numero_agencia, c.numero, c.saldo, c.data_abertura, c.status, c.score
+                SELECT *
                 FROM Conta c
                 INNER JOIN Tipo_Conta tc ON c.id_tipo = tc.id_tipo_conta
                 INNER JOIN Classe cl ON c.id_classe = cl.id_classe
@@ -213,20 +214,28 @@ public class ContaDAO {
                 WHERE c.id_usuario = ?
                 """;
 
-        stmt = con.prepareStatement(sql);
-        stmt.setInt(1, idUsuario);
-        rs = stmt.executeQuery();
+        try{
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idUsuario);
+            rs = stmt.executeQuery();
 
-        while (rs.next()) {
-
-            Conta conta = new Conta();
-            conta.setIdConta(rs.getInt("id_conta"));
-            conta.setTipo(rs.getString("tipo"));
-            conta.setDataAbertura(rs.getDate("data_abertura"));
-            contas.add(conta);
-
+            while (rs.next()) {
+                Conta conta = new Conta();
+                conta.setIdConta(rs.getInt("id_conta"));
+                conta.setIdUsuario(rs.getInt("id_usuario"));
+                conta.setTipo(rs.getString("tipo"));
+                conta.setTipoClasse(rs.getString("tipo_classe"));
+                conta.setNumeroAgencia(rs.getInt("numero_agencia"));
+                conta.setSaldo(rs.getDouble("saldo"));
+                conta.setStatus(rs.getString("status"));
+                conta.setDataAbertura(rs.getDate("data_abertura"));
+                contas.add(conta);
+            }
+            return contas;
         }
-        return contas;
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int buscarIdContaPorAgenciaENumero(int numeroAgencia, int numeroConta) throws SQLException{

@@ -1,6 +1,9 @@
 package com.agibank.corehub.controller.home;
 
+import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.beans.conta.Conta;
+import com.agibank.corehub.controller.ContaLogadaController;
+import com.agibank.corehub.controller.UsuarioLogadoController;
 import com.agibank.corehub.controller.conta.ContaController;
 import java.io.IOException;
 import java.net.URL;
@@ -23,22 +26,9 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 public class HomeController implements Initializable {
-    private int idUsuario;
+    private Usuario usuario = UsuarioLogadoController.getInstance().getUsuario();
     private Navegador navegar = new Navegador();
-
-    public void setIdUsuario(int id){
-        this.idUsuario = id;
-        try {
-            carregarContasUsuario();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
+    public int idConta;
 
     @FXML
     public Label labelNomeUsuario;
@@ -51,6 +41,7 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        labelNomeUsuario.setText(usuario.getNome());
         try {
             carregarContasUsuario();
         } catch (Exception e) {
@@ -60,21 +51,9 @@ public class HomeController implements Initializable {
 
     public void navegarConta(ActionEvent actionEvent) throws IOException {
         int selectedIndex = listViewContas.getSelectionModel().getSelectedIndex();
-
         if (selectedIndex >= 0) {
-            Conta contaSelecionada = contasUsuario.get(selectedIndex);
-
-            int idConta = 0;
-
-            try {
-                ContaDAO dao = new ContaDAO();
-                idConta = dao.buscarIdContaPorAgenciaENumero(
-                        contaSelecionada.getIdAgencia(), contaSelecionada.getNumero()
-                );
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            System.out.println(contasUsuario.get(selectedIndex));
+            ContaLogadaController.getInstance().setConta(contasUsuario.get(selectedIndex));
             navegar.navegarPara(actionEvent, "conta.fxml");
         } else {
             System.out.println("Nenhuma conta selecionada.");
@@ -84,7 +63,7 @@ public class HomeController implements Initializable {
 
     private void carregarContasUsuario() throws Exception {
         ContaDAO dao = new ContaDAO();
-        contasUsuario = dao.listarContasUsuario(idUsuario);
+        contasUsuario = dao.listarContasUsuario(usuario.getId_Usuario());
 
         for (Conta conta : contasUsuario) {
             contasExibidas.add("Conta: " + conta.getTipo());

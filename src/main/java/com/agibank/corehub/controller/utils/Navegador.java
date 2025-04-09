@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Navegador {
     public void navegarPara(ActionEvent actionEvent, String nomeViewFXML) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/view/"+nomeViewFXML));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/"+nomeViewFXML));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

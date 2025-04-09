@@ -43,12 +43,13 @@ public class StatusTransacaoDAO {
             stmt.setInt(1, idTransacao);
             stmt.setString(2, status);
             stmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+            return stmt.executeUpdate();
         } catch (SQLException e){
             Alerta.exibirAlertaErro("Erro de conexão com banco de dados", e.getMessage());
         } finally {
             fecharConexao();
         }
-        return stmt.executeUpdate();
+        return -1;
     }
 
     public int buscarIdStatusTransacao(int idTransacao) throws SQLException {

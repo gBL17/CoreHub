@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class VerificacaoSegurancaDAO {
@@ -60,27 +61,22 @@ public class VerificacaoSegurancaDAO {
         return valor;
     }
 
-    public boolean transacaoCorreuHorarioSeguro(int id_transacao) throws SQLException {
+    public Date transacaoCorreuHorarioSeguro(int id_transacao) throws SQLException {
         final String sql = """
-                "SELECT CASE
-                "WHEN TIME(data) BETWEEN '06:00:00' AND '18:00:00' THEN TRUE
-                "ELSE FALSE
-                "END AS dentro_intervalo
-                "FROM Transacao t Inner Join Status_Transacao st
-                "on t.id_transacao = st.id_transacao
-                "WHERE t.id_transacao = ?""";
+                SELECT data
+                FROM Status_Transacao
+                WHERE id_transacao = ?
+                """;
 
         try{
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id_transacao);
             rs = stmt.executeQuery();
-            boolean valor = false;
             if (rs.next()) {
-                valor = rs.getBoolean("dentro_intervalo");
+                return rs.getDate("data");
             }
-            return valor;
         } catch (SQLException e) {
-            Alerta.exibirAlertaErro("Erro no acesso ao Bacno", e.getMessage());
+            Alerta.exibirAlertaErro("Erro no acesso ao Banco", e.getMessage());
         } finally {
             fecharConexao();
         }
