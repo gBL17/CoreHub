@@ -1,5 +1,9 @@
 package com.agibank.corehub.controller.transacao.verificacao;
 
+import com.agibank.corehub.beans.conta.Conta;
+import com.agibank.corehub.beans.conta.ContaCorrente;
+import com.agibank.corehub.beans.conta.ContaPoupanca;
+import com.agibank.corehub.beans.conta.ContaSalario;
 import com.agibank.corehub.beans.transacao.Transacao;
 import com.agibank.corehub.dao.StatusTransacaoDAO;
 import com.agibank.corehub.dao.TransacaoDAO;
@@ -7,8 +11,10 @@ import com.agibank.corehub.dao.TransacaoDAO;
 import java.sql.SQLException;
 
 public class IntegridadeTransacaoController {
-    public void verificarIntegridadeTransacaoParaCadastrarEmStatus(Transacao transacao) throws SQLException {
+    public void verificarIntegridadeTransacaoParaCadastrarEmStatus(Conta conta, Transacao transacao) throws SQLException {
         //todo verificações de integridade de transação
+        verificarTransacaoContaOrigemDiferenteContaDestino(transacao);
+        verificarSaldoDisponivel(conta, transacao);
         cadastrarTransacao(transacao);
         int idTransacao = retornaIdTransacao(transacao);
         cadastrarTransacaoEmAnalise(idTransacao);
@@ -34,6 +40,18 @@ public class IntegridadeTransacaoController {
         transacaoDAO.fecharConexao();
         return idTransacao;
     }
+
+    public boolean verificarTransacaoContaOrigemDiferenteContaDestino(Transacao transacao){
+        if (transacao.getIdContaOrigem() != transacao.getIdContaDestino()) return true;
+        else return false;
+    }
+
+    public boolean verificarSaldoDisponivel (Conta conta, Transacao transacao) {
+        if (conta.getSaldo() < transacao.getValor()) return false;
+        return true;
+    }
+
+
 
     public int atualizarStatusTransacao(int idTransacao, String status) throws SQLException{
         int statusTransacao;

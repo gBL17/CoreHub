@@ -7,7 +7,7 @@ import com.agibank.corehub.beans.conta.ContaSalario;
 import com.agibank.corehub.beans.transacao.Transacao;
 
 public class IntegridadeController {
-    public boolean verificacaoTransacaoConta(Transacao transacao){
+    public boolean verificarTransacaoContaOrigemDiferenteContaDestino(Transacao transacao){
         if (transacao.getIdContaOrigem() != transacao.getIdContaDestino()) return true;
         else return false;
     }
