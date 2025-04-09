@@ -42,7 +42,7 @@ public class IntegridadeTransacaoController {
     }
 
     public boolean verificarTransacaoContaOrigemDiferenteContaDestino(Transacao transacao){
-        if (transacao.getIdContaOrigem() != transacao.getIdContaDestino()) return true;
+        if ((transacao.getIdContaOrigem() != transacao.getIdContaDestino()) || ((transacao.getIdContaOrigem() == transacao.getIdContaDestino()) && (transacao.isTransferenciaExterna() != false))) return true;
         else return false;
     }
 
