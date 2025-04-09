@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="800.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.home.LoginController">
 
@@ -12,37 +12,53 @@
             <Image url="@../assets/ondas180.png" />
         </image>
     </ImageView>
+   <Label layoutX="105.0" layoutY="162.0" style="-fx-text-fill: #1666C0" text="REALIZE SEU CADASTRO">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font></Label>
 
-    <Button onAction="#voltarTelaInicial" layoutX="20.0" layoutY="20.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #d5d643; -fx-text-fill: #004aad; -fx-font-weight: bold; -fx-background-radius: 20;">
+    <Button layoutX="20.0" layoutY="20.0" onAction="#voltarTelaInicial" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #d5d643; -fx-text-fill: #004aad; -fx-font-weight: bold; -fx-background-radius: 20;">
         <text>VOLTAR</text>
     </Button>
 
-    <VBox layoutX="50.0" layoutY="200.0" prefWidth="315.0" spacing="10.0">
+    <VBox layoutX="51.0" layoutY="250.0" prefWidth="315.0" spacing="10.0">
         <children>
             <HBox spacing="10">
-                <TextField fx:id="campoNome" promptText="Nome" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
-                <TextField fx:id="campoSobrenome" promptText="Sobrenome" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
+                <TextField fx:id="campoNome" prefHeight="40.0" promptText="Nome" HBox.hgrow="ALWAYS"
+                           style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
+                <TextField fx:id="campoSobrenome" prefHeight="40.0" promptText="Sobrenome" HBox.hgrow="ALWAYS"
+                           style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
             </HBox>
 
-            <TextField fx:id="campoEmail" promptText="Endereço de E-mail" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
-            <TextField fx:id="campoTelefone" promptText="Telefone" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
+            <TextField fx:id="campoEmail" prefHeight="40.0" promptText="Endereço de E-mail"
+                       style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
+            <TextField fx:id="campoTelefone" prefHeight="40.0" promptText="Telefone"
+                       style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
 
             <HBox spacing="10">
-                <TextField fx:id="campoCPF" promptText="CPF" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
-                <TextField fx:id="campoDataNascimento" promptText="Data de Nascimento" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
+                <TextField fx:id="campoCPF" prefHeight="40.0" promptText="CPF" HBox.hgrow="ALWAYS"
+                           style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
+                <TextField fx:id="campoDataNascimento" prefHeight="40.0" promptText="Data de Nascimento" HBox.hgrow="ALWAYS"
+                           style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
             </HBox>
 
-            <TextField fx:id="campoRua" promptText="Rua" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
+            <TextField fx:id="campoRua" prefHeight="40.0" promptText="Rua"
+                       style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
 
             <HBox spacing="10">
-                <TextField fx:id="campoNumero" promptText="Número" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
-                <TextField fx:id="campoComplemento" promptText="Complemento" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
+                <TextField fx:id="campoNumero" prefHeight="40.0" promptText="Número" HBox.hgrow="ALWAYS"
+                           style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
+                <TextField fx:id="campoComplemento" prefHeight="40.0" promptText="Complemento" HBox.hgrow="ALWAYS"
+                           style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
             </HBox>
 
-            <PasswordField fx:id="campoSenha" promptText="Senha" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
-            <PasswordField fx:id="campoConfirmarSenha" promptText="Confirmar Senha" prefHeight="40.0" style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
+            <PasswordField fx:id="campoSenha" prefHeight="40.0" promptText="Senha"
+                           style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
+            <PasswordField fx:id="campoConfirmarSenha" prefHeight="40.0" promptText="Confirmar Senha"
+                           style="-fx-border-color: #1666C0; -fx-border-radius: 10; -fx-background-radius: 10;" />
         </children>
     </VBox>
+
 
     <Button fx:id="btnCadastrar" layoutX="112.0" layoutY="700.0" prefHeight="47.0" prefWidth="189.0" style="-fx-background-color: #1666C0; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="CADASTRAR" />
 

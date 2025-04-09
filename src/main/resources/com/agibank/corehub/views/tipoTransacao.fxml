@@ -14,7 +14,10 @@
             <Image url="@../assets/ondaTipoConta.png" />
          </image>
       </ImageView>
-      <Label layoutX="106.0" layoutY="138.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-size: 16px; -fx-text-fill: white;" text="Selecione a opção desejada" />
+      <Label layoutX="80.0" layoutY="138.0" prefHeight="30.0" prefWidth="250.0"
+             style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #ffffff; -fx-alignment: center;"
+             text="Selecione a opção desejada" />
+
 
       <Button onAction="#voltarConta" layoutX="20.0" layoutY="20.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #d5d643; -fx-text-fill: #004aad; -fx-font-weight: bold; -fx-background-radius: 20;">
          <text>VOLTAR</text>
