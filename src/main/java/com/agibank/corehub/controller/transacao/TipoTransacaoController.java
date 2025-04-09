@@ -40,4 +40,10 @@ public class TipoTransacaoController implements Initializable {
     private void navegarContaTransacao(ActionEvent actionEvent) throws IOException {
         navegador.navegarPara(actionEvent, "contaTransacao.fxml");
     }
+
+    @FXML
+    private void voltarConta(ActionEvent actionEvent) throws IOException {
+        navegador.navegarPara(actionEvent,"conta.fxml");
+    }
+
 }

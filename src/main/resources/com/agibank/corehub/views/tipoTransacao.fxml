@@ -6,12 +6,19 @@
 
 <Pane prefHeight="915.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.transacao.TipoTransacaoController">
    <children>
+
+
+
       <ImageView fitHeight="350.0" fitWidth="412.0">
          <image>
             <Image url="@../assets/ondaTipoConta.png" />
          </image>
       </ImageView>
       <Label layoutX="106.0" layoutY="138.0" prefHeight="25.0" prefWidth="200.0" style="-fx-font-size: 16px; -fx-text-fill: white;" text="Selecione a opção desejada" />
+
+      <Button onAction="#voltarConta" layoutX="20.0" layoutY="20.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #d5d643; -fx-text-fill: #004aad; -fx-font-weight: bold; -fx-background-radius: 20;">
+         <text>VOLTAR</text>
+      </Button>
 
       <HBox alignment="CENTER" layoutX="76.0" layoutY="229.0" spacing="25.0">
 
