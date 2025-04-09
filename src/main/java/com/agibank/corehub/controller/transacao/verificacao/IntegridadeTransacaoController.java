@@ -24,7 +24,7 @@ public class IntegridadeTransacaoController {
                 statusTransacaoDAO.criarStatusTransacao(transacaoDAO.buscarIdTransacao(transacao), "CANCELADA");
                 return false;
             }
-            if (verificarSaldoDisponivel(transacao)){
+            if (!verificarSaldoDisponivel(transacao)){
                 statusTransacaoDAO.criarStatusTransacao(transacaoDAO.buscarIdTransacao(transacao), "CANCELADA");
                 return false;
             }
