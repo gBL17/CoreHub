@@ -1,41 +1,42 @@
 package com.agibank.corehub.controller;
 
-import com.agibank.corehub.controller.conta.ContaController;
+import com.agibank.corehub.beans.Usuario;
+import com.agibank.corehub.beans.conta.Conta;
+import com.agibank.corehub.controller.conta.ContaLogadaController;
+import com.agibank.corehub.controller.login.UsuarioLogadoController;
+import com.agibank.corehub.controller.utils.Navegador;
+import com.agibank.corehub.dao.conta.ContaDAO;
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
-public class HomeController {
-    private int idUsuario;
-
-    public void setIdUsuario(int id){
-        this.idUsuario = id;
-    }
-
-    public int getIdUsuario() {
-        return idUsuario;
-    }
+public class HomeController implements Initializable {
+    private static final Usuario usuarioLogado = UsuarioLogadoController.getInstance().getUsuario();
+    private Navegador navegar = new Navegador();
 
     @FXML
     public Label labelNomeUsuario;
 
-    public void navegarConta(ActionEvent actionEvent) throws IOException {
-        System.out.println(getIdUsuario());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/conta.fxml"));
-        Parent root = loader.load();
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        labelNomeUsuario.setText(usuarioLogado.getNome());
+    }
 
-        ContaController controller = loader.getController();
-        controller.setIdConta(3);
+    public void navegarConta(ActionEvent actionEvent) throws IOException, SQLException {
+        ContaLogadaController.getInstance().setConta(buscarConta(3));
 
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 412, 915);
-        stage.setScene(scene);
-        stage.show();
+        navegar.navegarPara(actionEvent, "conta.fxml");
+    }
+
+    public Conta buscarConta(int id) throws SQLException {
+        ContaDAO contaDAO = new ContaDAO();
+        Conta conta = contaDAO.buscarConta(id);
+        contaDAO.fecharConexao();
+        return conta;
     }
 }

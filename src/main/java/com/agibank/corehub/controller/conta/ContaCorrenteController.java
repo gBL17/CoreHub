@@ -14,14 +14,11 @@ public class ContaCorrenteController {
     public ContaCorrenteController() throws SQLException {
     }
 
-    public int descontarSaldoContaCorrente(int idConta) throws SQLException{
+    public int descontarSaldoContaCorrente(int idConta, LocalDate UltimaDataAcesso) throws SQLException{
 
-        LocalDate dataFormatada = LocalDate.now();
-        System.out.println(dataFormatada);
+        LocalDate dataAtual = LocalDate.now();
 
-        LocalDate ultimoDiaMesAtual = YearMonth.now().atEndOfMonth();
-
-        if (ultimoDiaMesAtual == dataFormatada) {
+        if (UltimaDataAcesso.getMonthValue() < dataAtual.getMonthValue()) {
             return contaCorrenteDAO.descontarSaldoContaCorrente(idConta);
         }else{
             int diaAtual = LocalDate.now().getDayOfMonth();

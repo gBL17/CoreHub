@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ContaDAO {
-
     private Connection con;
     private PreparedStatement stmt;
     private ResultSet rs;
@@ -85,7 +84,16 @@ public class ContaDAO {
             return conta;
 
         } else return null;
+    }
 
+    public Double buscarSaldoConta(int idConta) throws SQLException {
+        final String sql = "SELECT saldo FROM Conta WHERE id_conta = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idConta);
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getDouble("saldo");
+        } else return (double) -1;
     }
 
     public int atualizarConta(int numero, Double saldo, String dataAbertura, String status) throws SQLException {
@@ -102,22 +110,15 @@ public class ContaDAO {
 
     }
 
-    public double atualizarSaldo(int id_conta, double valor) throws SQLException {
+    public int atualizarSaldo(int id_conta, double valor) throws SQLException {
         final String sql = "UPDATE Conta set saldo = saldo + ? where id_conta = ?";
-
         stmt = con.prepareStatement(sql);
-
         stmt.setDouble(1, valor);
         stmt.setInt(2, id_conta);
-
-        rs = stmt.executeQuery();
-
-        if (rs.next()) {
-            return rs.getInt("saldo");
-        }
-
-        return 0;
+        return stmt.executeUpdate();
     }
+
+
 
     public int deletarConta(int id) throws SQLException {
         final String sql = "DELETE FROM Conta(id_conta) VALUES(?)";
@@ -190,11 +191,11 @@ public class ContaDAO {
 
     }
 
-    public ArrayList<Conta> listarContasUsuario(int idUsuario) throws SQLException {
+    public ArrayList<Conta> listarContasUsuario(int idUsuario) {
         ArrayList<Conta> contas = new ArrayList<>();
 
         String sql = """
-                SELECT c.id_conta, tc.tipo, cl.tipo_classe, a.numero_agencia, c.numero, c.saldo, c.data_abertura, c.status, c.score
+                SELECT *
                 FROM Conta c
                 INNER JOIN Tipo_Conta tc ON c.id_tipo = tc.id_tipo_conta
                 INNER JOIN Classe cl ON c.id_classe = cl.id_classe
@@ -202,18 +203,28 @@ public class ContaDAO {
                 WHERE c.id_usuario = ?
                 """;
 
-        stmt = con.prepareStatement(sql);
-        stmt.setInt(1, idUsuario);
-        rs = stmt.executeQuery();
+        try{
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idUsuario);
+            rs = stmt.executeQuery();
 
-        while (rs.next()) {
-
-            Conta conta = new Conta();
-            conta.setTipo(rs.getString("tipo"));
-            contas.add(conta);
-
+            while (rs.next()) {
+                Conta conta = new Conta();
+                conta.setIdConta(rs.getInt("id_conta"));
+                conta.setIdUsuario(rs.getInt("id_usuario"));
+                conta.setTipo(rs.getString("tipo"));
+                conta.setTipoClasse(rs.getString("tipo_classe"));
+                conta.setNumeroAgencia(rs.getInt("numero_agencia"));
+                conta.setSaldo(rs.getDouble("saldo"));
+                conta.setStatus(rs.getString("status"));
+                conta.setDataAbertura(rs.getDate("data_abertura"));
+                contas.add(conta);
+            }
+            return contas;
         }
-        return contas;
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int buscarIdContaPorAgenciaENumero(int numeroAgencia, int numeroConta) throws SQLException{
@@ -237,6 +248,16 @@ public class ContaDAO {
         }else {
             return 0;
         }
+    }
+
+    public double atualizarScoreConta(double score, int id_conta) throws SQLException{
+        final   String sql = "update Conta set score = score + ? where id_conta = ?";
+
+        stmt = con.prepareStatement(sql);
+        stmt.setDouble(1, score);
+        stmt.setInt(2,id_conta);
+
+        return stmt.executeUpdate();
     }
 
 }

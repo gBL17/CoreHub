@@ -1,4 +1,5 @@
-package com.agibank.corehub.controller;
+package com.agibank.corehub.controller.login;
+import com.agibank.corehub.controller.utils.CifradorSenha;
 import com.agibank.corehub.dao.UsuarioDAO;
 import com.agibank.corehub.beans.Usuario;
 

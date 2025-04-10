@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.transacao.verificacao.VerificaoDeSegurancaController">
+   <children>
+      <VBox prefHeight="800.0" prefWidth="412.0">
+
+         <children>
+            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="412.0" spacing="180.0" style="-fx-background-color: #1d71b8;">
+               <children>
+                  <!-- Logo CX à esquerda -->
+                  <ImageView fitHeight="77.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/LogoCX.png" />
+                     </image>
+                  </ImageView>
+
+                  <!-- Usuário padrão à direita -->
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/usuarioPadrao.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <opaqueInsets>
+                  <Insets left="10.0" right="10.0" />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </HBox>
+
+            <VBox alignment="CENTER" prefHeight="673.0" prefWidth="412.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Confirmação de Segurança" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="18.0" />
+                     </font>
+                     <style>
+                        -fx-background-color: #FFF8E1; /* amarelo claro */
+                        -fx-border-color: #FFEB3B;
+                        -fx-border-width: 1px;
+                        -fx-border-radius: 8px;
+                        -fx-background-radius: 8px;
+                        -fx-padding: 10px;
+                        -fx-pref-width: 300px;
+                        -fx-text-fill: #333333;
+                     </style>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+
+                  <Label text="Revisamos alguns pontos importantes para garantir a segurança de sua transação." textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Segoe UI" size="14.0" />
+                     </font>
+                     <style>
+                        -fx-background-color: #FFFDE7;
+                        -fx-border-color: #FFEB3B;
+                        -fx-border-width: 1px;
+                        -fx-border-radius: 8px;
+                        -fx-background-radius: 8px;
+                        -fx-padding: 10px;
+                        -fx-pref-width: 360px;
+                        -fx-text-fill: #555555;
+                     </style>
+                     <VBox.margin>
+                        <Insets bottom="15.0" top="0.0" />
+                     </VBox.margin>
+                  </Label>
+
+
+                  <CheckBox fx:id="checkBox1" text="Não recebi mensagens suspeitas" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="16.0" />
+                     </font>
+                     <style>
+                        -fx-pref-width: 320px;
+                        -fx-pref-height: 90px;
+                        -fx-padding: 15px;
+                        -fx-background-color: #f0f0f0;
+                        -fx-background-radius: 10px;
+                        -fx-border-color: #cccccc;
+                        -fx-border-radius: 10px;
+                        -fx-text-fill: #333333;
+                     </style>
+                  </CheckBox>
+
+                  <CheckBox fx:id="checkBox2" text="Transferência para conta correta" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="16.0" />
+                     </font>
+                     <style>
+                        -fx-pref-width: 320px;
+                        -fx-pref-height: 90px;
+                        -fx-padding: 15px;
+                        -fx-background-color: #f0f0f0;
+                        -fx-background-radius: 10px;
+                        -fx-border-color: #cccccc;
+                        -fx-border-radius: 10px;
+                        -fx-text-fill: #333333;
+                     </style>
+                  </CheckBox>
+
+                  <CheckBox fx:id="checkBox3" text="Confirmo que é seguro prosseguir" wrapText="true">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Segoe UI Semibold" size="16.0" />
+                     </font>
+                     <style>
+                        -fx-pref-width: 320px;
+                        -fx-pref-height: 90px;
+                        -fx-padding: 15px;
+                        -fx-background-color: #f0f0f0;
+                        -fx-background-radius: 10px;
+                        -fx-border-color: #cccccc;
+                        -fx-border-radius: 10px;
+                        -fx-text-fill: #333333;
+                     </style>
+                  </CheckBox>
+
+                  <HBox alignment="CENTER" prefHeight="165.0" prefWidth="412.0" spacing="20.0">
+                     <children>
+                        <Button onAction="#cancelarTransacao" mnemonicParsing="false" text="Cancelar">
+                           <style>
+                              -fx-font-size: 14px;
+                              -fx-padding: 10px 20px;
+                              -fx-background-color: #e0e0e0;
+                              -fx-background-radius: 8px;
+                           </style>
+                        </Button>
+                        <Button fx:id="confirmarButton" onAction="#confirmarTransacao" mnemonicParsing="false" text="Confirmar">
+                           <style>
+                              -fx-font-size: 14px;
+                              -fx-padding: 10px 20px;
+                              -fx-background-color: #1666C0;
+                              -fx-text-fill: white;
+                              -fx-background-radius: 8px;
+                           </style>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>

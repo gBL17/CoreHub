@@ -3,10 +3,19 @@ package com.agibank.corehub.controller.transacao;
 import com.agibank.corehub.beans.transacao.DestinatarioTransacao;
 import com.agibank.corehub.dao.ContaExternaDAO;
 import com.agibank.corehub.dao.conta.ContaDAO;
+import javafx.fxml.Initializable;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class IdContaDestinoController {
+    DestinatarioTransacao destinatario;
+
+    public IdContaDestinoController(DestinatarioTransacao destinatario) {
+        this.destinatario = destinatario;
+    }
+
     public int buscarIdContaDestino(DestinatarioTransacao destinatario) throws SQLException {
         int idContaDestino;
 

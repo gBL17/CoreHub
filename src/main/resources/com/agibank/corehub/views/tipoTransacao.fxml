@@ -1,73 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<Pane prefHeight="915.0"
-      prefWidth="412.0"
-      xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.agibank.corehub.controller.transacao.TipoTransacaoController">
+<Pane prefHeight="915.0" prefWidth="412.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.agibank.corehub.controller.transacao.TipoTransacaoController">
    <children>
-      <VBox prefHeight="915.0" prefWidth="412.0">
-         <children>
-            <HBox prefHeight="200.0" prefWidth="412.0">
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="154.0" fitWidth="150.0" layoutX="25.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/logoAgi.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="31.0" layoutY="126.0" prefHeight="39.0" prefWidth="81.0" text="v4.69.1">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="75.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/usuarioPadrao.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-               </children>
-            </HBox>
-            <VBox alignment="CENTER" prefHeight="287.0" prefWidth="412.0">
-               <children>
-                  <Label prefHeight="49.0" prefWidth="206.0" text="Qual operação desejada?">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <HBox alignment="CENTER" prefHeight="268.0" prefWidth="412.0">
-                     <children>
-                        <RadioButton mnemonicParsing="false" text="PIX" fx:id="radioPix"/>
-                        <RadioButton mnemonicParsing="false" text="DOC" fx:id="radioDoc"/>
-                        <RadioButton mnemonicParsing="false" text="TED" fx:id="radioTed"/>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button mnemonicParsing="false" text="Voltar" onAction="#navegarConta"/>
-                        <Button mnemonicParsing="false" text="Confirmar" onAction="#navegarContaTransacao" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </VBox>
+
+
+
+      <ImageView fitHeight="350.0" fitWidth="412.0">
+         <image>
+            <Image url="@../assets/ondaTipoConta.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="80.0" layoutY="138.0" prefHeight="30.0" prefWidth="250.0"
+             style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #ffffff; -fx-alignment: center;"
+             text="Selecione a opção desejada" />
+
+
+      <Button onAction="#voltarConta" layoutX="20.0" layoutY="20.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #d5d643; -fx-text-fill: #004aad; -fx-font-weight: bold; -fx-background-radius: 20;">
+         <text>VOLTAR</text>
+      </Button>
+
+      <HBox alignment="CENTER" layoutX="76.0" layoutY="229.0" spacing="25.0">
+
+         <!-- PIX -->
+         <VBox alignment="CENTER">
+            <StackPane prefHeight="70" prefWidth="70">
+               <!-- Ícone visível -->
+               <StackPane style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                  <ImageView fitHeight="53.0" fitWidth="56.0">
+                     <image>
+                        <Image url="@../assets/pixIcon.png" />
+                     </image>
+                  </ImageView>
+               </StackPane>
+
+               <!-- Botão invisível por cima -->
+               <Button onAction="#navegarParaTransacaoPix"
+                       style="-fx-background-color: transparent; -fx-cursor: hand;"
+                       prefHeight="70" prefWidth="70" />
+            </StackPane>
+
+            <Label text="Pix" textFill="#1166B1" />
+         </VBox>
+         <!-- DOC -->
+         <VBox alignment="CENTER">
+            <StackPane prefHeight="70" prefWidth="70">
+               <!-- Ícone visível -->
+               <StackPane style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                  <ImageView fitHeight="61.0" fitWidth="61.0">
+                     <image>
+                        <Image url="@../assets/docIcon.png" />
+                     </image>
+                  </ImageView>
+               </StackPane>
+               <!-- Botão invisível por cima -->
+               <Button onAction="#navegarParaTransacaoDoc"
+                       style="-fx-background-color: transparent; -fx-cursor: hand;"
+                       prefHeight="70" prefWidth="70" />
+            </StackPane>
+
+            <Label text="DOC" textFill="#1166B1" />
+         </VBox>
+         <!-- TED -->
+         <VBox alignment="CENTER">
+            <StackPane prefHeight="70" prefWidth="70">
+               <!-- Ícone visível -->
+               <StackPane style="-fx-background-color: #1166B1; -fx-background-radius: 15;">
+                  <ImageView fitHeight="58.0" fitWidth="51.0">
+                     <image>
+                        <Image url="@../assets/tedIcon.png" />
+                     </image>
+                  </ImageView>
+               </StackPane>
+               <!-- Botão invisível por cima -->
+               <Button onAction="#navegarParaTransacaoTed"
+                       style="-fx-background-color: transparent; -fx-cursor: hand;"
+                       prefHeight="70" prefWidth="70" />
+            </StackPane>
+            <Label text="TED" textFill="#1166B1" />
+         </VBox>
+      </HBox>
    </children>
 </Pane>

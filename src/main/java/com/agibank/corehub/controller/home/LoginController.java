@@ -1,21 +1,23 @@
-package com.agibank.corehub.controller;
+package com.agibank.corehub.controller.home;
 
 import com.agibank.corehub.beans.Usuario;
+import com.agibank.corehub.controller.utils.Navegador;
+import com.agibank.corehub.controller.utils.Alerta;
+import com.agibank.corehub.controller.utils.CifradorSenha;
+import com.agibank.corehub.controller.login.UsuarioLogadoController;
 import com.agibank.corehub.dao.UsuarioDAO;
+import com.agibank.corehub.controller.conta.ContaController;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 public class LoginController {
+    Navegador navegador = new Navegador();
 
     @FXML
     private TextField campoApelido;
@@ -41,24 +43,24 @@ public class LoginController {
         }
 
         if(usuarioVerificado != null && cifrador.validarSenhaCrifrada(usuarioVerificado.getSenha(),senha)){
-            navegarHome(actionEvent, usuarioVerificado);
+            //Cria instancia do usuario logado
+            UsuarioLogadoController.getInstance().setUsuario(usuarioVerificado);
+
+            //Carrega as views na próxima lista
+            ContaController contaController = new ContaController();
+            contaController.atualizarContas(UsuarioLogadoController.getInstance().getUsuario().getId_Usuario());
+
+            //Atualiza data de acesso
+            usuarioDao.atualizarUltimaDataAcesso(LocalDate.now(),UsuarioLogadoController.getInstance().getUsuario().getId_Usuario());
+
+            navegador.navegarPara(actionEvent, "home.fxml");
         } else {
             Alerta.exibirAlertaErro("Erro de Login", "Usuário ou Senha incorreta!");
         }
     }
 
-
-    public void navegarHome(ActionEvent actionEvent, Usuario usuario) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/agibank/corehub/views/home.fxml"));
-        Parent root = loader.load();
-
-        HomeController homeController = loader.getController();
-        homeController.labelNomeUsuario.setText(usuario.getNome());
-        homeController.setIdUsuario(usuario.getId_Usuario());
-
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 412, 915);
-        stage.setScene(scene);
-        stage.show();
+    @FXML
+    private void voltarTelaInicial(ActionEvent actionEvent) throws IOException {
+        navegador.navegarPara(actionEvent,"telaInicial.fxml");
     }
 }

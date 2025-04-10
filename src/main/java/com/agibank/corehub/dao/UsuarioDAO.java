@@ -1,14 +1,13 @@
 package com.agibank.corehub.dao;
 
 import com.agibank.corehub.beans.Usuario;
-import com.agibank.corehub.controller.CifradorSenha;
+import com.agibank.corehub.controller.utils.CifradorSenha;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import com.agibank.corehub.dao.Conexao;
 
 public class UsuarioDAO {
     private Connection con;
@@ -24,11 +23,9 @@ public class UsuarioDAO {
     }
 
     public int criarUsuario(Usuario usuario) throws SQLException {
-        final String sql = "INSERT INTO Usuario (nome, apelido, senha, email, telefone, data_nascimento, rua, numero, complemento) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        final String sql = "INSERT INTO Usuario (nome, apelido, senha, email, telefone, data_nascimento, rua, numero, complemento,ultima_data_acesso) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         stmt = con.prepareStatement(sql);
-
         CifradorSenha cifradorSenha = new CifradorSenha();
-
         stmt.setString(1, usuario.getNome());
         stmt.setString(2, usuario.getApelido());
         stmt.setString(3, cifradorSenha.cifrarSenha(usuario.getSenha()));
@@ -38,6 +35,16 @@ public class UsuarioDAO {
         stmt.setString(7, usuario.getRua());
         stmt.setInt(8, usuario.getNumero());
         stmt.setString(9, usuario.getComplemento());
+        stmt.setDate(10, Date.valueOf(usuario.getUltimoAcesso()));
+        return stmt.executeUpdate();
+    }
+
+    public int atualizarUltimaDataAcesso(LocalDate data, int id_usuario) throws SQLException {
+        final String sql = "UPDATE Usuario SET ultima_data_acesso = ? where id_usuario = ?";
+        stmt = con.prepareStatement(sql);
+
+        stmt.setDate(1, Date.valueOf(data));
+        stmt.setInt(2, id_usuario);
         return stmt.executeUpdate();
     }
 
@@ -97,6 +104,7 @@ public class UsuarioDAO {
             usuario.setId(rs.getInt("id_usuario"));
             usuario.setNome(rs.getString("nome"));
             usuario.setApelido(rs.getString("apelido"));
+            usuario.setUltimoAcesso(rs.getDate("ultima_data_acesso").toLocalDate());
             return usuario;
         }
 

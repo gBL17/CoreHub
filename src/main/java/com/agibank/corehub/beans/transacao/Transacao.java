@@ -96,7 +96,7 @@ public class Transacao {
         this.idTipoTransacao = idTipoTransacao;
     }
 
-    public boolean isTransferenciaExterna() {
+    public boolean getTransacaoExterna() {
         return transferenciaExterna;
     }
 

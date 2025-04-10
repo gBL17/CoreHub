@@ -1,7 +1,7 @@
 package com.agibank.corehub.dao;
 
 import com.agibank.corehub.beans.transacao.StatusTransacao;
-import com.agibank.corehub.dao.Conexao;
+import com.agibank.corehub.controller.utils.Alerta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +32,37 @@ public class StatusTransacaoDAO {
         return stmt.executeUpdate();
     }
 
-    public StatusTransacao buscarStatusTransacao(int id) throws SQLException {
+    public int criarStatusTransacao(int idTransacao, String status) throws SQLException {
+        final String sql = """
+                INSERT INTO Status_Transacao (id_transacao, status, data)
+                VALUES (?,?,?)
+                """;
+        try{
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idTransacao);
+            stmt.setString(2, status);
+            stmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+            return stmt.executeUpdate();
+        } catch (SQLException e){
+            Alerta.exibirAlertaErro("Erro de conexão com banco de dados", e.getMessage());
+        } finally {
+            fecharConexao();
+        }
+        return -1;
+    }
+
+    public int buscarIdStatusTransacao(int idTransacao) throws SQLException {
+        final String sql = "SELECT id_status_transacao FROM Status_Transacao WHERE id_transacao = ? ORDER BY data DESC LIMIT 1";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idTransacao);
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("id_status_transacao");
+        }
+        return -1;
+    }
+
+    public StatusTransacao buscarTodosStatusTransacao(int id) throws SQLException {
         StatusTransacao statusTransacao = new StatusTransacao();
         final String sql = "SELECT * FROM Status_Transacao WHERE id_transacao = ?";
         stmt = con.prepareStatement(sql);
@@ -45,6 +75,17 @@ public class StatusTransacaoDAO {
             statusTransacao.setDataTransacao(rs.getTimestamp("data").toLocalDateTime());
         }
         return statusTransacao;
+    }
+
+    public String buscarUltimoStatusTransacao(int id) throws SQLException {
+        final String sql = "SELECT status FROM Status_Transacao WHERE id_transacao = ? ORDER BY data DESC LIMIT 1";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getString("status");
+        }
+        return null;
     }
 
     public int atualizarStatusTransacao(int id, String Status) throws SQLException {

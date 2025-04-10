@@ -1,4 +1,4 @@
-package com.agibank.corehub.controller;
+package com.agibank.corehub.controller.utils;
 
 import javafx.scene.control.Alert;
 

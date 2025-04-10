@@ -14,6 +14,20 @@ public class Usuario {
     private int numero;
     private String complemento;
     private boolean funcionario;
+    private LocalDate data_ultimo_acesso;
+
+
+    public Usuario(String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento) {
+        this.nome = nome;
+        this.apelido = apelido;
+        this.senha = senha;
+        this.email = email;
+        this.telefone = telefone;
+        this.data_nascimento = data_nascimento;
+        this.rua = rua;
+        this.numero = numero;
+        this.complemento = complemento;
+    }
 
     public Usuario(String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento, boolean funcionario) {
         this.nome = nome;
@@ -55,6 +69,19 @@ public class Usuario {
 
     public Usuario() {
 
+    }
+
+    public Usuario(String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento, LocalDate data_ultimo_acesso) {
+        this.nome = nome;
+        this.apelido = apelido;
+        this.senha = senha;
+        this.email = email;
+        this.telefone = telefone;
+        this.data_nascimento = data_nascimento;
+        this.rua = rua;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.data_ultimo_acesso = data_ultimo_acesso;
     }
 
     public int getId_Usuario() {
@@ -143,5 +170,13 @@ public class Usuario {
 
     public void setFuncionario(boolean funcionario) {
         this.funcionario = funcionario;
+    }
+
+    public LocalDate getUltimoAcesso(){
+        return data_ultimo_acesso;
+    }
+
+    public void setUltimoAcesso (LocalDate data) {
+        this.data_ultimo_acesso = data;
     }
 }
