@@ -50,31 +50,48 @@ public class CadastroController {
     }
 
     public void cadastrarUsuario(ActionEvent actionEvent) {
-        if (campoSenha.getText().equals(campoConfirmarSenha.getText())){
-            try{
+        if (campoSenha.getText().equals(campoConfirmarSenha.getText())) {
+            try {
+                String telefoneLimpo = campoTelefone.getText().replaceAll("\\D", "");
+
+                if (telefoneLimpo.length() > 11) {
+                    Alerta.exibirAlertaErro("Telefone inválido", "O número de telefone deve ter até 9 dígitos.");
+                    return;
+                }
+
+                int telefone = Integer.parseInt(telefoneLimpo);
+
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 Usuario novoUsuario = new Usuario(
                         campoNome.getText(),
                         campoApelido.getText(),
                         campoSenha.getText(),
                         campoEmail.getText(),
-                        Integer.parseInt(campoTelefone.getText()),
+                        telefone,
                         converterTextoParaDataSQL(campoDataNascimento.getText()).toLocalDate(),
                         campoRua.getText(),
                         Integer.parseInt(campoNumero.getText()),
                         campoComplemento.getText(),
                         LocalDate.now()
                 );
-                if (usuarioDAO.criarUsuario(novoUsuario) == 1){
+
+                if (usuarioDAO.criarUsuario(novoUsuario) == 1) {
                     navegador.navegarPara(actionEvent, "telaInicial.fxml");
                     Alerta.exibirAlertaSucesso("Cadastro Realizado", "Cadastro realizado com sucesso!");
+                } else {
+                    Alerta.exibirAlertaErro("O Cadastro falhou", "Tente novamente");
                 }
-                Alerta.exibirAlertaErro("O Cadastro falhou", "Tente novamente");
+
+            } catch (NumberFormatException e) {
+                Alerta.exibirAlertaErro("Erro de Formato", "Telefone ou número inválido. Digite apenas números.");
             } catch (SQLException | IOException e) {
                 throw new RuntimeException(e);
             }
+        } else {
+            Alerta.exibirAlertaErro("Senhas diferentes", "As senhas informadas não são iguais.");
         }
     }
+
 
     public static Date converterTextoParaDataSQL(String dataTexto) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
