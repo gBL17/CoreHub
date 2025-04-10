@@ -23,7 +23,7 @@ public class UsuarioDAO {
     }
 
     public int criarUsuario(Usuario usuario) throws SQLException {
-        final String sql = "INSERT INTO Usuario (nome, apelido, senha, email, telefone, data_nascimento, rua, numero, complemento) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        final String sql = "INSERT INTO Usuario (nome, apelido, senha, email, telefone, data_nascimento, rua, numero, complemento,ultima_data_acesso) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         stmt = con.prepareStatement(sql);
         CifradorSenha cifradorSenha = new CifradorSenha();
         stmt.setString(1, usuario.getNome());
@@ -35,6 +35,7 @@ public class UsuarioDAO {
         stmt.setString(7, usuario.getRua());
         stmt.setInt(8, usuario.getNumero());
         stmt.setString(9, usuario.getComplemento());
+        stmt.setDate(10, Date.valueOf(usuario.getUltimoAcesso()));
         return stmt.executeUpdate();
     }
 

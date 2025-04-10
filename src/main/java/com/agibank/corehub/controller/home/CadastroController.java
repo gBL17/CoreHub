@@ -60,12 +60,13 @@ public class CadastroController {
                         campoEmail.getText(),
                         Integer.parseInt(campoTelefone.getText()),
                         converterTextoParaDataSQL(campoDataNascimento.getText()).toLocalDate(),
-                        campoNumero.getText(),
+                        campoRua.getText(),
                         Integer.parseInt(campoNumero.getText()),
-                        campoComplemento.getText()
+                        campoComplemento.getText(),
+                        LocalDate.now()
                 );
                 if (usuarioDAO.criarUsuario(novoUsuario) == 1){
-                    navegador.navegarPara(actionEvent, "home.fxml");
+                    navegador.navegarPara(actionEvent, "telaInicial.fxml");
                     Alerta.exibirAlertaSucesso("Cadastro Realizado", "Cadastro realizado com sucesso!");
                 }
                 Alerta.exibirAlertaErro("O Cadastro falhou", "Tente novamente");

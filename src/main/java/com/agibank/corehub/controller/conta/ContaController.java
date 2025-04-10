@@ -71,11 +71,11 @@ public class ContaController implements Initializable {
                 LocalDate dataAbertura = Instant.ofEpochMilli(conta.getDataAbertura().getTime())
                         .atZone(ZoneId.systemDefault())
                         .toLocalDate();
-                scoreController.atualizarScore(conta.getIdConta(),usuario.geUltimoAcesso(),dataAbertura);
+                scoreController.atualizarScore(conta.getIdConta(),usuario.getUltimoAcesso(),dataAbertura);
                 if(conta.getIdTipo() == 1){
-                    contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta(),usuario.geUltimoAcesso());
+                    contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta(),usuario.getUltimoAcesso());
                 }else if (conta.getIdTipo() == 2){
-                    double rendimento = contaPoupancaController.calcularRendimento(conta.getIdConta(),usuario.geUltimoAcesso());
+                    double rendimento = contaPoupancaController.calcularRendimento(conta.getIdConta(),usuario.getUltimoAcesso());
                     atualizarSaldoInterno(conta.getIdConta(),rendimento);
                 }
             }
