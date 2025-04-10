@@ -1,4 +1,4 @@
-package com.agibank.corehub.controller;
+package com.agibank.corehub.controller.login;
 
 import com.agibank.corehub.beans.Usuario;
 

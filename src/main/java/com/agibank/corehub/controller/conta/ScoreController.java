@@ -1,4 +1,4 @@
-package com.agibank.corehub.controller;
+package com.agibank.corehub.controller.conta;
 
 import java.time.LocalDate;
 import com.agibank.corehub.dao.TransacaoDAO;

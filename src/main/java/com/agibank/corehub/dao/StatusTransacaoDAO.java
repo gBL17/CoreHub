@@ -1,8 +1,7 @@
 package com.agibank.corehub.dao;
 
 import com.agibank.corehub.beans.transacao.StatusTransacao;
-import com.agibank.corehub.controller.Alerta;
-import com.agibank.corehub.dao.Conexao;
+import com.agibank.corehub.controller.utils.Alerta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

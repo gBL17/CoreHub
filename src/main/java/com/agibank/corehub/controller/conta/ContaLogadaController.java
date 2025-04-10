@@ -1,4 +1,4 @@
-package com.agibank.corehub.controller;
+package com.agibank.corehub.controller.conta;
 
 import com.agibank.corehub.beans.conta.Conta;
 

@@ -1,14 +1,12 @@
 package com.agibank.corehub.controller.conta;
 
-import com.agibank.corehub.controller.ScoreController;
-import com.agibank.corehub.controller.UsuarioController;
+import com.agibank.corehub.controller.login.UsuarioController;
 import com.agibank.corehub.controller.utils.Navegador;
 import com.agibank.corehub.dao.conta.ContaDAO;
 import java.io.IOException;
 import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.beans.conta.Conta;
-import com.agibank.corehub.controller.ContaLogadaController;
-import com.agibank.corehub.controller.UsuarioLogadoController;
+import com.agibank.corehub.controller.login.UsuarioLogadoController;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -73,11 +71,11 @@ public class ContaController implements Initializable {
                 LocalDate dataAbertura = Instant.ofEpochMilli(conta.getDataAbertura().getTime())
                         .atZone(ZoneId.systemDefault())
                         .toLocalDate();
-                scoreController.atualizarScore(conta.getIdConta(),usuario.geUltimoAcesso(),dataAbertura);
+                scoreController.atualizarScore(conta.getIdConta(),usuario.getUltimoAcesso(),dataAbertura);
                 if(conta.getIdTipo() == 1){
-                    contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta(),usuario.geUltimoAcesso());
+                    contaCorrenteController.descontarSaldoContaCorrente(conta.getIdConta(),usuario.getUltimoAcesso());
                 }else if (conta.getIdTipo() == 2){
-                    double rendimento = contaPoupancaController.calcularRendimento(conta.getIdConta(),usuario.geUltimoAcesso());
+                    double rendimento = contaPoupancaController.calcularRendimento(conta.getIdConta(),usuario.getUltimoAcesso());
                     atualizarSaldoInterno(conta.getIdConta(),rendimento);
                 }
             }

@@ -2,9 +2,8 @@ package com.agibank.corehub.controller.home;
 
 import com.agibank.corehub.beans.Usuario;
 import com.agibank.corehub.beans.conta.Conta;
-import com.agibank.corehub.controller.ContaLogadaController;
-import com.agibank.corehub.controller.UsuarioLogadoController;
-import com.agibank.corehub.controller.conta.ContaController;
+import com.agibank.corehub.controller.conta.ContaLogadaController;
+import com.agibank.corehub.controller.login.UsuarioLogadoController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -16,14 +15,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.stage.Stage;
 
 public class HomeController implements Initializable {
     private Usuario usuario = UsuarioLogadoController.getInstance().getUsuario();

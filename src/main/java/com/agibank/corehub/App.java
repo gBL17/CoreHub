@@ -14,7 +14,6 @@ public class App extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 412, 800);
         stage.setTitle("CoreHub");
         stage.setScene(scene);
-
         stage.show();
     }
 
